@@ -1,18 +1,18 @@
-.PHONY: directories clean stat
+all: create_folder bin/ut_all
 
-all: directories bin/ut_all bin/main
+bin/ut_all: test/ut_all.cpp test/Iterator_test.h test/dfsIterator_test.h test/bfsIterator_test.h src/node.h src/folder.h src/file.h src/null_iterator.h iterator.o dfs_iterator.o
+	g++ -std=c++11 test/ut_all.cpp obj/iterator.o obj/dfs_iterator.o -o bin/ut_all -lgtest -lpthread
 
-bin/main: src/main.cpp src/hello.h
-	g++ -std=c++11 src/main.cpp -o bin/main
+iterator.o: src/iterator.cpp src/iterator.h
+	g++ -std=c++11 -c src/iterator.cpp -o obj/iterator.o
 
-bin/ut_all: test/ut_main.cpp test/ut_hello.h src/hello.h
-	g++ -std=c++11 test/ut_main.cpp -o bin/ut_all -lgtest -lpthread
+dfs_iterator.o: src/dfs_iterator.cpp src/dfs_iterator.h
+	g++ -std=c++11 -c src/dfs_iterator.cpp -o obj/dfs_iterator.o
 
-directories:
-	mkdir -p bin
+create_folder:
+	mkdir -p bin obj
 
 clean:
-	rm -f bin/*
+	rm -rf bin obj
 
-stat:
-	wc src/* test/*
+.PHONY: clean
