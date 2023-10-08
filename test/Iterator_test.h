@@ -20,6 +20,7 @@ TEST(FileSuite, TestNameAndPathReturnValue)
 TEST(FileSuite, TestFolderIterator)
 {
     Node *folder = new Folder("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder");
+    folder->switchState(0);
 
     // add
     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test.txt"));

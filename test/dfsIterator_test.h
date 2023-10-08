@@ -8,9 +8,9 @@ TEST(DFSIteratorSuite, TestRecusive)
         Node *folder1 = new Folder("/ewffew/fewewfewf/folder1");
         Node *folder2 = new Folder("/ewffew/fewewfewf/folder1/folder3/folder2");
         Node *folder3 = new Folder("/ewffew/fewewfewf/folder1/folder3");
-        // folder1->switchState(1);
-        // folder2->switchState(1);
-        // folder3->switchState(1);
+        folder1->switchState(1);
+        folder2->switchState(1);
+        folder3->switchState(1);
 
         folder2->add(new File("/ewffew/fewewfewf/folder1/folder3/folder2/2-1"));
         folder2->add(new File("/ewffew/fewewfewf/folder1/folder3/folder2/2-2"));
