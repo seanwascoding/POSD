@@ -58,7 +58,7 @@ Node *DfsIterator::currentItem() const
 // todo recursive method
 void DfsIterator::next()
 {
-    if (!isDone())
+    if (!isDone() || (*_it) != nullptr)
     {
         if (isFolder(*_it))
         {
