@@ -18,23 +18,13 @@ public:
 
     bool isDone() const override;
 
-    // bool isFolder(Node *node) override
-    // {
-    //     // printf("test\n");
-    //     Node *temp = dynamic_cast<File *>(node);
-    //     if (temp)
-    //     {
-    //         // printf("false\n");
-    //         return !temp->getClassIterator();
-    //     }
-    //     // printf("true\n");
-    //     return true;
-    // }
+    int getVirtualNum() override { return _i; }
 
 private:
     Node *_composite;
     std::vector<Node *>::iterator _it;
     std::vector<std::vector<Node *>::iterator> _temp;
+    int _i = 0;
 };
 
 class BfsIterator : public Iterator

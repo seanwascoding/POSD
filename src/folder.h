@@ -124,9 +124,9 @@ public:
     // todo bug
     int numberOfFiles() const override
     {
-        int i = 0, j=0;
+        int i = 0, j = 0;
         printf("%d\n", _files.size());
-        for (it->first(); j < _files.size(); it->next())
+        for (it->first(); j < _files.size() - it->getVirtualNum(); it->next())
         {
             // printf("%d\n", it->isDone());
             if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
