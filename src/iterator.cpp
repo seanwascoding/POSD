@@ -58,20 +58,21 @@ Node *DfsIterator::currentItem() const
 // todo recursive method
 void DfsIterator::next()
 {
-    if (!isDone() || (*_it) != nullptr)
+    if (!isDone())
     {
         if (isFolder(*_it))
         {
-            // printf("test1\n");
+            printf("testf\n");
             _temp.push_back(_it);
             _it = dynamic_cast<Folder *>(*_it)->_files.begin();
         }
-        // identity file iterator => nullptr
         else
         {
             _it++;
+            printf("test\n");
             while (_temp.size() > 0 && _it == dynamic_cast<Folder *>(*_temp.back())->_files.end())
             {
+                printf("test2\n");
                 // if SubFolder is end, then will back to RootFolder
                 _it = _temp.back();
                 _temp.pop_back();
