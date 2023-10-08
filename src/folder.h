@@ -126,10 +126,12 @@ public:
         //     }
         // }
         it->first();
-        it->next();
-        it->next();
         printf("%d\n", _files.size());
-        printf("%d\n", it->isDone());
+        printf("%s\n", it->currentItem()->path().c_str());
+        it->next();
+        printf("%s\n", it->currentItem()->path().c_str());
+        it->next();
+        printf("%s\n", it->currentItem()->path().c_str());
 
 
         return i;
