@@ -128,7 +128,8 @@ public:
         it->first();
         it->next();
         it->next();
-        it->next();
+        printf("%d\n", it->currentItem()->name().c_str());
+        // it->next();
         // printf("%d\n", it->isDone());
         return i;
     }
