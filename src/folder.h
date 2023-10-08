@@ -105,15 +105,11 @@ public:
     {
         for (it->first(); !it->isDone(); it->next())
         {
-            // printf("test%s\n", it->currentItem()->path().c_str());
             if (it->currentItem()->path() == path)
             {
-                // printf("work\n");
                 return it->currentItem();
             }
         }
-        // printf("nullptr\n");
-        // printf("%s\n", it->currentItem()->name().c_str());
         return nullptr;
     };
 
@@ -122,7 +118,7 @@ public:
     {
         if (_files.size() > 0)
         {
-            // int i = 0;
+            int i = 0;
             // for (it->first(); !it->isDone(); it->next())
             // {
             //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
