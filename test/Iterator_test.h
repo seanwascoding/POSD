@@ -94,5 +94,8 @@ TEST(FileSuite, TestFolderfind)
     ASSERT_EQ("test2.py", getFile->name());
     ASSERT_EQ("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py", getFile->path());
 
+    ASSERT_EQ(3, folder->numberOfFiles());
+
+
     delete folder;
 }

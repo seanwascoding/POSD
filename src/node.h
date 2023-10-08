@@ -25,7 +25,7 @@ public:
 
     virtual Iterator *createIterator() = 0;
 
-    virtual bool getClassIterator(){};
+    virtual bool getClassIterator(){return false;};
 
     virtual ~Node(){};
 
