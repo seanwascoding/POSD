@@ -130,7 +130,7 @@ public:
             it->first();
             it->next();
             it->next();
-            it->next();
+            i=5;
             // printf("%d\n", it->isDone());
         }
         catch (...)
