@@ -126,8 +126,11 @@ public:
         //     }
         // }
         it->first();
-        it->isDone();
         it->next();
+        it->next();
+        printf("%d\n", _files.size());
+        printf("%d\n", it->isDone());
+
 
         return i;
     }
