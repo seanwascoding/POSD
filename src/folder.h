@@ -47,7 +47,8 @@ public:
         {
             _files.push_back(node);
         }
-        else{
+        else
+        {
             throw runtime_error("wrong path");
         }
     }
@@ -55,14 +56,29 @@ public:
     // Explicit parent reference p.166
     void remove(string path) override
     {
-        for (it->first(); !it->isDone(); it->next())
+        if (_path == path.substr(0, path.find_last_of("/")))
         {
-            if (it->currentItem()->path() == path && it->currentItem()->getClassIterator() == true)
+            printf("test\n");
+            for (it->first(); !it->isDone(); it->next())
             {
-                vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
-                delete it->currentItem();
-                _files.erase(temp);
-                break;
+                if (it->currentItem()->path() == path)
+                {
+                    vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
+                    _files.erase(temp);
+                    delete it->currentItem();
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (it->first(); !it->isDone(); it->next())
+            {
+                if (it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")) == path.substr(0, it->currentItem()->path().find_last_of("/")) && it->currentItem()->getClassIterator() == false)
+                {
+                    it->currentItem()->remove(path);
+                    break;
+                }
             }
         }
     }
@@ -95,10 +111,10 @@ public:
         return nullptr;
     };
 
-    //todo bug
+    // todo bug
     int numberOfFiles() const override
     {
-        int i=0;
+        int i = 0;
         for (it->first(); !it->isDone(); it->next())
         {
             if (it->currentItem()->getClassIterator() == true)

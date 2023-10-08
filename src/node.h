@@ -25,11 +25,12 @@ public:
 
     virtual Iterator *createIterator() = 0;
 
-    virtual bool getClassIterator(){return false;};
+    virtual bool getClassIterator() { return false; };
 
     virtual ~Node(){};
 
     virtual void switchState(int state){};
+
 };
 
 #endif // NODE_H

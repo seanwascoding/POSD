@@ -5,9 +5,9 @@ TEST(DFSIteratorSuite, TestRecusive)
 {
     try
     {
-        Folder *folder1 = new Folder("/ewffew/fewewfewf/folder1");
-        Folder *folder2 = new Folder("/ewffew/fewewfewf/folder1/folder3/folder2");
-        Folder *folder3 = new Folder("/ewffew/fewewfewf/folder1/folder3");
+        Node *folder1 = new Folder("/ewffew/fewewfewf/folder1");
+        Node *folder2 = new Folder("/ewffew/fewewfewf/folder1/folder3/folder2");
+        Node *folder3 = new Folder("/ewffew/fewewfewf/folder1/folder3");
         folder1->switchState(1);
         folder2->switchState(1);
         folder3->switchState(1);
@@ -43,14 +43,16 @@ TEST(DFSIteratorSuite, TestRecusive)
         it->next();
         ASSERT_TRUE(it->isDone());
 
-        ASSERT_EQ(7, folder1->numberOfFiles());
+        folder1->remove("/ewffew/fewewfewf/folder1/5-1");
+
+        ASSERT_EQ(6, folder1->numberOfFiles());
 
         delete folder1;
         delete folder2;
         delete folder3;
         delete it;
     }
-    catch (const std::runtime_error& e)
+    catch (const std::runtime_error &e)
     {
         EXPECT_STREQ("wrong path", e.what());
     }
