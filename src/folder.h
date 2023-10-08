@@ -19,7 +19,7 @@ class Folder : public Node
 public:
     Folder(string path)
     {
-        _state = 0;
+        _state = 1;
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
         it = this->createIterator();
