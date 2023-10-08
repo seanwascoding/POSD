@@ -95,9 +95,18 @@ public:
         return nullptr;
     };
 
+    //todo bug
     int numberOfFiles() const override
     {
-        return _files.size();
+        int i=0;
+        for (it->first(); !it->isDone(); it->next())
+        {
+            if (it->currentItem()->getClassIterator() == true)
+            {
+                i++;
+            }
+        }
+        return i;
     }
 
     // Different Iterator type can be place
