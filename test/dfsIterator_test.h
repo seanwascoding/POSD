@@ -26,6 +26,7 @@ TEST(DFSIteratorSuite, TestRecusive)
         folder1->add(new File("/ewffew/fewewfewf/folder1/3-1"));
         folder1->add(new File("/ewffew/fewewfewf/folder1/5-1"));
         folder1->add(folder3);
+        folder1->add(nullptr);
 
 
         // ASSERT_EQ(7, folder2->numberOfFiles());
@@ -45,11 +46,11 @@ TEST(DFSIteratorSuite, TestRecusive)
         it->next();
         ASSERT_TRUE(it->isDone());
 
-        // ASSERT_EQ(7, folder1->numberOfFiles());
+        ASSERT_EQ(7, folder1->numberOfFiles());
 
-        // folder1->remove("/ewffew/fewewfewf/folder1/5-1");
+        folder1->remove("/ewffew/fewewfewf/folder1/5-1");
 
-        // ASSERT_EQ(6, folder1->numberOfFiles());
+        ASSERT_EQ(6, folder1->numberOfFiles());
 
         delete folder1;
         delete folder2;

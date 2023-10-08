@@ -43,7 +43,7 @@ public:
 
     void add(Node *node) override
     {
-        if (_path == node->path().substr(0, node->path().find_last_of("/")))
+        if (node != nullptr && _path == node->path().substr(0, node->path().find_last_of("/")))
         {
             _files.push_back(node);
         }
@@ -103,7 +103,6 @@ public:
 
     Node *find(string path) override
     {
-        printf("%d", _files.size());
         for (it->first(); !it->isDone(); it->next())
         {
             if (it->currentItem()->path() == path)
