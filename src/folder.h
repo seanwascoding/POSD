@@ -130,8 +130,8 @@ public:
         printf("%s\n", it->currentItem()->path().c_str());
         it->next();
         printf("%s\n", it->currentItem()->path().c_str());
-        it->next();
-        printf("%s\n", it->currentItem()->path().c_str());
+        // it->next();
+        // printf("%s\n", it->currentItem()->path().c_str());
 
 
         return i;
