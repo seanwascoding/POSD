@@ -126,14 +126,9 @@ public:
         //     }
         // }
         it->first();
-        printf("%d\n", _files.size());
-        printf("%s\n", it->currentItem()->path().c_str());
         it->next();
-        printf("%s\n", it->currentItem()->path().c_str());
         it->next();
-        // printf("%s\n", it->currentItem()->name().c_str());
-
-
+        printf("%d\n", it->isDone());
         return i;
     }
 
