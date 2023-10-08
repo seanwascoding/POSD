@@ -128,8 +128,8 @@ public:
         it->first();
         it->next();
         it->next();
-        // it->next();
-        printf("%d\n", it->isDone());
+        it->next();
+        // printf("%d\n", it->isDone());
         return i;
     }
 
