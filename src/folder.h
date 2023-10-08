@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <stdexcept>
 #include "node.h"
 #include "iterator.h"
 
@@ -47,7 +48,7 @@ public:
             _files.push_back(node);
         }
         else{
-            throw "wrong path";
+            throw runtime_error("wrong path");
         }
     }
 
