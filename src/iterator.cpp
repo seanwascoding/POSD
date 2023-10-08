@@ -89,6 +89,14 @@ void DfsIterator::next()
             while ((*_it) == nullptr)
             {
                 _it++;
+                while (_temp.size() > 0 && _it == dynamic_cast<Folder *>(*_temp.back())->_files.end())
+                {
+                    printf("test2\n");
+                    // if SubFolder is end, then will back to RootFolder
+                    _it = _temp.back();
+                    _temp.pop_back();
+                    _it++;
+                }
             }
         }
     }
