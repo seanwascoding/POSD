@@ -111,12 +111,14 @@ public:
 
     Node *find(string path) override
     {
-        for (it->first(); !it->isDone(); it->next())
+        int j = 0;
+        for (it->first(); j < _files.size() - it->getVirtualNum(); it->next())
         {
             if (it->currentItem()->path() == path)
             {
                 return it->currentItem();
             }
+            j++;
         }
         return nullptr;
     };
