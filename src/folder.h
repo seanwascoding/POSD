@@ -46,6 +46,9 @@ public:
         {
             _files.push_back(node);
         }
+        else{
+            throw "wrong path";
+        }
     }
 
     // Explicit parent reference p.166
