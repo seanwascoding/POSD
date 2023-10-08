@@ -57,7 +57,7 @@ public:
     {
         for (it->first(); !it->isDone(); it->next())
         {
-            if (it->currentItem()->path() == path)
+            if (it->currentItem()->path() == path && it->currentItem()->getClassIterator() == true)
             {
                 vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
                 delete it->currentItem();
