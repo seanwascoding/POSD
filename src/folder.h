@@ -117,19 +117,26 @@ public:
     int numberOfFiles() const override
     {
         int i = 0;
-        printf("test\n");
-        // for (it->first(); !it->isDone(); it->next())
-        // {
-        //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
-        //     {
-        //         i++;
-        //     }
-        // }
-        it->first();
-        it->next();
-        it->next();
-        it->next();
-        // printf("%d\n", it->isDone());
+        try
+        {
+            printf("test\n");
+            // for (it->first(); !it->isDone(); it->next())
+            // {
+            //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+            //     {
+            //         i++;
+            //     }
+            // }
+            it->first();
+            it->next();
+            it->next();
+            it->next();
+            // printf("%d\n", it->isDone());
+        }
+        catch (...)
+        {
+            return i;
+        }
         return i;
     }
 
