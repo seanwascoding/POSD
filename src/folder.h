@@ -127,6 +127,7 @@ public:
         // }
         it->first();
         it->isDone();
+        it->next();
 
         return i;
     }
