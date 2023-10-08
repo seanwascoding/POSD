@@ -18,8 +18,6 @@ public:
 
     bool isDone() const override;
 
-    int getVirtualNum() override { return _i; }
-
 private:
     Node *_composite;
     std::vector<Node *>::iterator _it;

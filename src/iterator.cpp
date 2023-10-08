@@ -51,7 +51,6 @@ void DfsIterator::first()
     while ((*_it) == nullptr)
     {
         _it++;
-        _i++;
     }
 };
 
@@ -73,7 +72,6 @@ void DfsIterator::next()
             while ((*_it) == nullptr)
             {
                 _it++;
-                _i++;
             }
         }
         else
@@ -91,7 +89,6 @@ void DfsIterator::next()
             while ((*_it) == nullptr)
             {
                 _it++;
-                _i++;
                 while (_temp.size() > 0 && _it == dynamic_cast<Folder *>(*_temp.back())->_files.end())
                 {
                     printf("test2\n");

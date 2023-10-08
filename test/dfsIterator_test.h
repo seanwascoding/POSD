@@ -29,12 +29,16 @@ TEST(DFSIteratorSuite, TestRecusive)
         folder1->add(new File("/ewffew/fewewfewf/folder1/3-1"));
         folder1->add(new File("/ewffew/fewewfewf/folder1/5-1"));
         folder1->add(nullptr);
-        // folder1->add(folder3);
+        folder1->add(folder3);
         folder1->add(new File("/ewffew/fewewfewf/folder1/5-1"));
-        // folder1->add(nullptr);
-        // folder1->add(nullptr);
+        folder1->add(nullptr);
+        folder1->add(nullptr);
 
-        // ASSERT_EQ(4, folder1->numberOfFiles());
+        // ASSERT_EQ(6, folder1->numberOfFiles());
+
+        Node * test = folder1->find("/ewffew/fewewfewf/folder1/5-1");
+        printf("%s\n", test->name().c_str());
+
 
         Iterator *it = folder1->createIterator();
 

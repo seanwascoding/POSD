@@ -18,7 +18,6 @@ public:
     virtual Node *currentItem() const {};
     virtual void next(){};
     virtual bool isDone() const {};
-    virtual int getVirtualNum(){};
 };
 
 class FolderIterator : public Iterator

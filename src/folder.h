@@ -47,6 +47,7 @@ public:
         if (node == nullptr)
         {
             printf("nullptr be add\n");
+            _i++;
             _files.push_back(nullptr);
         }
         else if (_path == node->path().substr(0, node->path().find_last_of("/")))
@@ -112,7 +113,7 @@ public:
     Node *find(string path) override
     {
         int j = 0;
-        for (it->first(); j < _files.size() - it->getVirtualNum(); it->next())
+        for (it->first(); j < _files.size() - _i; it->next())
         {
             if (it->currentItem()->path() == path)
             {
@@ -128,20 +129,20 @@ public:
     {
         int i = 0, j = 0;
         printf("%d\n", _files.size());
-        // for (it->first(); j < _files.size() - it->getVirtualNum(); it->next())
-        // {
-        //     // printf("%d\n", it->isDone());
-        //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
-        //     {
-        //         printf("work %s\n", it->currentItem()->name().c_str());
-        //         i++;
-        //     }
-        //     else
-        //     {
-        //         printf("fail\n");
-        //     }
-        //     j++;
-        // }
+        for (it->first(); j < _files.size() - _i; it->next())
+        {
+            // printf("%d\n", it->isDone());
+            if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+            {
+                printf("work %s\n", it->currentItem()->name().c_str());
+                i++;
+            }
+            else
+            {
+                printf("fail\n");
+            }
+            j++;
+        }
         return i;
     }
 
@@ -173,7 +174,7 @@ private:
     string _path, _name;
     vector<Node *> _files;
     Iterator *it;
-    int _state;
+    int _i = 0, _state;
 };
 
 #endif // FOLDER
