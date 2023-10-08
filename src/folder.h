@@ -123,7 +123,7 @@ public:
         int i = 0;
         for (it->first(); !it->isDone(); it->next())
         {
-            if (it->currentItem()->getClassIterator() == true)
+            if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
             {
                 i++;
             }
