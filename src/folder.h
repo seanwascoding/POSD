@@ -131,7 +131,7 @@ public:
         it->next();
         printf("%s\n", it->currentItem()->path().c_str());
         it->next();
-        printf("%s\n", it->currentItem()->name().c_str());
+        // printf("%s\n", it->currentItem()->name().c_str());
 
 
         return i;
