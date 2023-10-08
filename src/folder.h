@@ -19,6 +19,7 @@ class Folder : public Node
 public:
     Folder(string path)
     {
+        _state = 0;
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
         it = this->createIterator();
@@ -92,15 +93,30 @@ public:
     // Different Iterator type can be place
     Iterator *createIterator() override
     {
-        // return new FolderIterator(this);
-        // return new DfsIterator(this);
+        if (_state == 0)
+    {
+        return new FolderIterator(this);
+    }
+    else if (_state == 1)
+    {
+        return new DfsIterator(this);
+    }
+    else if (_state == 2)
+    {
         return new BfsIterator(this);
+    }
+    }
+
+    void switchState(int state)
+    {
+        _state = state;
     }
 
 private:
     string _path, _name;
     vector<Node *> _files;
     Iterator *it;
+    int _state;
 };
 
 #endif // FOLDER

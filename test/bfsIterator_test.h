@@ -6,6 +6,10 @@ TEST(BFSIteratorSuite, TestRecusive)
     Node *folder = new Folder("/asdsadasd/adsadsads/1");
     Node *folder2 = new Folder("/asdsadasd/adsadsads/2");
     Node *folder3 = new Folder("/asdsadasd/adsadsads/3");
+    folder->switchState(1);
+    folder2->switchState(1);
+    folder3->switchState(1);
+
 
     folder3->add(new File("/3-1"));
     folder3->add(new File("/3-2"));

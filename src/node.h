@@ -28,6 +28,8 @@ public:
     virtual bool getClassIterator(){};
 
     virtual ~Node(){};
+
+    virtual void switchState(int state){};
 };
 
 #endif // NODE_H
