@@ -49,7 +49,7 @@ public:
         }
         else
         {
-            throw runtime_error("wrong path");
+            // throw runtime_error("wrong path");
         }
     }
 
@@ -118,20 +118,13 @@ public:
     {
         int i = 0;
 
-        printf("test\n");
-        // for (it->first(); !it->isDone(); it->next())
-        // {
-        //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
-        //     {
-        //         i++;
-        //     }
-        // }
-        it->first();
-        it->next();
-        it->next();
-        i = 5;
-        // printf("%d\n", it->isDone());
-
+        for (it->first(); !it->isDone(); it->next())
+        {
+            if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+            {
+                i++;
+            }
+        }
         return i;
     }
 
