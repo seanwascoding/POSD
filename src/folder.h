@@ -103,6 +103,7 @@ public:
 
     Node *find(string path) override
     {
+        printf("%d", _files.size());
         for (it->first(); !it->isDone(); it->next())
         {
             if (it->currentItem()->path() == path)
