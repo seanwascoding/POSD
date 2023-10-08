@@ -119,13 +119,13 @@ public:
         if (_files.size() > 0)
         {
             int i = 0;
-            // for (it->first(); !it->isDone(); it->next())
-            // {
+            for (it->first(); !it->isDone(); it->next())
+            {
             //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
             //     {
             //         i++;
             //     }
-            // }
+            }
             // return i;
         }
         return 0;
