@@ -19,7 +19,7 @@ class Folder : public Node
 public:
     Folder(string path)
     {
-        _state = 1;
+        _state = 2;
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
         it = this->createIterator();
@@ -49,7 +49,7 @@ public:
         }
         else
         {
-            // throw runtime_error("wrong path");
+            throw runtime_error("wrong path");
         }
     }
 
