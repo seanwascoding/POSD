@@ -6,7 +6,6 @@
 #include <algorithm>
 #include "node.h"
 #include "iterator.h"
-#include "dfs_iterator.h"
 
 using namespace std;
 
@@ -94,17 +93,17 @@ public:
     Iterator *createIterator() override
     {
         if (_state == 0)
-    {
-        return new FolderIterator(this);
-    }
-    else if (_state == 1)
-    {
-        return new DfsIterator(this);
-    }
-    else if (_state == 2)
-    {
-        return new BfsIterator(this);
-    }
+        {
+            return new FolderIterator(this);
+        }
+        else if (_state == 1)
+        {
+            return new DfsIterator(this);
+        }
+        else if (_state == 2)
+        {
+            return new BfsIterator(this);
+        }
     }
 
     void switchState(int state)

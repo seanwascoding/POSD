@@ -8,6 +8,7 @@
 
 class Node;
 class Folder;
+class File;
 
 class Iterator
 {
@@ -32,5 +33,7 @@ private:
     Folder *_composite;
     std::vector<Node *>::iterator _it;
 };
+
+#include "dfs_iterator.h"
 
 #endif // ITERATOR_H
