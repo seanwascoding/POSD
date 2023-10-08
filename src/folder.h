@@ -120,7 +120,7 @@ public:
     // todo bug
     int numberOfFiles() const override
     {
-        try
+        if (_files.size() > 0)
         {
             int i = 0;
             for (it->first(); !it->isDone(); it->next())
@@ -132,11 +132,7 @@ public:
             }
             return i;
         }
-        catch (...)
-        {
-            printf("test\n");
-            throw runtime_error("error");
-        }
+        return 0;
     }
 
     // Different Iterator type can be place
