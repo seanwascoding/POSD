@@ -19,7 +19,7 @@ class Folder : public Node
 public:
     Folder(string path)
     {
-        _state = 1;
+        _state = 2;
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
         it = this->createIterator();
@@ -119,14 +119,14 @@ public:
         if (_files.size() > 0)
         {
             int i = 0;
-            // for (it->first(); !it->isDone(); it->next())
-            // {
-            //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
-            //     {
-            //         i++;
-            //     }
-            // }
-            // return i;
+            for (it->first(); !it->isDone(); it->next())
+            {
+                if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+                {
+                    i++;
+                }
+            }
+            return i;
         }
         return 0;
     }
