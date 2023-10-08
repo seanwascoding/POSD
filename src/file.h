@@ -7,9 +7,10 @@
 class File : public Node
 {
 public:
-    File(string path) : _path(path)
+    File(string path)
     {
         iterator = this->createIterator();
+        _path = path;
         _name = path.substr(path.find_last_of("/") + 1);
     };
 
@@ -33,7 +34,7 @@ public:
         return new NullIterator();
     }
 
-    bool getClassIterator(){return iterator->isDone();};
+    bool getClassIterator() override { return iterator->isDone(); };
 
 private:
     string _path, _name;

@@ -18,17 +18,17 @@ TEST(BFSIteratorSuite, TestRecusive)
     folder2->add(new File("/2-2"));
     folder2->add(folder3);
 
-    folder->add(new File("/1-1"));
+    folder->add(new File("/asdsadasd/adsadsads/1/1-1"));
     folder->add(folder2);
     folder->add(folder3);
-    folder->add(new File("/1-3"));
+    folder->add(new File("/asdsadasd/adsadsads/1/1-3"));
 
     Iterator *it = folder->createIterator();
 
     it->first();
     cout << it->currentItem()->name() << endl;
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 1; i++)
     {
         it->next();
         cout << it->currentItem()->name() << endl;

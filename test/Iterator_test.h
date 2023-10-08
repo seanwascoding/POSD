@@ -20,18 +20,17 @@ TEST(FileSuite, TestNameAndPathReturnValue)
 TEST(FileSuite, TestFolderIterator)
 {
     Node *folder = new Folder("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder");
-    folder->switchState(0);
 
     // add
-    folder->add(new File("/home/sean/Desktop/test123.txt"));
+    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test.txt"));
 
     // Create Iterator
     Iterator *it = folder->createIterator();
 
     // Search
     it->first();
-    ASSERT_EQ("/home/sean/Desktop/test123.txt", it->currentItem()->path());
-    ASSERT_EQ("test123.txt", it->currentItem()->name());
+    ASSERT_EQ("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test.txt", it->currentItem()->path());
+    ASSERT_EQ("test.txt", it->currentItem()->name());
 
     it->next();
     ASSERT_TRUE(it->isDone());
@@ -43,7 +42,6 @@ TEST(FileSuite, TestFolderIterator)
 TEST(FileSuite, TestFolderRemove)
 {
     Node *folder = new Folder("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder");
-    folder->switchState(0);
 
     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test1.py"));
     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py"));
@@ -64,17 +62,17 @@ TEST(FileSuite, TestFolderRemove)
 TEST(FileSuite, TestFoldergetChildByName)
 {
     Node *folder = new Folder("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder");
-    folder->switchState(0);
 
     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test1.py"));
     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py"));
-    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test3.py"));
+    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder34345/test3.py"));
     char temp[] = "test3.py";
 
     Node *get_File = folder->getChildByName(temp);
 
-    ASSERT_EQ("test3.py", get_File->name());
-    ASSERT_EQ("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test3.py", get_File->path());
+    ASSERT_EQ(nullptr, get_File);
+    // ASSERT_EQ("test3.py", get_File->name());
+    // ASSERT_EQ("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder", get_File->path());
 
     delete folder;
 }
@@ -82,17 +80,19 @@ TEST(FileSuite, TestFoldergetChildByName)
 TEST(FileSuite, TestFolderfind)
 {
     Node *folder = new Folder("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder");
-    folder->switchState(0);
 
     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test1.py"));
     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py"));
-    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test3.py"));
+    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder34345/test3.py"));
     string temp = "/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py";
 
-    Node *get_File = folder->find(temp);
+    // ASSERT_EQ("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder", folder->path());
 
-    ASSERT_EQ("test2.py", get_File->name());
-    ASSERT_EQ("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py", get_File->path());
+    Node *getFile = folder->find(temp);
+
+    // ASSERT_EQ(nullptr, getFile);
+    ASSERT_EQ("test2.py", getFile->name());
+    ASSERT_EQ("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py", getFile->path());
 
     delete folder;
 }

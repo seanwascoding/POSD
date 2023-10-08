@@ -42,7 +42,10 @@ public:
 
     void add(Node *node) override
     {
-        _files.push_back(node);
+        if (_path == node->path().substr(0, node->path().find_last_of("/")))
+        {
+            _files.push_back(node);
+        }
     }
 
     // Explicit parent reference p.166
@@ -60,7 +63,7 @@ public:
         }
     }
 
-    Node *getChildByName(const char *name) const
+    Node *getChildByName(const char *name) const override
     {
         for (it->first(); !it->isDone(); it->next())
         {
@@ -72,15 +75,19 @@ public:
         return nullptr;
     };
 
-    Node *find(string path)
+    Node *find(string path) override
     {
         for (it->first(); !it->isDone(); it->next())
         {
+            // printf("test%s\n", it->currentItem()->path().c_str());
             if (it->currentItem()->path() == path)
             {
+                // printf("work\n");
                 return it->currentItem();
             }
         }
+        // printf("nullptr\n");
+        // printf("%s\n", it->currentItem()->name().c_str());
         return nullptr;
     };
 
@@ -106,9 +113,11 @@ public:
         }
     }
 
-    void switchState(int state)
+    void switchState(int state) override
     {
+        delete it;
         _state = state;
+        it = this->createIterator();
     }
 
 private:
