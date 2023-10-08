@@ -19,7 +19,7 @@ class Folder : public Node
 public:
     Folder(string path)
     {
-        _state = 2;
+        _state = 1;
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
         it = this->createIterator();
@@ -43,13 +43,17 @@ public:
 
     void add(Node *node) override
     {
-        if (node != nullptr && _path == node->path().substr(0, node->path().find_last_of("/")))
+        if (node == nullptr)
+        {
+            _files.push_back(nullptr);
+        }
+        else if (_path == node->path().substr(0, node->path().find_last_of("/")))
         {
             _files.push_back(node);
         }
         else
         {
-            throw runtime_error("wrong path");
+            // throw runtime_error("wrong path");
         }
     }
 
@@ -117,9 +121,11 @@ public:
     int numberOfFiles() const override
     {
         int i = 0;
+        printf("test1\n");
 
         for (it->first(); !it->isDone(); it->next())
         {
+            printf("test");
             if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
             {
                 i++;
