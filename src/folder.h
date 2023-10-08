@@ -19,7 +19,7 @@ class Folder : public Node
 public:
     Folder(string path)
     {
-        _state = 2;
+        _state = 1;
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
         it = this->createIterator();
@@ -116,19 +116,18 @@ public:
     // todo bug
     int numberOfFiles() const override
     {
-        if (_files.size() > 0)
-        {
-            int i = 0;
-            for (it->first(); !it->isDone(); it->next())
-            {
-                if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
-                {
-                    i++;
-                }
-            }
-            return i;
-        }
-        return 0;
+        int i = 0;
+        printf("test\n");
+        // for (it->first(); !it->isDone(); it->next())
+        // {
+        //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+        //     {
+        //         i++;
+        //     }
+        // }
+        it->first();
+
+        return i;
     }
 
     // Different Iterator type can be place

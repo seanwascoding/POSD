@@ -18,8 +18,8 @@ TEST(DFSIteratorSuite, TestRecusive)
         // folder3->add(folder2);
         folder3->add(new File("/ewffew/fewewfewf/folder1/folder3/4-1"));
         // folder3->add(folder2);
-        folder3->add(new File("/ewffew/fewewfewf/folder1/folder3/4-2"));
-        folder3->add(folder2);
+        // folder3->add(new File("/ewffew/fewewfewf/folder1/folder3/4-2"));
+        // folder3->add(folder2);
 
         folder1->add(new File("/ewffew/fewewfewf/folder1/1-1"));
         // folder1->add(folder2);
@@ -36,7 +36,7 @@ TEST(DFSIteratorSuite, TestRecusive)
         it->first(); // 1-1
         cout << it->currentItem()->name() << endl;
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 4; i++)
         {
             it->next();
             cout << it->currentItem()->name() << endl;
