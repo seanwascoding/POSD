@@ -120,15 +120,23 @@ public:
     // todo bug
     int numberOfFiles() const override
     {
-        int i = 0;
-        for (it->first(); !it->isDone(); it->next())
+        try
         {
-            if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+            int i = 0;
+            for (it->first(); !it->isDone(); it->next())
             {
-                i++;
+                if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+                {
+                    i++;
+                }
             }
+            return i;
         }
-        return i;
+        catch (...)
+        {
+            printf("test\n");
+            throw runtime_error("error");
+        }
     }
 
     // Different Iterator type can be place
