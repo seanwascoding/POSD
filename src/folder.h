@@ -128,7 +128,7 @@ public:
         it->first();
         it->next();
         it->next();
-        printf("%d\n", it->currentItem()->name().c_str());
+        printf("%d\n", it->currentItem()->getClassIterator());
         // it->next();
         // printf("%d\n", it->isDone());
         return i;
