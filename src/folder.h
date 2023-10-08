@@ -20,6 +20,7 @@ public:
     Folder(string path)
     {
         _state = 1;
+        _files.clear();
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
         it = this->createIterator();
@@ -45,10 +46,13 @@ public:
     {
         if (node == nullptr)
         {
+            printf("nullptr be add\n");
             _files.push_back(nullptr);
         }
         else if (_path == node->path().substr(0, node->path().find_last_of("/")))
         {
+            printf("node be add\n");
+
             _files.push_back(node);
         }
         else
@@ -120,10 +124,11 @@ public:
     // todo bug
     int numberOfFiles() const override
     {
-        int i = 0;
-
-        for (it->first(); !it->isDone(); it->next())
+        int i = 0, j=0;
+        printf("%d\n", _files.size());
+        for (it->first(); j < _files.size(); it->next())
         {
+            // printf("%d\n", it->isDone());
             if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
             {
                 printf("work %s\n", it->currentItem()->name().c_str());
@@ -133,6 +138,7 @@ public:
             {
                 printf("fail\n");
             }
+            j++;
         }
         return i;
     }
