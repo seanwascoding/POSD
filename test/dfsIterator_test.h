@@ -25,31 +25,30 @@ TEST(DFSIteratorSuite, TestRecusive)
         // folder3->add(folder2);
 
         folder1->add(new File("/ewffew/fewewfewf/folder1/1-1"));
-        // folder1->add(folder2);
         folder1->add(nullptr);
         folder1->add(new File("/ewffew/fewewfewf/folder1/3-1"));
         folder1->add(new File("/ewffew/fewewfewf/folder1/5-1"));
-        folder1->add(nullptr);
-        folder1->add(folder3);
+        // folder1->add(nullptr);
+        // folder1->add(folder3);
         folder1->add(new File("/ewffew/fewewfewf/folder1/5-1"));
-        folder1->add(nullptr);
-        folder1->add(nullptr);
+        // folder1->add(nullptr);
+        // folder1->add(nullptr);
 
-        // ASSERT_EQ(6, folder1->numberOfFiles());
+        ASSERT_EQ(6, folder1->numberOfFiles());
 
         Iterator *it = folder1->createIterator();
 
         it->first(); // 1-1
         cout << it->currentItem()->name() << endl;
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 4; i++)
         {
             it->next();
             cout << it->currentItem()->name() << endl;
         }
 
-        // it->next();
-        // ASSERT_TRUE(it->isDone());
+        it->next();
+        ASSERT_TRUE(it->isDone());
 
         // ASSERT_EQ(6, folder1->numberOfFiles());
 

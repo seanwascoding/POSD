@@ -121,14 +121,17 @@ public:
     int numberOfFiles() const override
     {
         int i = 0;
-        printf("test1\n");
 
         for (it->first(); !it->isDone(); it->next())
         {
-            printf("test");
             if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
             {
+                printf("work %s\n", it->currentItem()->name().c_str());
                 i++;
+            }
+            else
+            {
+                printf("fail\n");
             }
         }
         return i;

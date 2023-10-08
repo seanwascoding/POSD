@@ -108,7 +108,7 @@ void DfsIterator::next()
 
 bool DfsIterator::isDone() const
 {
-    return _it == dynamic_cast<Folder *>(_composite)->_files.end();
+    return _it == dynamic_cast<Folder *>(_composite)->_files.end()-1;
 };
 
 /* bfs_iterator */
