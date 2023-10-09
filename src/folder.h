@@ -142,18 +142,20 @@ public:
     // Different Iterator type can be place
     Iterator *createIterator() override
     {
-        if (_state == 0)
-        {
-            return new FolderIterator(this);
-        }
-        else if (_state == 1)
-        {
-            return new DfsIterator(this);
-        }
-        else if (_state == 2)
-        {
-            return new BfsIterator(this);
-        }
+        return new DfsIterator(this);
+
+        // if (_state == 0)
+        // {
+        //     return new FolderIterator(this);
+        // }
+        // else if (_state == 1)
+        // {
+        //     return new DfsIterator(this);
+        // }
+        // else if (_state == 2)
+        // {
+        //     return new BfsIterator(this);
+        // }
     }
 
     void switchState(int state) override

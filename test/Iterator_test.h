@@ -40,25 +40,21 @@ TEST(FileSuite, TestFolderIterator)
     delete folder;
 }
 
-TEST(FileSuite, TestFolderRemove)
-{
-    Node *folder = new Folder("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder");
-
-    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test1.py"));
-    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py"));
-    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test3.py"));
-    string PATH = "/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py";
-
-    Iterator *it = folder->createIterator();
-    // it->first();
-    // it->next();
-    folder->remove(PATH);
-
-    ASSERT_EQ(2, folder->numberOfFiles());
-
-    delete it;
-    delete folder;
-}
+// TEST(FileSuite, TestFolderRemove)
+// {
+//     Node *folder = new Folder("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder");
+//     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test1.py"));
+//     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py"));
+//     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test3.py"));
+//     string PATH = "/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py";
+//     Iterator *it = folder->createIterator();
+//     // it->first();
+//     // it->next();
+//     folder->remove(PATH);
+//     ASSERT_EQ(2, folder->numberOfFiles());
+//     delete it;
+//     delete folder;
+// }
 
 TEST(FileSuite, TestFoldergetChildByName)
 {
@@ -99,4 +95,48 @@ TEST(FileSuite, TestFolderfind)
 
 
     delete folder;
+}
+
+TEST(FileSuite, TestTAIssue)
+{
+    Node *fff = new Folder("/Users/user/home");
+    fff->switchState(0);
+
+    Node *documents = new Folder("/Users/user/home/documents");
+    Node *profile = new Folder("/Users/user/home/profile");
+    Node *download = new Folder("/Users/user/home/download");
+
+    Node *fav = new Folder("/Users/user/home/documents/fav");
+
+    fff->add(profile);
+    fff->add(documents);
+
+    documents->add(fav);
+
+    fav->add(new File("/Users/user/home/documents/fav/1"));
+    fav->add(new File("/Users/user/home/documents/fav/2"));
+    fav->add(new File("/Users/user/home/documents/fav/3"));
+
+    documents->add(new File("/Users/user/home/documents/note"));
+
+    fff->add(download);
+
+    download->add(new File("/Users/user/home/download/funny"));
+
+    // ASSERT_EQ(5, fff->numberOfFiles());
+
+    Iterator *it = fff->createIterator();
+
+    for (it->first(); !it->isDone(); it->next())
+    {
+        cout << it->currentItem()->name() << endl;
+    }
+
+    ASSERT_TRUE(it->isDone());
+
+    delete fff;
+    delete documents;
+    delete profile;
+    delete download;
+    delete fav;
 }

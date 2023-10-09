@@ -68,7 +68,6 @@ TEST(DFSIteratorSuite, TestTARecusive)
     fff->add(new File("/Users/user/home/Downloads123"));
     fff->add(new File("/Users/user/home/Downloads333"));
 
-
     Iterator *it = fff->createIterator();
     for (it->first(); !it->isDone(); it->next())
     {
@@ -85,4 +84,47 @@ TEST(DFSIteratorSuite, TestTARecusive)
 
     delete fff;
     delete it;
+}
+
+TEST(DFSIteratorSuite, TestTAIssue)
+{
+    Node *fff = new Folder("/Users/user/home");
+
+    Node *documents = new Folder("/Users/user/home/documents");
+    Node *profile = new Folder("/Users/user/home/profile");
+    Node *download = new Folder("/Users/user/home/download");
+
+    Node *fav = new Folder("/Users/user/home/documents/fav");
+
+    fff->add(profile);
+    fff->add(documents);
+
+    documents->add(fav);
+
+    fav->add(new File("/Users/user/home/documents/fav/1"));
+    fav->add(new File("/Users/user/home/documents/fav/2"));
+    fav->add(new File("/Users/user/home/documents/fav/3"));
+
+    documents->add(new File("/Users/user/home/documents/note"));
+
+    fff->add(download);
+
+    download->add(new File("/Users/user/home/download/funny"));
+
+    ASSERT_EQ(5, fff->numberOfFiles());
+
+    Iterator *it = fff->createIterator();
+
+    for (it->first(); !it->isDone(); it->next())
+    {
+        cout << it->currentItem()->name() << endl;
+    }
+
+    ASSERT_TRUE(it->isDone());
+
+    delete fff;
+    delete documents;
+    delete profile;
+    delete download;
+    delete fav;
 }
