@@ -117,6 +117,10 @@ public:
                 return it->currentItem();
             }
         }
+        if (it->currentItem()->path() == path)
+        {
+            return it->currentItem();
+        }
         return nullptr;
     };
 
