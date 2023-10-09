@@ -132,7 +132,7 @@ bool DfsIterator::isDone() const
         // printf("%d\n", _i);
         size_t index = std::distance(_composite->_files.begin(), _it);
         printf("isDone filter %d %d\n", index, _i + 1);
-        return index == _i + 1;
+        return index == (_i + 1);
     }
     else
     {
