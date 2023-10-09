@@ -89,6 +89,7 @@ TEST(DFSIteratorSuite, TestTARecusive)
 TEST(DFSIteratorSuite, TestTAIssue)
 {
     Node *fff = new Folder("/Users/user/home");
+    fff->switchState(1);
 
     Node *documents = new Folder("/Users/user/home/documents");
     Node *profile = new Folder("/Users/user/home/profile");

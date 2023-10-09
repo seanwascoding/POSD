@@ -19,7 +19,7 @@ class Folder : public Node
 public:
     Folder(string path)
     {
-        _state = 1;
+        _state = 0;
         _files.clear();
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
@@ -142,20 +142,18 @@ public:
     // Different Iterator type can be place
     Iterator *createIterator() override
     {
-        return new DfsIterator(this);
-
-        // if (_state == 0)
-        // {
-        //     return new FolderIterator(this);
-        // }
-        // else if (_state == 1)
-        // {
-        //     return new DfsIterator(this);
-        // }
-        // else if (_state == 2)
-        // {
-        //     return new BfsIterator(this);
-        // }
+        if (_state == 0)
+        {
+            return new FolderIterator(this);
+        }
+        else if (_state == 1)
+        {
+            return new DfsIterator(this);
+        }
+        else if (_state == 2)
+        {
+            return new BfsIterator(this);
+        }
     }
 
     void switchState(int state) override
