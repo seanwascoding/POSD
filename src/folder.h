@@ -44,6 +44,7 @@ public:
 
     void add(Node *node) override
     {
+        printf("input\n");
         if (node == nullptr)
         {
             printf("nullptr be add\n");
