@@ -24,6 +24,7 @@ public:
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
         it = this->createIterator();
+        it_normal = this->createIterator();
     };
 
     ~Folder() override
@@ -144,6 +145,7 @@ public:
     {
         if (_state == 0)
         {
+            _state = 1;
             return new FolderIterator(this);
         }
         else if (_state == 1)
@@ -165,7 +167,7 @@ public:
 
 private:
     string _path, _name;
-    // vector<Node *> _files;
+    Iterator *it_normal;
     Iterator *it;
     int _i = 0, _state;
 };
