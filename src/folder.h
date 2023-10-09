@@ -58,7 +58,7 @@ public:
         }
         else
         {
-            throw runtime_error("wrong path");
+            // throw runtime_error("wrong path");
         }
     }
 
