@@ -167,8 +167,8 @@ public:
 
 private:
     string _path, _name;
-    Iterator *it_normal;
     Iterator *it;
+    Iterator *it_normal;
     int _i = 0, _state;
 };
 
