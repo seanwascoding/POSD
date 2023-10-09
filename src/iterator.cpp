@@ -93,10 +93,10 @@ void DfsIterator::next()
         else
         {
             _it++;
-            printf("test\n");
+            printf("move to next file\n");
             while (_temp.size() > 0 && _it == dynamic_cast<Folder *>(*_temp.back())->_files.end())
             {
-                printf("test2\n");
+                printf("subfolder end\n");
                 // if SubFolder is end, then will back to RootFolder
                 _it = _temp.back();
                 _temp.pop_back();
@@ -107,7 +107,7 @@ void DfsIterator::next()
                 _it++;
                 while (_temp.size() > 0 && _it == dynamic_cast<Folder *>(*_temp.back())->_files.end())
                 {
-                    printf("test2\n");
+                    printf("subfolder end\n");
                     // if SubFolder is end, then will back to RootFolder
                     _it = _temp.back();
                     _temp.pop_back();
@@ -124,7 +124,16 @@ void DfsIterator::next()
 
 bool DfsIterator::isDone() const
 {
-    return _it == dynamic_cast<Folder *>(_composite)->_files.end();
+    if (_temp.size() == 0)
+    {
+        size_t index = std::distance(_composite->_files.end(), _it) + 1;
+        printf("isDone filter %d %d\n", index, _composite->_files.size());
+        return index == _composite->_files.size();
+    }
+    else
+    {
+        return _it == _composite->_files.end();
+    }
 };
 
 /* bfs_iterator */

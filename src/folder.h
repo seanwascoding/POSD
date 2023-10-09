@@ -19,7 +19,6 @@ class Folder : public Node
 public:
     Folder(string path)
     {
-        printf("input %s\n", path.c_str());
         _state = 1;
         _files.clear();
         _name = path.substr(path.find_last_of("/") + 1);
@@ -59,7 +58,7 @@ public:
         }
         else
         {
-            // throw runtime_error("wrong path");
+            throw runtime_error("wrong path");
         }
     }
 
@@ -67,30 +66,30 @@ public:
     void remove(string path) override
     {
         printf("%s", path.c_str());
-        // if (_path == path.substr(0, path.find_last_of("/")))
-        // {
-        //     for (it->first(); !it->isDone(); it->next())
-        //     {
-        //         if (it->currentItem()->path() == path)
-        //         {
-        //             vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
-        //             _files.erase(temp);
-        //             delete it->currentItem();
-        //             break;
-        //         }
-        //     }
-        // }
-        // else
-        // {
-        //     for (it->first(); !it->isDone(); it->next())
-        //     {
-        //         if (it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")) == path.substr(0, it->currentItem()->path().find_last_of("/")) && it->currentItem()->getClassIterator() == false)
-        //         {
-        //             it->currentItem()->remove(path);
-        //             break;
-        //         }
-        //     }
-        // }
+        if (_path == path.substr(0, path.find_last_of("/")))
+        {
+            for (it->first(); !it->isDone(); it->next())
+            {
+                if (it->currentItem()->path() == path)
+                {
+                    vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
+                    _files.erase(temp);
+                    delete it->currentItem();
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (it->first(); !it->isDone(); it->next())
+            {
+                if (it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")) == path.substr(0, it->currentItem()->path().find_last_of("/")) && it->currentItem()->getClassIterator() == false)
+                {
+                    it->currentItem()->remove(path);
+                    break;
+                }
+            }
+        }
     }
 
     Node *getChildByName(const char *name) const override
@@ -107,14 +106,12 @@ public:
 
     Node *find(string path) override
     {
-        int j = 0;
-        for (it->first(); j < _files.size() - _i; it->next())
+        for (it->first(); !it->isDone(); it->next())
         {
             if (it->currentItem()->path() == path)
             {
                 return it->currentItem();
             }
-            j++;
         }
         return nullptr;
     };
@@ -122,11 +119,10 @@ public:
     // todo bug
     int numberOfFiles() const override
     {
-        int i = 0, j = 0;
+        int i = 0;
         printf("%d\n", _files.size());
-        for (it->first(); j < _files.size() - _i; it->next())
+        for (it->first(); !it->isDone(); it->next())
         {
-            // printf("%d\n", it->isDone());
             if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
             {
                 printf("work %s\n", it->currentItem()->name().c_str());
@@ -136,7 +132,6 @@ public:
             {
                 printf("fail\n");
             }
-            j++;
         }
         return i;
     }
@@ -167,7 +162,7 @@ public:
 
 private:
     string _path, _name;
-    vector<Node *> _files;
+    // vector<Node *> _files;
     Iterator *it;
     int _i = 0, _state;
 };

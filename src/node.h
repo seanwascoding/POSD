@@ -31,6 +31,7 @@ public:
 
     virtual void switchState(int state){};
 
+    vector<Node *> _files;
 };
 
 #endif // NODE_H

@@ -15,42 +15,48 @@ TEST(DFSIteratorSuite, TestRecusive)
         folder2->add(new File("/ewffew/fewewfewf/folder1/folder3/folder2/2-1"));
         folder2->add(new File("/ewffew/fewewfewf/folder1/folder3/folder2/2-2"));
 
-        // folder3->add(folder2);
+        folder3->add(folder2);
         folder3->add(new File("/ewffew/fewewfewf/folder1/folder3/4-1"));
         // folder3->add(folder2);
         folder3->add(new File("/ewffew/fewewfewf/folder1/folder3/4-2"));
-        folder3->add(nullptr);
+        // folder3->add(nullptr);
 
         printf("-------------\n");
 
         folder1->add(new File("/ewffew/fewewfewf/folder1/1-1"));
-        folder1->add(nullptr);
+        // folder1->add(nullptr);
         folder1->add(new File("/ewffew/fewewfewf/folder1/3-1"));
         folder1->add(new File("/ewffew/fewewfewf/folder1/5-1"));
-        folder1->add(nullptr);
+        // folder1->add(nullptr);
         folder1->add(folder3);
         folder1->add(new File("/ewffew/fewewfewf/folder1/5-1"));
-        folder1->add(nullptr);
-        folder1->add(nullptr);
+        // folder1->add(nullptr);
+        // folder1->add(nullptr);
 
         // ASSERT_EQ(6, folder1->numberOfFiles());
 
         Node *test = folder1->find("/ewffew/fewewfewf/folder1/5-1");
-        printf("%s\n", test->name().c_str());
+        printf("find %s\n", test->name().c_str());
 
         Iterator *it = folder1->createIterator();
 
-        // it->first(); // 1-1
-        // cout << it->currentItem()->name() << endl;
+        it->first(); // 1-1
+        cout << it->currentItem()->name() << endl;
 
-        // for (int i = 0; i < 4; i++)
-        // {
-        //     it->next();
-        //     cout << it->currentItem()->name() << endl;
-        // }
+        for (int i = 0; i < 9; i++)
+        {
+            it->next();
+            cout << it->currentItem()->name() << endl;
+        }
 
         // it->next();
         // ASSERT_TRUE(it->isDone());
+
+        it->next();
+
+        ASSERT_TRUE(it->isDone());
+
+        ASSERT_EQ(8, folder1->numberOfFiles());
 
         // ASSERT_EQ(6, folder1->numberOfFiles());
 
@@ -71,19 +77,19 @@ TEST(DFSIteratorSuite, TestRecusive)
 
 TEST(DFSIteratorSuite, TestTARecusive)
 {
-    Node *folder1 = new Folder("/Users/user/home");
-    folder1->add(new File("/Users/user/home/Downloads"));
-    folder1->add(new Folder("/Users/user/home/Documents"));
+    // Node *folder1 = new Folder("/Users/user/home");
+    // folder1->add(new File("/Users/user/home/Downloads"));
+    // folder1->add(new Folder("/Users/user/home/Documents"));
 
-    Iterator *it = folder1->createIterator();
+    // Iterator *it = folder1->createIterator();
 
-    it->first();
-    printf("%s\n", it->currentItem()->name().c_str());
-    it->next();
-    printf("%s\n", it->currentItem()->name().c_str());
-    it->next();
-    printf("%d\n", it->isDone());
-    
-    delete folder1;
-    delete it;
+    // it->first();
+    // printf("%s\n", it->currentItem()->name().c_str());
+    // it->next();
+    // printf("%s\n", it->currentItem()->name().c_str());
+    // it->next();
+    // printf("%d\n", it->isDone());
+
+    // delete folder1;
+    // delete it;
 }
