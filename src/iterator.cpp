@@ -56,11 +56,11 @@ void DfsIterator::first()
     else
     {
         _it = dynamic_cast<Folder *>(_composite)->_files.begin();
-        while ((*_it) == nullptr)
-        {
-            _it++;
-            _i++;
-        }
+        // while ((*_it) == nullptr)
+        // {
+        //     _it++;
+        //     _i++;
+        // }
     }
 };
 
@@ -78,7 +78,9 @@ void DfsIterator::next()
         {
             if (dynamic_cast<Folder *>(*_it)->_files.empty())
             {
+                printf("empty\n");
                 _it++;
+                _i++;
                 return;
             }
             else
@@ -105,18 +107,18 @@ void DfsIterator::next()
                 _temp.pop_back();
                 _it++;
             }
-            while ((*_it) == nullptr)
-            {
-                _it++;
-                while (_temp.size() > 0 && _it == dynamic_cast<Folder *>(*_temp.back())->_files.end())
-                {
-                    printf("subfolder end\n");
-                    // if SubFolder is end, then will back to RootFolder
-                    _it = _temp.back();
-                    _temp.pop_back();
-                    _it++;
-                }
-            }
+            // while ((*_it) == nullptr)
+            // {
+            //     _it++;
+            //     while (_temp.size() > 0 && _it == dynamic_cast<Folder *>(*_temp.back())->_files.end())
+            //     {
+            //         printf("subfolder end\n");
+            //         // if SubFolder is end, then will back to RootFolder
+            //         _it = _temp.back();
+            //         _temp.pop_back();
+            //         _it++;
+            //     }
+            // }
         }
     }
     else
@@ -129,10 +131,9 @@ bool DfsIterator::isDone() const
 {
     if (_temp.size() == 0 && _i != std::distance(_composite->_files.begin(), _it))
     {
-        // printf("%d\n", _i);
         size_t index = std::distance(_composite->_files.begin(), _it);
-        printf("isDone filter %d %d\n", index, _i + 1);
-        return index == (_i + 1);
+        printf("isDone filter %d %d\n", index, _i);
+        return index == (_composite->_files.size()-1);
     }
     else
     {
