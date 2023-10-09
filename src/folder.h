@@ -76,7 +76,7 @@ public:
                 delete it->currentItem();
                 return;
             }
-            printf("fail to delete %s vs %s\n", it->currentItem()->path().c_str(), _path.c_str());
+            // printf("fail to delete %s vs %s\n", it->currentItem()->path().c_str(), _path.c_str());
         }
         if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true && path == it->currentItem()->path())
         {
@@ -85,7 +85,7 @@ public:
             delete it->currentItem();
             return;
         }
-        printf("fail to delete %s\n", it->currentItem()->path().c_str());
+        // printf("fail to delete %s\n", it->currentItem()->path().c_str());
 
         // printf("%s", path.c_str());
         // if (_path == path.substr(0, path.find_last_of("/")))
@@ -148,7 +148,7 @@ public:
         int i = 0;
         for (it->first(); !it->isDone(); it->next())
         {
-            printf("filter name %s\n", it->currentItem()->name().c_str());
+            // printf("filter name %s\n", it->currentItem()->name().c_str());
             if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
             {
                 printf("work %s\n", it->currentItem()->name().c_str());
@@ -159,7 +159,6 @@ public:
                 printf("fail\n");
             }
         }
-        printf("filter name %s\n", it->currentItem()->name().c_str());
         if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
         {
             printf("work %s\n", it->currentItem()->name().c_str());
