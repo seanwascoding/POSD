@@ -53,8 +53,8 @@ public:
         else if (_path == node->path().substr(0, node->path().find_last_of("/")))
         {
             printf("node be add\n");
-
             _files.push_back(node);
+            printf("%s\n", node->path().c_str());
         }
         else
         {
