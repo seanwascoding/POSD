@@ -19,7 +19,7 @@ class Folder : public Node
 public:
     Folder(string path)
     {
-        _state = 0;
+        _state = 1;
         _files.clear();
         _name = path.substr(path.find_last_of("/") + 1);
         _path = path;
@@ -145,11 +145,11 @@ public:
     {
         if (_state == 0)
         {
-            _state = 1;
             return new FolderIterator(this);
         }
         else if (_state == 1)
         {
+            _state = 0;
             return new DfsIterator(this);
         }
         else if (_state == 2)
