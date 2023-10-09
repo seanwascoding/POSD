@@ -66,37 +66,30 @@ public:
     void remove(string path) override
     {
         printf("%s", path.c_str());
-        try
-        {
-            if (_path == path.substr(0, path.find_last_of("/")))
-            {
-                for (it->first(); !it->isDone(); it->next())
-                {
-                    if (it->currentItem()->path() == path)
-                    {
-                        vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
-                        _files.erase(temp);
-                        delete it->currentItem();
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                for (it->first(); !it->isDone(); it->next())
-                {
-                    if (it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")) == path.substr(0, it->currentItem()->path().find_last_of("/")) && it->currentItem()->getClassIterator() == false)
-                    {
-                        it->currentItem()->remove(path);
-                        break;
-                    }
-                }
-            }
-        }
-        catch (...)
-        {
-            printf("error\n");
-        }
+        // if (_path == path.substr(0, path.find_last_of("/")))
+        // {
+        //     for (it->first(); !it->isDone(); it->next())
+        //     {
+        //         if (it->currentItem()->path() == path)
+        //         {
+        //             vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
+        //             _files.erase(temp);
+        //             delete it->currentItem();
+        //             break;
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     for (it->first(); !it->isDone(); it->next())
+        //     {
+        //         if (it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")) == path.substr(0, it->currentItem()->path().find_last_of("/")) && it->currentItem()->getClassIterator() == false)
+        //         {
+        //             it->currentItem()->remove(path);
+        //             break;
+        //         }
+        //     }
+        // }
     }
 
     Node *getChildByName(const char *name) const override
