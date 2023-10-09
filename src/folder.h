@@ -19,6 +19,7 @@ class Folder : public Node
 public:
     Folder(string path)
     {
+        printf("input %s\n", path.c_str());
         _state = 1;
         _files.clear();
         _name = path.substr(path.find_last_of("/") + 1);
@@ -44,7 +45,6 @@ public:
 
     void add(Node *node) override
     {
-        printf("input\n");
         if (node == nullptr)
         {
             printf("nullptr be add\n");
