@@ -71,8 +71,6 @@ public:
 
                 if (temp_dir == nullptr)
                 {
-                    // vector<Node *>::iterator position_node = std::find(_files.begin(), _files.end(), it->currentItem());
-                    // printf("%s\n", (*position_node)->name().c_str());
                     _files.erase(std::remove_if(_files.begin(), _files.end(), [test](Node *node)
                                                 { return node->path() == test->path(); }),
                                  _files.end());
@@ -82,7 +80,7 @@ public:
                     vector<Node *>::iterator position_node = std::find(temp_dir->_files.begin(), temp_dir->_files.end(), test);
                     temp_dir->_files.erase(std::remove(temp_dir->_files.begin(), temp_dir->_files.end(), test), temp_dir->_files.end());
                 }
-                delete test;
+                // delete test;
                 break;
             }
         }
