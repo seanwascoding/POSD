@@ -72,19 +72,14 @@ public:
                 printf("work to delete\n");
                 // vector<Node *>::iterator temp = std::find(it->currentItem()->_files.begin(), it->currentItem()->_files.end(), it->currentItem());
                 // _files.erase(temp);
-                // it->currentItem()->_files.erase();
+                // it->currentItem()->_files.erase(temp);
                 delete it->currentItem();
                 return;
             }
             // printf("fail to delete %s vs %s\n", it->currentItem()->path().c_str(), _path.c_str());
         }
-        if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true && path == it->currentItem()->path())
-        {
-            vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
-            _files.erase(temp);
-            delete it->currentItem();
-            return;
-        }
+
+
         // printf("fail to delete %s\n", it->currentItem()->path().c_str());
 
         // printf("%s", path.c_str());
@@ -123,10 +118,10 @@ public:
                 return it->currentItem();
             }
         }
-        if (it->currentItem()->name() == name)
-        {
-            return it->currentItem();
-        }
+        // if (it->currentItem()->name() == name)
+        // {
+        //     return it->currentItem();
+        // }
         return nullptr;
     };
 
@@ -159,15 +154,15 @@ public:
                 printf("fail\n");
             }
         }
-        if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
-        {
-            printf("work %s\n", it->currentItem()->name().c_str());
-            i++;
-        }
-        else
-        {
-            printf("fail\n");
-        }
+        // if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+        // {
+        //     printf("work %s\n", it->currentItem()->name().c_str());
+        //     i++;
+        // }
+        // else
+        // {
+        //     printf("fail\n");
+        // }
         return i;
     }
 
