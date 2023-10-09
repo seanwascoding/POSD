@@ -120,9 +120,9 @@ public:
     int numberOfFiles() const override
     {
         int i = 0;
-        printf("%d\n", _files.size());
         for (it->first(); !it->isDone(); it->next())
         {
+            printf("filter name %s\n", it->currentItem()->name().c_str());
             if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
             {
                 printf("work %s\n", it->currentItem()->name().c_str());
@@ -132,6 +132,16 @@ public:
             {
                 printf("fail\n");
             }
+        }
+        printf("filter name %s\n", it->currentItem()->name().c_str());
+        if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+        {
+            printf("work %s\n", it->currentItem()->name().c_str());
+            i++;
+        }
+        else
+        {
+            printf("fail\n");
         }
         return i;
     }

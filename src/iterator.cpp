@@ -126,7 +126,8 @@ bool DfsIterator::isDone() const
 {
     if (_temp.size() == 0)
     {
-        size_t index = std::distance(_composite->_files.end(), _it) + 1;
+        printf("%d\n", _temp.size());
+        size_t index = std::distance(_composite->_files.begin(), _it) + 1;
         printf("isDone filter %d %d\n", index, _composite->_files.size());
         return index == _composite->_files.size();
     }

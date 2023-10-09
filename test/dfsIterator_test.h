@@ -24,36 +24,21 @@ TEST(DFSIteratorSuite, TestRecusive)
         printf("-------------\n");
 
         folder1->add(new File("/ewffew/fewewfewf/folder1/1-1"));
-        // folder1->add(nullptr);
         folder1->add(new File("/ewffew/fewewfewf/folder1/3-1"));
         folder1->add(new File("/ewffew/fewewfewf/folder1/5-1"));
-        // folder1->add(nullptr);
         folder1->add(folder3);
         folder1->add(new File("/ewffew/fewewfewf/folder1/5-1"));
-        // folder1->add(nullptr);
-        // folder1->add(nullptr);
-
-        // ASSERT_EQ(6, folder1->numberOfFiles());
 
         Node *test = folder1->find("/ewffew/fewewfewf/folder1/5-1");
         printf("find %s\n", test->name().c_str());
 
         Iterator *it = folder1->createIterator();
 
-        it->first(); // 1-1
-        cout << it->currentItem()->name() << endl;
-
-        for (int i = 0; i < 9; i++)
+        for (it->first(); !it->isDone(); it->next())
         {
-            it->next();
             cout << it->currentItem()->name() << endl;
         }
-
-        // it->next();
-        // ASSERT_TRUE(it->isDone());
-
-        it->next();
-
+        cout << it->currentItem()->name() << endl;
         ASSERT_TRUE(it->isDone());
 
         ASSERT_EQ(8, folder1->numberOfFiles());
