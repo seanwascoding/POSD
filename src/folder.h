@@ -64,21 +64,25 @@ public:
             if (path == it->currentItem()->path())
             {
                 printf("remove find the file %s\n", it->currentItem()->name().c_str());
+                Node *test = it->currentItem();
 
+                // effect the iterator => last execute
                 Node *temp_dir = find(it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")));
 
                 if (temp_dir == nullptr)
                 {
                     // vector<Node *>::iterator position_node = std::find(_files.begin(), _files.end(), it->currentItem());
                     // printf("%s\n", (*position_node)->name().c_str());
-                    _files.erase(std::remove(_files.begin(), _files.end(), it->currentItem()), _files.end());
+                    _files.erase(std::remove_if(_files.begin(), _files.end(), [test](Node *node)
+                                                { return node->path() == test->path(); }),
+                                 _files.end());
                 }
                 else
                 {
-                    // vector<Node *>::iterator position_node = std::find(temp_dir->_files.begin(), temp_dir->_files.end(), it->currentItem());
-                    temp_dir->_files.erase(std::remove(temp_dir->_files.begin(), temp_dir->_files.end(), it->currentItem()), temp_dir->_files.end());
+                    vector<Node *>::iterator position_node = std::find(temp_dir->_files.begin(), temp_dir->_files.end(), test);
+                    temp_dir->_files.erase(std::remove(temp_dir->_files.begin(), temp_dir->_files.end(), test), temp_dir->_files.end());
                 }
-                // delete it->currentItem();
+                delete test;
                 break;
             }
         }

@@ -50,11 +50,11 @@ TEST(FileSuite, TestFolderRemove)
     string PATH = "/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py";
 
     Iterator *it = folder->createIterator();
-    it->first();
-    it->next();
+    // it->first();
+    // it->next();
     folder->remove(PATH);
 
-    ASSERT_EQ("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py", it->currentItem()->path());
+    ASSERT_EQ(2, folder->numberOfFiles());
 
     delete it;
     delete folder;
