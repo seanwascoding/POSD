@@ -5,9 +5,6 @@
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
-#include <iostream>
-#include <fstream>
-#include <cstdio>
 #include "node.h"
 #include "iterator.h"
 
@@ -47,13 +44,7 @@ public:
 
     void add(Node *node) override
     {
-        if (node == nullptr)
-        {
-            printf("nullptr be add\n");
-            _i++;
-            _files.push_back(nullptr);
-        }
-        else if (_path == node->path().substr(0, node->path().find_last_of("/")))
+        if (_path == node->path().substr(0, node->path().find_last_of("/")))
         {
             printf("node be add\n");
             _files.push_back(node);
@@ -70,55 +61,27 @@ public:
     {
         for (it->first(); !it->isDone(); it->next())
         {
-            if (it->currentItem()->getClassIterator() == true && path == it->currentItem()->path())
+            if (path == it->currentItem()->path())
             {
-                printf("remove find the file %s", it->currentItem()->name().c_str());
-                if (std::remove(path.c_str()) == 0)
+                printf("remove find the file %s\n", it->currentItem()->name().c_str());
+
+                Node *temp_dir = find(it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")));
+
+                if (temp_dir == nullptr)
                 {
-                    std::cout << "work to delete" << std::endl;
+                    // vector<Node *>::iterator position_node = std::find(_files.begin(), _files.end(), it->currentItem());
+                    // printf("%s\n", (*position_node)->name().c_str());
+                    _files.erase(std::remove(_files.begin(), _files.end(), it->currentItem()), _files.end());
                 }
                 else
                 {
-                    std::cerr << "error" << std::endl;
+                    // vector<Node *>::iterator position_node = std::find(temp_dir->_files.begin(), temp_dir->_files.end(), it->currentItem());
+                    temp_dir->_files.erase(std::remove(temp_dir->_files.begin(), temp_dir->_files.end(), it->currentItem()), temp_dir->_files.end());
                 }
-
-                // vector<Node *>::iterator temp = std::find(it->currentItem()->_files.begin(), it->currentItem()->_files.end(), it->currentItem());
-                // _files.erase(temp);
-                // it->currentItem()->_files.erase(temp);
                 // delete it->currentItem();
-
                 break;
             }
-            // printf("fail to delete %s vs %s\n", it->currentItem()->path().c_str(), _path.c_str());
         }
-
-        // printf("fail to delete %s\n", it->currentItem()->path().c_str());
-
-        // printf("%s", path.c_str());
-        // if (_path == path.substr(0, path.find_last_of("/")))
-        // {
-        //     for (it->first(); !it->isDone(); it->next())
-        //     {
-        //         if (it->currentItem()->path() == path)
-        //         {
-        //             vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
-        //             _files.erase(temp);
-        //             delete it->currentItem();
-        //             break;
-        //         }
-        //     }
-        // }
-        // else
-        // {
-        //     for (it->first(); !it->isDone(); it->next())
-        //     {
-        //         if (it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")) == path.substr(0, it->currentItem()->path().find_last_of("/")) && it->currentItem()->getClassIterator() == false)
-        //         {
-        //             it->currentItem()->remove(path);
-        //             break;
-        //         }
-        //     }
-        // }
     }
 
     Node *getChildByName(const char *name) const override
@@ -130,10 +93,6 @@ public:
                 return it->currentItem();
             }
         }
-        // if (it->currentItem()->name() == name)
-        // {
-        //     return it->currentItem();
-        // }
         return nullptr;
     };
 
