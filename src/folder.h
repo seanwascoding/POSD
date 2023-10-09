@@ -65,6 +65,7 @@ public:
     // Explicit parent reference p.166
     void remove(string path) override
     {
+        printf("%s", path.c_str());
         try
         {
             if (_path == path.substr(0, path.find_last_of("/")))
