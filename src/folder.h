@@ -5,6 +5,9 @@
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
+#include <fstream>
+#include <cstdio>
 #include "node.h"
 #include "iterator.h"
 
@@ -69,16 +72,24 @@ public:
         {
             if (it->currentItem()->getClassIterator() == true && path == it->currentItem()->path())
             {
-                printf("work to delete\n");
+                if (std::remove(path.c_str()) == 0)
+                {
+                    std::cout << "work to delete" << std::endl;
+                }
+                else
+                {
+                    std::cerr << "error" << std::endl;
+                }
+
                 // vector<Node *>::iterator temp = std::find(it->currentItem()->_files.begin(), it->currentItem()->_files.end(), it->currentItem());
                 // _files.erase(temp);
                 // it->currentItem()->_files.erase(temp);
                 // delete it->currentItem();
-                break;;
+
+                break;
             }
             // printf("fail to delete %s vs %s\n", it->currentItem()->path().c_str(), _path.c_str());
         }
-
 
         // printf("fail to delete %s\n", it->currentItem()->path().c_str());
 
