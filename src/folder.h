@@ -65,31 +65,42 @@ public:
     // Explicit parent reference p.166
     void remove(string path) override
     {
-        printf("%s", path.c_str());
-        if (_path == path.substr(0, path.find_last_of("/")))
-        {
-            for (it->first(); !it->isDone(); it->next())
-            {
-                if (it->currentItem()->path() == path)
-                {
-                    vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
-                    _files.erase(temp);
-                    delete it->currentItem();
-                    break;
-                }
-            }
-        }
-        else
-        {
-            for (it->first(); !it->isDone(); it->next())
-            {
-                if (it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")) == path.substr(0, it->currentItem()->path().find_last_of("/")) && it->currentItem()->getClassIterator() == false)
-                {
-                    it->currentItem()->remove(path);
-                    break;
-                }
-            }
-        }
+        // for (it->first(); !it->isDone(); it->next())
+        // {
+        //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+        //     {
+        //         return it->currentItem();
+        //     }
+        // }
+        
+
+
+
+        // printf("%s", path.c_str());
+        // if (_path == path.substr(0, path.find_last_of("/")))
+        // {
+        //     for (it->first(); !it->isDone(); it->next())
+        //     {
+        //         if (it->currentItem()->path() == path)
+        //         {
+        //             vector<Node *>::iterator temp = std::find(_files.begin(), _files.end(), it->currentItem());
+        //             _files.erase(temp);
+        //             delete it->currentItem();
+        //             break;
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     for (it->first(); !it->isDone(); it->next())
+        //     {
+        //         if (it->currentItem()->path().substr(0, it->currentItem()->path().find_last_of("/")) == path.substr(0, it->currentItem()->path().find_last_of("/")) && it->currentItem()->getClassIterator() == false)
+        //         {
+        //             it->currentItem()->remove(path);
+        //             break;
+        //         }
+        //     }
+        // }
     }
 
     Node *getChildByName(const char *name) const override
@@ -100,10 +111,6 @@ public:
             {
                 return it->currentItem();
             }
-        }
-        if (it->currentItem()->name() == name)
-        {
-            return it->currentItem();
         }
         return nullptr;
     };
@@ -116,10 +123,6 @@ public:
             {
                 return it->currentItem();
             }
-        }
-        if (it->currentItem()->path() == path)
-        {
-            return it->currentItem();
         }
         return nullptr;
     };
@@ -140,16 +143,6 @@ public:
             {
                 printf("fail\n");
             }
-        }
-        printf("filter name %s\n", it->currentItem()->name().c_str());
-        if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
-        {
-            printf("work %s\n", it->currentItem()->name().c_str());
-            i++;
-        }
-        else
-        {
-            printf("fail\n");
         }
         return i;
     }

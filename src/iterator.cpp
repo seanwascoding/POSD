@@ -42,6 +42,7 @@ bool isFolder(Node *node)
 DfsIterator::DfsIterator(Node *composite) : _composite(composite)
 {
     _temp.clear();
+    _i = 0;
 };
 
 void DfsIterator::first()
@@ -58,6 +59,7 @@ void DfsIterator::first()
         while ((*_it) == nullptr)
         {
             _it++;
+            _i++;
         }
     }
 };
@@ -93,6 +95,7 @@ void DfsIterator::next()
         else
         {
             _it++;
+            _i++;
             printf("move to next file\n");
             while (_temp.size() > 0 && _it == dynamic_cast<Folder *>(*_temp.back())->_files.end())
             {
@@ -124,12 +127,12 @@ void DfsIterator::next()
 
 bool DfsIterator::isDone() const
 {
-    if (_temp.size() == 0)
+    if (_temp.size() == 0 && _i != std::distance(_composite->_files.begin(), _it))
     {
-        printf("%d\n", _temp.size());
-        size_t index = std::distance(_composite->_files.begin(), _it) + 1;
-        printf("isDone filter %d %d\n", index, _composite->_files.size());
-        return index == _composite->_files.size();
+        // printf("%d\n", _i);
+        size_t index = std::distance(_composite->_files.begin(), _it);
+        printf("isDone filter %d %d\n", index, _i + 1);
+        return index == _i + 1;
     }
     else
     {
