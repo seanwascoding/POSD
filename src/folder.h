@@ -67,14 +67,14 @@ public:
     {
         for (it->first(); !it->isDone(); it->next())
         {
-            if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true && path == it->currentItem()->path())
+            if (it->currentItem()->getClassIterator() == true && path == it->currentItem()->path())
             {
                 printf("work to delete\n");
                 // vector<Node *>::iterator temp = std::find(it->currentItem()->_files.begin(), it->currentItem()->_files.end(), it->currentItem());
                 // _files.erase(temp);
                 // it->currentItem()->_files.erase(temp);
-                delete it->currentItem();
-                return;
+                // delete it->currentItem();
+                break;;
             }
             // printf("fail to delete %s vs %s\n", it->currentItem()->path().c_str(), _path.c_str());
         }
