@@ -128,21 +128,21 @@ public:
     int numberOfFiles() const override
     {
         int i = 0, j = 0;
-        // printf("%d\n", _files.size());
-        // for (it->first(); j < _files.size() - _i; it->next())
-        // {
-        //     // printf("%d\n", it->isDone());
-        //     if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
-        //     {
-        //         printf("work %s\n", it->currentItem()->name().c_str());
-        //         i++;
-        //     }
-        //     else
-        //     {
-        //         printf("fail\n");
-        //     }
-        //     j++;
-        // }
+        printf("%d\n", _files.size());
+        for (it->first(); j < _files.size() - _i; it->next())
+        {
+            // printf("%d\n", it->isDone());
+            if (it->currentItem() != nullptr && it->currentItem()->getClassIterator() == true)
+            {
+                printf("work %s\n", it->currentItem()->name().c_str());
+                i++;
+            }
+            else
+            {
+                printf("fail\n");
+            }
+            j++;
+        }
         return i;
     }
 

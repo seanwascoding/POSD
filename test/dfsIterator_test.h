@@ -21,7 +21,6 @@ TEST(DFSIteratorSuite, TestRecusive)
         folder3->add(new File("/ewffew/fewewfewf/folder1/folder3/4-2"));
         folder3->add(nullptr);
 
-        
         printf("-------------\n");
 
         folder1->add(new File("/ewffew/fewewfewf/folder1/1-1"));
@@ -36,13 +35,10 @@ TEST(DFSIteratorSuite, TestRecusive)
 
         // ASSERT_EQ(6, folder1->numberOfFiles());
 
-        Node * test = folder1->find("/ewffew/fewewfewf/folder1/5-1");
+        Node *test = folder1->find("/ewffew/fewewfewf/folder1/5-1");
         printf("%s\n", test->name().c_str());
 
-
         Iterator *it = folder1->createIterator();
-
-        
 
         // it->first(); // 1-1
         // cout << it->currentItem()->name() << endl;
@@ -71,4 +67,23 @@ TEST(DFSIteratorSuite, TestRecusive)
     {
         EXPECT_STREQ("wrong path", e.what());
     }
+}
+
+TEST(DFSIteratorSuite, TestTARecusive)
+{
+    Node *folder1 = new Folder("/Users/user/home");
+    folder1->add(new File("/Users/user/home/Downloads"));
+    folder1->add(new Folder("/Users/user/home/Documents"));
+
+    Iterator *it = folder1->createIterator();
+
+    it->first();
+    printf("%s\n", it->currentItem()->name().c_str());
+    it->next();
+    printf("%s\n", it->currentItem()->name().c_str());
+    it->next();
+    printf("%d\n", it->isDone());
+    
+    delete folder1;
+    delete it;
 }

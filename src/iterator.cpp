@@ -47,10 +47,18 @@ DfsIterator::DfsIterator(Node *composite) : _composite(composite)
 void DfsIterator::first()
 {
     // composite must be the folder in the first giving on this pattern
-    _it = dynamic_cast<Folder *>(_composite)->_files.begin();
-    while ((*_it) == nullptr)
+    if (dynamic_cast<Folder *>(_composite)->_files.empty())
     {
-        _it++;
+        printf("empty\n");
+        return;
+    }
+    else
+    {
+        _it = dynamic_cast<Folder *>(_composite)->_files.begin();
+        while ((*_it) == nullptr)
+        {
+            _it++;
+        }
     }
 };
 
@@ -66,12 +74,20 @@ void DfsIterator::next()
     {
         if (isFolder(*_it))
         {
-            printf("folder\n");
-            _temp.push_back(_it);
-            _it = dynamic_cast<Folder *>(*_it)->_files.begin();
-            while ((*_it) == nullptr)
+            if (dynamic_cast<Folder *>(*_it)->_files.empty())
             {
                 _it++;
+                return;
+            }
+            else
+            {
+                printf("folder\n");
+                _temp.push_back(_it);
+                _it = dynamic_cast<Folder *>(*_it)->_files.begin();
+                while ((*_it) == nullptr)
+                {
+                    _it++;
+                }
             }
         }
         else
