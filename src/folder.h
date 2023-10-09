@@ -72,6 +72,7 @@ public:
         {
             if (it->currentItem()->getClassIterator() == true && path == it->currentItem()->path())
             {
+                printf("remove find the file %s", it->currentItem()->name().c_str());
                 if (std::remove(path.c_str()) == 0)
                 {
                     std::cout << "work to delete" << std::endl;
