@@ -58,7 +58,7 @@ public:
         }
         else
         {
-            // throw runtime_error("wrong path");
+            throw runtime_error("wrong path");
         }
     }
 
@@ -100,6 +100,10 @@ public:
             {
                 return it->currentItem();
             }
+        }
+        if (it->currentItem()->name() == name)
+        {
+            return it->currentItem();
         }
         return nullptr;
     };
