@@ -6,18 +6,15 @@ TEST(BFSIteratorSuite, TestRecusive)
     try
     {
         Node *folder = new Folder("/asdsadasd/adsadsads/1");
-        Node *folder2 = new Folder("/asdsadasd/adsadsads/2");
-        Node *folder3 = new Folder("/asdsadasd/adsadsads/3");
-        folder->switchState(1);
-        folder2->switchState(1);
-        folder3->switchState(1);
+        Node *folder2 = new Folder("/asdsadasd/adsadsads/1/2");
+        Node *folder3 = new Folder("/asdsadasd/adsadsads/1/3");
+        folder->switchState(2); // switch to BFS Iterator
 
-        folder3->add(new File("/3-1"));
-        folder3->add(new File("/3-2"));
+        folder3->add(new File("/asdsadasd/adsadsads/1/3/3-1"));
+        folder3->add(new File("/asdsadasd/adsadsads/1/3/3-2"));
 
-        folder2->add(new File("/2-1"));
-        folder2->add(new File("/2-2"));
-        folder2->add(folder3);
+        folder2->add(new File("/asdsadasd/adsadsads/1/2/2-1"));
+        folder2->add(new File("/asdsadasd/adsadsads/1/2/2-2"));
 
         folder->add(new File("/asdsadasd/adsadsads/1/1-1"));
         folder->add(folder2);
@@ -25,18 +22,10 @@ TEST(BFSIteratorSuite, TestRecusive)
         folder->add(new File("/asdsadasd/adsadsads/1/1-3"));
 
         Iterator *it = folder->createIterator();
-
-        it->first();
-        cout << it->currentItem()->name() << endl;
-
-        for (int i = 0; i < 1; i++)
+        for (it->first(); !it->isDone(); it->next())
         {
-            it->next();
             cout << it->currentItem()->name() << endl;
         }
-
-        it->next();
-
         ASSERT_TRUE(it->isDone());
 
         delete folder;

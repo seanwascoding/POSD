@@ -1,5 +1,19 @@
 #include "../src/file.h"
 #include "../src/folder.h"
+#include <memory>
+
+TEST(FileSuite, TestFolderException)
+{
+    try
+    {
+        std::unique_ptr<Node> node(new Folder("/TEST/43434/ffff"));
+        node->add(new File("/dfsdfdfs/dsfdsfdfs/dsfdsf"));
+    }
+    catch (const std::runtime_error &e)
+    {
+        EXPECT_STREQ("wrong path", e.what());
+    }
+}
 
 TEST(FileSuite, TestNameAndPathReturnValue)
 {
@@ -40,21 +54,22 @@ TEST(FileSuite, TestFolderIterator)
     delete folder;
 }
 
-// TEST(FileSuite, TestFolderRemove)
-// {
-//     Node *folder = new Folder("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder");
-//     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test1.py"));
-//     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py"));
-//     folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test3.py"));
-//     string PATH = "/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py";
-//     Iterator *it = folder->createIterator();
-//     // it->first();
-//     // it->next();
-//     folder->remove(PATH);
-//     ASSERT_EQ(2, folder->numberOfFiles());
-//     delete it;
-//     delete folder;
-// }
+TEST(FileSuite, TestFolderRemove)
+{
+    Node *folder = new Folder("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder");
+    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test1.py"));
+    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py"));
+    folder->add(new File("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test3.py"));
+    string PATH = "/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py";
+    Iterator *it = folder->createIterator();
+    it->first();
+    it->next();
+    folder->remove(PATH);
+    ASSERT_EQ(2, folder->numberOfFiles());
+    ASSERT_EQ("test3.py", it->currentItem()->name());
+    delete it;
+    delete folder;
+}
 
 TEST(FileSuite, TestFoldergetChildByName)
 {
@@ -90,17 +105,17 @@ TEST(FileSuite, TestFolderfind)
     // ASSERT_EQ(nullptr, getFile);
     ASSERT_EQ("test2.py", getFile->name());
     ASSERT_EQ("/home/nvidia/Desktop/POSD/HW2/posd2023f_ta-master/template/test_folder/test2.py", getFile->path());
-
-    // ASSERT_EQ(3, folder->numberOfFiles());
-
+    ASSERT_EQ(3, folder->numberOfFiles());
 
     delete folder;
 }
 
 TEST(FileSuite, TestTAIssue)
 {
+    // The below Issue is the error about the TA test => resolve
+
     Node *fff = new Folder("/Users/user/home");
-    fff->switchState(0);
+    fff->switchState(0); // switch to normal Iterator
 
     Node *documents = new Folder("/Users/user/home/documents");
     Node *profile = new Folder("/Users/user/home/profile");
@@ -123,7 +138,7 @@ TEST(FileSuite, TestTAIssue)
 
     download->add(new File("/Users/user/home/download/funny"));
 
-    // ASSERT_EQ(5, fff->numberOfFiles());
+    ASSERT_EQ(0, fff->numberOfFiles()); // all of the node is folder type in the normal iterator
 
     Iterator *it = fff->createIterator();
 
