@@ -37,10 +37,15 @@ TEST(BFSIteratorSuite, TestRecusive)
         Node *getChildByName_file = folder->getChildByName("3-1");
         ASSERT_EQ("3-1", getChildByName_file->name());
 
-        // remove
+        // remove folder
         ASSERT_EQ(6, folder->numberOfFiles());
+        folder->remove("/asdsadasd/adsadsads/1/3");
+        ASSERT_EQ(4, folder->numberOfFiles());
+
+        // remove file
+        ASSERT_EQ(4, folder->numberOfFiles());
         folder->remove("/asdsadasd/adsadsads/1/2/2-1");
-        ASSERT_EQ(5, folder->numberOfFiles());
+        ASSERT_EQ(3, folder->numberOfFiles());
 
         delete folder;
         delete folder2;
