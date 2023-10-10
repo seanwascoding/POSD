@@ -21,12 +21,26 @@ TEST(BFSIteratorSuite, TestRecusive)
         folder->add(folder3);
         folder->add(new File("/asdsadasd/adsadsads/1/1-3"));
 
+        // recusive test
         Iterator *it = folder->createIterator();
         for (it->first(); !it->isDone(); it->next())
         {
             cout << it->currentItem()->name() << endl;
         }
         ASSERT_TRUE(it->isDone());
+
+        // find
+        Node *find_file = folder->find("/asdsadasd/adsadsads/1/2/2-1");
+        ASSERT_EQ("2-1", find_file->name());
+
+        // getChildByName
+        Node *getChildByName_file = folder->getChildByName("3-1");
+        ASSERT_EQ("3-1", getChildByName_file->name());
+
+        // remove
+        ASSERT_EQ(6, folder->numberOfFiles());
+        folder->remove("/asdsadasd/adsadsads/1/2/2-1");
+        ASSERT_EQ(5, folder->numberOfFiles());
 
         delete folder;
         delete folder2;

@@ -120,6 +120,7 @@ BfsIterator::BfsIterator(Node *composite) : _composite(composite)
 
 void BfsIterator::first()
 {
+    _state = false;
     _it = dynamic_cast<Folder *>(_composite)->_files.begin();
 }
 
@@ -138,10 +139,8 @@ void BfsIterator::next()
     printf("++\n");
     _it++;
 
-    if (_it == dynamic_cast<Folder*>(_composite)->_files.end())
+    if (_it == dynamic_cast<Folder *>(_composite)->_files.end())
     {
-        printf("done1 %d\n", _temp2.size());
-
         if (_temp2.size() == 0)
         {
             printf("only one row test\n");

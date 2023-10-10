@@ -62,9 +62,9 @@ public:
     {
         for (it->first(); !it->isDone(); it->next())
         {
+            // printf("remove find the file %s\n", it->currentItem()->name().c_str());
             if (path == it->currentItem()->path())
             {
-                printf("remove find the file %s\n", it->currentItem()->name().c_str());
                 Node *test = it->currentItem();
 
                 // effect the iterator => last execute
@@ -81,7 +81,6 @@ public:
                     vector<Node *>::iterator position_node = std::find(temp_dir->_files.begin(), temp_dir->_files.end(), test);
                     temp_dir->_files.erase(std::remove(temp_dir->_files.begin(), temp_dir->_files.end(), test), temp_dir->_files.end());
                 }
-                // delete test;
                 break;
             }
         }
