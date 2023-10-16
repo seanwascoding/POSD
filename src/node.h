@@ -30,7 +30,6 @@ protected:
         else
         {
             cout << "working to read the file/folder" << endl;
-            cout << _sb.st_dev << endl;
         }
     }
 
@@ -94,5 +93,5 @@ public:
         throw string("This node does not support deleting sub node");
     }
 
-    void accept(Visitor *visitor);
+    virtual void accept(Visitor *visitor) = 0;
 };
