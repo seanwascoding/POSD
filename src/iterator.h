@@ -1,39 +1,33 @@
-#if !defined(ITERATOR_H)
-#define ITERATOR_H
+#pragma once 
 
-#pragma once
-
-#include <list>
-#include <vector>
+#include<list>
 
 class Node;
 class Folder;
-class File;
 
-class Iterator
-{
+class Iterator {
 public:
-    virtual ~Iterator(){};
-    virtual void first(){};
-    virtual Node *currentItem() const {};
-    virtual void next(){};
-    virtual bool isDone() const {};
+    virtual ~Iterator() {}
+    virtual void first() {}
+    virtual Node * currentItem() const {
+        return nullptr;
+    }
+    virtual void next() {}
+    virtual bool isDone() const {
+        return true;
+    }
 };
 
-class FolderIterator : public Iterator
-{
+class FolderIterator : public Iterator {
 public:
-    FolderIterator(Folder *composite);
-    void first() override;
-    Node *currentItem() const override;
-    void next() override;
-    bool isDone() const override;
+    FolderIterator(Folder* composite);
+    ~FolderIterator() {}
+    void first();
+    Node * currentItem() const;
+    void next();
+    bool isDone() const;
 
 private:
-    Folder *_composite;
-    std::vector<Node *>::iterator _it;
+    Folder* const _host;
+    std::list<Node *>::iterator _current;
 };
-
-#include "dfs_iterator.h"
-
-#endif // ITERATOR_H

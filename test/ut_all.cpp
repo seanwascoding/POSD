@@ -1,10 +1,13 @@
 #include <gtest/gtest.h>
-#include "Iterator_test.h"
-#include "dfsIterator_test.h"
-#include "bfsIterator_test.h"
+
+// #include "ut_file.h"
+// #include "ut_folder.h"
+// #include "ut_node.h"
+// #include "ut_iterator.h"
+
+#include "ut_file_read.h"
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
- 
