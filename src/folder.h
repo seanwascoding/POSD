@@ -9,10 +9,10 @@ using namespace std;
 
 class Folder : public Node
 {
-    friend class FolderIterator;
-
 private:
     list<Node *> _nodes;
+    struct stat _sb;
+    bool _created;
 
 protected:
     void removeChild(Node *target)
@@ -21,11 +21,29 @@ protected:
     }
 
 public:
-    Folder(string path) : Node(path) {}
+    Folder(string path) : Node(path), _created(false)
+    {
+        if (stat(path.c_str(), &_sb) == -1)
+        {
+            throw string("error to read");
+        }
+        else if (S_ISDIR(_sb.st_mode))
+        {
+            cout << "working to read the folder" << endl;
+        }
+        else
+        {
+            throw string("it is not a folder");
+        }
+    }
 
     void add(Node *node)
     {
-        if (node->path() != this->path() + "/" + node->name())
+        if (_created)
+        {
+            setState(true);
+        }
+        else if (node->path() != this->path() + "/" + node->name())
         {
             throw string("Incorrect path of node: " + node->path());
         }
@@ -61,6 +79,7 @@ public:
 
     Iterator *createIterator()
     {
+        _created = true;
         return new FolderIterator(this);
     }
 
@@ -127,4 +146,40 @@ public:
     {
         visitor->visitFolder(this);
     }
+
+    class FolderIterator : public Iterator
+    {
+    public:
+        FolderIterator(Folder *composite) : _host(composite) { _sizeChanged = composite->numberOfFiles(); };
+        ~FolderIterator() {}
+        void first()
+        {
+            if (_host->getState())
+            {
+                throw string("folder changed");
+            }
+            else
+            {
+                _current = _host->_nodes.begin();
+            }
+        };
+        Node *currentItem() const { return *_current; };
+        void next()
+        {
+            if (_host->getState())
+            {
+                throw string("folder changed");
+            }
+            else
+            {
+                _current++;
+            }
+        };
+        bool isDone() const { return _current == _host->_nodes.end(); };
+
+    private:
+        Folder *const _host;
+        std::list<Node *>::iterator _current;
+        int _sizeChanged;
+    };
 };

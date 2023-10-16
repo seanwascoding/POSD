@@ -18,20 +18,10 @@ class Node
 private:
     string _path;
     Node *_parent;
-    struct stat _sb;
+    bool _state;
 
 protected:
-    Node(string path) : _path(path) 
-    {
-        if (stat(path.c_str(), &_sb) == -1)
-        {
-            throw string("error to read");
-        }
-        else
-        {
-            cout << "working to read the file/folder" << endl;
-        }
-    }
+    Node(string path) : _path(path), _state(false) {}
 
 public:
     virtual ~Node() {}
@@ -94,4 +84,8 @@ public:
     }
 
     virtual void accept(Visitor *visitor) = 0;
+
+    virtual bool getState() { return _state; }
+
+    virtual bool setState(bool state) { _state = state; }
 };

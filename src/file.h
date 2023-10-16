@@ -4,8 +4,25 @@
 
 class File : public Node
 {
+private:
+    struct stat _sb;
+
 public:
-    File(string path) : Node(path) {}
+    File(string path) : Node(path)
+    {
+        if (stat(path.c_str(), &_sb) == -1)
+        {
+            throw string("error to read");
+        }
+        else if (S_ISREG(_sb.st_mode))
+        {
+            cout << "working to read the file" << endl;
+        }
+        else
+        {
+            throw string("it is not a file");
+        }
+    }
 
     int numberOfFiles() const
     {
