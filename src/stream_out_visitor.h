@@ -62,6 +62,7 @@ public:
             it->currentItem()->accept(this);
             if (temp != _contents)
             {
+                printf("something changing %s\n", it->currentItem()->path().c_str());
                 _contents.append("\n");
             }
         }
