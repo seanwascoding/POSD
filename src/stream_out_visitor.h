@@ -23,15 +23,22 @@ public:
         }
 
         std::stringstream contentStream;
+
+        contentStream << "_____________________________________________" << "\n";
         contentStream << file->path() << '\n';
+        contentStream << "---------------------------------------------" << "\n";
+
         std::string line;
         while (std::getline(input, line))
         {
             // std::cout << line << std::endl;
             // _contents.append(line + "\n");
-            contentStream << line;
+            contentStream << line << "\n";
         }
         input.close();
+
+        contentStream << "_____________________________________________" << "\n\n";
+        contentStream << "_____________________________________________" << "\n";
 
         _contents = contentStream.str();
     };
