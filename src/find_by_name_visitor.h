@@ -12,9 +12,10 @@ public:
 
     void visitFile(File *file) override
     {
+        printf("%s", _name.c_str());
         if (_name == file->name())
         {
-            _files.push_back(file->name());
+            _files.push_back(file->path());
         }
     };
 
@@ -23,6 +24,7 @@ public:
         auto it = folder->dfsIterator();
         for (it->first(); !it->isDone(); it->next())
         {
+            printf("%s", it->currentItem()->path().c_str());
             it->currentItem()->accept(this);
         }
         delete it;
