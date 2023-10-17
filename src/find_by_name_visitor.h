@@ -14,6 +14,7 @@ public:
     {
         printf("1:%s\n", _name.c_str());
         printf("2:%s\n", file->name().c_str());
+        printf("3:%s\n", file->path().c_str());
 
         if (_name == file->name())
         {
