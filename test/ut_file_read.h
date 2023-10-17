@@ -85,25 +85,39 @@ TEST(Vistor, IteratorTest)
 
 TEST(Vistor, StreamOutVistorFile)
 {
-    StreamOutVisitor stream;
+    try
+    {
+        StreamOutVisitor stream;
 
-    File file("/home/sean/test/posd2023f/makefile");
+        File file("/home/sean/test/posd2023f/makefile");
 
-    file.accept(&stream);
+        file.accept(&stream);
 
-    printf("%s\n", stream.getResult().c_str());
+        printf("%s\n", stream.getResult().c_str());
+    }
+    catch (const std::string &e)
+    {
+        std::cerr << e << '\n';
+    }
 }
 
 TEST(Vistor, StreamOutVistorFolder)
 {
-    StreamOutVisitor stream;
+    try
+    {
+        StreamOutVisitor stream;
 
-    Folder folder("/home/sean/test/posd2023f");
-    folder.add(new File("/home/sean/test/posd2023f/makefile"));
-    folder.add(new File("/home/sean/test/posd2023f/README.md"));
-    folder.add(new Folder("/home/sean/test/posd2023f/test"));
+        Folder folder("/home/sean/test/posd2023f");
+        folder.add(new File("/home/sean/test/posd2023f/makefile"));
+        folder.add(new File("/home/sean/test/posd2023f/README.md"));
+        folder.add(new Folder("/home/sean/test/posd2023f/test"));
 
-    folder.accept(&stream);
+        folder.accept(&stream);
 
-    printf("%s\n", stream.getResult().c_str());
+        printf("%s\n", stream.getResult().c_str());
+    }
+    catch (const std::string &e)
+    {
+        std::cerr << e << '\n';
+    }
 }
