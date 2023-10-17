@@ -12,10 +12,10 @@ public:
 
     void visitFile(File *file) override
     {
-        printf("%s\n", _name.c_str());
-        printf("%s\n",file->name().c_str());
+        // printf("%s\n", _name.c_str());
+        // printf("%s\n",file->name().c_str());
 
-        if (_name == file->name())
+        if (_name == file->path())
         {
             _files.push_back(file->path());
         }
