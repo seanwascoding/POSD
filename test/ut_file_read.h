@@ -20,7 +20,7 @@ TEST(Vistor, FindByNameInFile)
 {
     try
     {
-        FindByNameVisitor vistor("/home/sean/test/posd2023f/makefile");
+        FindByNameVisitor vistor("makefile");
 
         File file("/home/sean/test/posd2023f/makefile");
 
@@ -38,7 +38,7 @@ TEST(Vistor, FindByNameInFolder)
 {
     try
     {
-        FindByNameVisitor vistor("/home/sean/test/posd2023f/makefile");
+        FindByNameVisitor vistor("makefile");
 
         Folder folder("/home/sean/test/posd2023f");
         folder.add(new File("/home/sean/test/posd2023f/README.md"));

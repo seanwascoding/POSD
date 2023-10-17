@@ -15,7 +15,7 @@ public:
         printf("%s\n", _name.c_str());
         printf("%s\n",file->path().c_str());
 
-        if (_name == file->path())
+        if (_name == file->name())
         {
             _files.push_back(file->path());
         }
@@ -26,7 +26,7 @@ public:
         auto it = folder->dfsIterator();
         for (it->first(); !it->isDone(); it->next())
         {
-            printf("%s", it->currentItem()->path().c_str());
+            // printf("%s\n", it->currentItem()->path().c_str());
             it->currentItem()->accept(this);
         }
         delete it;
