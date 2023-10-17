@@ -29,7 +29,7 @@ public:
         {
             // std::cout << line << std::endl;
             // _contents.append(line + "\n");
-            contentStream << line << '\n';
+            contentStream << line;
         }
         input.close();
 
