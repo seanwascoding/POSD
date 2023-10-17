@@ -57,6 +57,7 @@ public:
         auto it = folder->dfsIterator();
         for (it->first(); !it->isDone(); it->next())
         {
+            printf("%s\n", it->currentItem()->path().c_str());
             string temp = _contents;
             it->currentItem()->accept(this);
             if (temp != _contents)
