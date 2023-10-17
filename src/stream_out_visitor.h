@@ -60,7 +60,7 @@ public:
             printf("%s\n", it->currentItem()->path().c_str());
             string temp = _contents;
             it->currentItem()->accept(this);
-            if (temp != _contents && typeid(it->currentItem()->createIterator()) == typeid(NullIterator))
+            if (temp != _contents && it->currentItem()->createIterator()->isDone() == true)
             {
                 printf("something changing %s\n", it->currentItem()->path().c_str());
                 _contents.append("\n");
