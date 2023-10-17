@@ -37,10 +37,9 @@ public:
         }
         input.close();
 
-        contentStream << "_____________________________________________" << "\n\n";
         contentStream << "_____________________________________________" << "\n";
 
-        _contents = contentStream.str();
+        _contents.append(contentStream.str());
     };
 
     void visitFolder(Folder *folder) override
@@ -49,6 +48,7 @@ public:
         for (it->first(); !it->isDone(); it->next())
         {
             it->currentItem()->accept(this);
+            _contents.append("\n");
         }
         delete it;
     };
