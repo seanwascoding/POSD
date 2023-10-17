@@ -45,6 +45,8 @@ TEST(Vistor, FindByNameInFolder)
         folder.add(new Folder("/home/sean/test/posd2023f/bin"));
         folder.add(new Folder("/home/sean/test/posd2023f/test"));
         folder.add(new File("/home/sean/test/posd2023f/makefile"));
+        folder.add(new File("/home/sean/test/posd2023f/makefile"));
+
 
         folder.accept(&vistor);
 
@@ -108,6 +110,7 @@ TEST(Vistor, StreamOutVistorFolder)
         StreamOutVisitor stream;
 
         Folder folder("/home/sean/test/posd2023f");
+        folder.add(new File("/home/sean/test/posd2023f/makefile"));
         folder.add(new File("/home/sean/test/posd2023f/makefile"));
         folder.add(new File("/home/sean/test/posd2023f/README.md"));
         folder.add(new Folder("/home/sean/test/posd2023f/test"));

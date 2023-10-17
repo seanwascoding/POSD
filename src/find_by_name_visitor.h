@@ -12,12 +12,16 @@ public:
 
     void visitFile(File *file) override
     {
-        printf("%s\n", _name.c_str());
-        printf("%s\n",file->name().c_str());
+        // printf("%s\n", _name.c_str());
+        // printf("%s\n", file->name().c_str());
 
         if (_name == file->name())
         {
-            _files.push_back(file->path());
+            std::list<string>::iterator it = find(_files.begin(), _files.end(), file->path());
+            if (it == _files.end())
+            {
+                _files.push_back(file->path());
+            }
         }
     };
 
