@@ -87,5 +87,5 @@ public:
 
     virtual bool getState() { return _state; }
 
-    virtual bool setState(bool state) { _state = state; }
+    virtual void setState(bool state) { _state = state; }
 };
