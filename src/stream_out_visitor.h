@@ -57,8 +57,12 @@ public:
         auto it = folder->dfsIterator();
         for (it->first(); !it->isDone(); it->next())
         {
+            string temp = _contents;
             it->currentItem()->accept(this);
-            _contents.append("\n");
+            if (temp != _contents)
+            {
+                _contents.append("\n");
+            }
         }
         delete it;
     };
