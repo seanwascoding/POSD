@@ -31,7 +31,7 @@ public:
         auto it = folder->dfsIterator();
         for (it->first(); !it->isDone(); it->next())
         {
-            // printf("%s\n", it->currentItem()->path().c_str());
+            printf("the output folders%s\n", it->currentItem()->path().c_str());
             it->currentItem()->accept(this);
         }
         delete it;
