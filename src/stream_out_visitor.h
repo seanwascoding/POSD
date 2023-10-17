@@ -15,6 +15,13 @@ private:
 public:
     void visitFile(File *file) override
     {
+        size_t found = _contents.find(file->path());
+
+        if (found != string::npos)
+        {
+            return;
+        }
+
         ifstream input(file->path());
         if (!input)
         {
@@ -24,9 +31,11 @@ public:
 
         std::stringstream contentStream;
 
-        contentStream << "_____________________________________________" << "\n";
+        contentStream << "_____________________________________________"
+                      << "\n";
         contentStream << file->path() << '\n';
-        contentStream << "---------------------------------------------" << "\n";
+        contentStream << "---------------------------------------------"
+                      << "\n";
 
         std::string line;
         while (std::getline(input, line))
@@ -37,7 +46,8 @@ public:
         }
         input.close();
 
-        contentStream << "_____________________________________________" << "\n";
+        contentStream << "_____________________________________________"
+                      << "\n";
 
         _contents.append(contentStream.str());
     };
