@@ -47,7 +47,7 @@ public:
         input.close();
 
         contentStream << "_____________________________________________"
-                      << "\n\n";
+                      << "\n";
 
         _contents.append(contentStream.str());
     };
@@ -58,6 +58,7 @@ public:
         for (it->first(); !it->isDone(); it->next())
         {
             it->currentItem()->accept(this);
+            _contents.append("\n");
         }
         delete it;
     };
