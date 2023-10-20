@@ -8,7 +8,7 @@
 class FindByNameVisitor : public Visitor
 {
 public:
-    FindByNameVisitor(string name) : _name(name){};
+    FindByNameVisitor(string name) : _name(name), _state(false){};
 
     void visitFile(File *file) override
     {
@@ -19,17 +19,20 @@ public:
         if (_name == file->name())
         {
             _files.push_back(file->path());
-
-            // std::list<string>::iterator it = find(_files.begin(), _files.end(), file->path());
-            // if (it == _files.end())
-            // {
-            //     _files.push_back(file->path());
-            // }
+            if (_state)
+            {
+                std::list<string>::iterator it = find(_files.begin(), _files.end(), file->path());
+                if (it == _files.end())
+                {
+                    _files.push_back(file->path());
+                }
+            }
         }
     };
 
     void visitFolder(Folder *folder) override
     {
+        _state = true;
         auto it = folder->dfsIterator();
         for (it->first(); !it->isDone(); it->next())
         {
@@ -47,4 +50,5 @@ public:
 private:
     string _name;
     std::list<string> _files;
+    bool _state;
 };
