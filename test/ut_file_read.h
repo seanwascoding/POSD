@@ -16,7 +16,7 @@ TEST(File, ReadActualFile)
     }
 }
 
-TEST(Vistor, FindByNameInFile)
+TEST(Vistor, VisitFile)
 {
     try
     {
@@ -34,22 +34,27 @@ TEST(Vistor, FindByNameInFile)
     }
 }
 
-TEST(Vistor, FindByNameInFolder)
+TEST(Vistor, VisitFolder)
 {
     try
     {
-        FindByNameVisitor vistor("makefile");
+        FindByNameVisitor vistor("ut");
 
-        Folder folder("/home/sean/test/posd2023f");
-        folder.add(new File("/home/sean/test/posd2023f/README.md"));
-        folder.add(new Folder("/home/sean/test/posd2023f/bin"));
-        folder.add(new Folder("/home/sean/test/posd2023f/test"));
-        folder.add(new File("/home/sean/test/posd2023f/makefile"));
+        Folder *ttt = new Folder("/home/sean/test/posd2023f");
+        Folder *test = new Folder("/home/sean/test/posd2023f/bin");
+        test->add(new File("/home/sean/test/posd2023f/bin/ut"));
+        ttt->add(new File("/home/sean/test/posd2023f/README.md"));
+        ttt->add(test);
+        ttt->add(new Folder("/home/sean/test/posd2023f/test"));
+        ttt->add(new File("/home/sean/test/posd2023f/makefile"));
 
-
-        folder.accept(&vistor);
+        ttt->accept(&vistor);
 
         ASSERT_EQ(1, vistor.getPaths().size());
+
+        delete test;
+        delete ttt;
+
     }
     catch (const std::string &e)
     {
@@ -72,7 +77,7 @@ TEST(Vistor, IteratorTest)
         {
             printf("%s\n", it->currentItem()->name().c_str());
             i++;
-            if (i == 2)
+            if (i == 1)
             {
                 folder.add(new File("/home/sean/test/posd2023f/eeeee.f"));
             }
@@ -80,7 +85,7 @@ TEST(Vistor, IteratorTest)
     }
     catch (const std::string &e)
     {
-        std::cerr << e << '\n';
+        ASSERT_EQ("folder changed", e);
     }
 }
 
