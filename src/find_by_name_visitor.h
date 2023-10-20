@@ -16,14 +16,16 @@ public:
         printf("2:%s\n", file->name().c_str());
         printf("3:%s\n", file->path().c_str());
 
-        if (_name == file->name())
-        {
-            std::list<string>::iterator it = find(_files.begin(), _files.end(), file->path());
-            if (it == _files.end())
-            {
-                _files.push_back(file->path());
-            }
-        }
+        _files.push_back(file->path());
+
+        // if (_name == file->name())
+        // {
+        //     std::list<string>::iterator it = find(_files.begin(), _files.end(), file->path());
+        //     if (it == _files.end())
+        //     {
+        //         _files.push_back(file->path());
+        //     }
+        // }
     };
 
     void visitFolder(Folder *folder) override

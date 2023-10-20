@@ -50,7 +50,7 @@ TEST(Vistor, FindByNameInFolder)
 
         folder.accept(&vistor);
 
-        ASSERT_EQ(1, vistor.getPaths().size());
+        ASSERT_EQ(3, vistor.getPaths().size());
     }
     catch (const std::string &e)
     {
