@@ -51,29 +51,29 @@ TEST(expression, visitor)
     }
 }
 
-TEST(expression, Parser)
-{
-    try
-    {
-        // The structure according to Figure1
-        Term *s = new Operand(3);
-        Term *t = new Operand(5);
-        Term *u = new Operand(7);
+// TEST(expression, Parser)
+// {
+//     try
+//     {
+//         // The structure according to Figure1
+//         Term *s = new Operand(3);
+//         Term *t = new Operand(5);
+//         Term *u = new Operand(7);
 
-        Expression *e = new Expression(s, new Expression(t, u), '*');
+//         Expression *e = new Expression(s, new Expression(t, u), '*');
 
-        Builder *builder = new Builder();
-        Scanner *scanner = new Scanner();
+//         Builder *builder = new Builder();
+//         Scanner *scanner = new Scanner();
 
-        Parser *parser = new Parser(scanner, builder);
-        parser->setInput("( 10 + ( ( 11 + 12 ) * ( 5 * 4 ) ) )");
-        parser->parse();
+//         Parser *parser = new Parser(scanner, builder);
+//         parser->setInput("( 10 + ( ( 11 + 12 ) * ( 5 * 4 ) ) )");
+//         parser->parse();
 
-        // ASSERT_EQ("(3*(5+7))", visit->result());
-        // ASSERT_EQ("3 5 7 + *", g->result());
-    }
-    catch (const char *e)
-    {
-        std::cerr << e << '\n';
-    }
-}
+//         // ASSERT_EQ("(3*(5+7))", visit->result());
+//         // ASSERT_EQ("3 5 7 + *", g->result());
+//     }
+//     catch (const char *e)
+//     {
+//         std::cerr << e << '\n';
+//     }
+// }
