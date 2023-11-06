@@ -5,7 +5,7 @@ LIBS = -lgtest -lpthread
 
 UT_ALL = test/ut_all.cpp
 TEST_HEADERS = test/ut_expression.h
-SRC_HEADERS = src/term.h src/operand.h src/expression.h src/builder.h src/visitor.h src/scanner.h src/parser.h src/postvisitor.h src/strvisitor.h
+SRC_HEADERS = src/term.h src/operand.h src/expression.h src/builder.h src/visitor.h src/scanner.h src/parser.h src/post_visitor.h src/str_visitor.h
 
 all: dirs bin/ut_all
 

@@ -1,7 +1,7 @@
 #include "../src/operand.h"
 #include "../src/expression.h"
-#include "../src/strvisitor.h"
-#include "../src/postvisitor.h"
+#include "../src/str_visitor.h"
+#include "../src/post_visitor.h"
 #include "../src/parser.h"
 
 TEST(expression, normal)
