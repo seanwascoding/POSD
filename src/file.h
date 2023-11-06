@@ -1,55 +1,40 @@
 #pragma once
 
 #include "node.h"
+#include "visitor.h"
 
-class File : public Node
-{
-private:
-    struct stat _sb;
-
+class File: public Node {
 public:
-    File(string path) : Node(path)
-    {
-        if (stat(path.c_str(), &_sb) == -1)
-        {
-            throw string("error to read");
+    File(string path): Node(path) {
+        struct stat fileInfo;
+        const char *c = path.c_str();
+        if(lstat(c, &fileInfo) == 0){
+            if(S_ISREG(fileInfo.st_mode))
+                return;
         }
-        else if (S_ISREG(_sb.st_mode))
-        {
-            cout << "working to read the file" << endl;
-        }
-        else
-        {
-            throw string("it is not a file");
-        }
+        throw "No File exists";
     }
 
-    int numberOfFiles() const
-    {
+    int numberOfFiles() const override {
         return 1;
     }
 
-    Node *find(string path)
-    {
-        if (this->path() == path)
-        {
+    Node * find(string path) override {
+        if (this->path() == path) {
             return this;
         }
         return nullptr;
     }
 
-    std::list<string> findByName(string name) override
-    {
+    std::list<string> findByName(string name) override {
         std::list<string> pathList;
-        if (this->name() == name)
-        {
+        if (this->name() == name) {
             pathList.push_back(this->path());
         }
         return pathList;
     }
 
-    void accept(Visitor *visitor) override
-    {
+    void accept(Visitor * visitor) override {
         visitor->visitFile(this);
     }
 };

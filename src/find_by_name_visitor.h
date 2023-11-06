@@ -1,44 +1,39 @@
 #pragma once
 
-#include <string>
 #include "file.h"
 #include "folder.h"
 #include "visitor.h"
 
-class FindByNameVisitor : public Visitor
-{
+class FindByNameVisitor : public Visitor {
 public:
-    FindByNameVisitor(string name) : _name(name){};
+    FindByNameVisitor(string name) : _name(name) {}
 
-    void visitFile(File *file) override
-    {
-        printf("1:%s\n", _name.c_str());
-        printf("2:%s\n", file->name().c_str());
-        printf("3:%s\n", file->path().c_str());
-
-        if (_name == file->name())
-        {
-            _files.push_back(file->path());
+    void visitFile(File * file) override {
+        if (file->name() == _name) {
+            _paths.push_back(file->path());
         }
-    };
+    }
 
-    void visitFolder(Folder *folder) override
-    {
-        auto it = folder->createIterator();
-        for (it->first(); !it->isDone(); it->next())
-        {
-            printf("the output folders:%s\n", it->currentItem()->path().c_str());
+    void visitFolder(Folder * folder) override {
+        if (folder->name() == _name) {
+            _paths.push_back(folder->path());
+        }
+
+        Iterator * it = folder->createIterator();
+
+        it->first();
+        for (; !it->isDone(); it->next()) {
             it->currentItem()->accept(this);
         }
-        delete it;
-    };
 
-    std::list<string> getPaths() const
-    {
-        return _files;
-    };
+        delete it;
+    }
+
+    std::list<string> getPaths() const {
+        return _paths;
+    }
 
 private:
     string _name;
-    std::list<string> _files;
+    std::list<string> _paths;
 };

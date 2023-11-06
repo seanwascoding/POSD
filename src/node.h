@@ -2,14 +2,9 @@
 
 #include <string>
 #include "iterator.h"
-#include "null_iterator.h"
 #include "visitor.h"
-
-//! extra
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <iostream>
+#include "null_iterator.h"
+#include "order_by.h"
 
 using namespace std;
 
@@ -18,10 +13,9 @@ class Node
 private:
     string _path;
     Node *_parent;
-    bool _state;
 
 protected:
-    Node(string path) : _path(path), _state(false) {}
+    Node(string path) : _path(path) {}
 
 public:
     virtual ~Node() {}
@@ -64,12 +58,14 @@ public:
 
     virtual int numberOfFiles() const = 0;
 
+    //! default
     virtual Iterator *createIterator()
     {
         return new NullIterator();
     }
 
-    virtual Iterator *dfsIterator()
+    //! Add function => orderby template
+    virtual Iterator *createIterator(OrderBy orderby)
     {
         return new NullIterator();
     }
@@ -84,8 +80,4 @@ public:
     }
 
     virtual void accept(Visitor *visitor) = 0;
-
-    virtual bool getState() { return _state; }
-
-    virtual void setState(bool state) { _state = state; }
 };

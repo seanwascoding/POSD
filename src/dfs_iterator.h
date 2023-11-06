@@ -1,8 +1,7 @@
 #pragma once
 
+#include <queue>
 #include <stack>
-#include <list>
-
 #include "iterator.h"
 
 class DfsIterator: public Iterator {
@@ -13,7 +12,6 @@ public:
         while(!_stack.empty()){
             _stack.pop();
         }
-
         _curr = _root;
         _pushCurrIter();
         next();

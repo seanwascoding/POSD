@@ -7,70 +7,36 @@
 #include <iostream>
 #include <sstream>
 
-class StreamOutVisitor : public Visitor
-{
-private:
-    string _contents;
-
+class StreamOutVisitor : public Visitor {
 public:
-    void visitFile(File *file) override
-    {
-        size_t found = _contents.find(file->path());
+    void visitFile(File * file) override {
+        std::ifstream t(file->path());
+        std::stringstream buffer;
 
-        if (found != string::npos)
-        {
-            return;
-        }
+        buffer << t.rdbuf(); 
 
-        ifstream input(file->path());
-        if (!input)
-        {
-            std::cerr << "Cannot open: " << file->name() << std::endl;
-            return;
-        }
+        _result += "_____________________________________________\n";
+        _result += file->path() + "\n";
+        _result += "---------------------------------------------\n";
+        _result += buffer.str() + "\n";
+        _result += "_____________________________________________\n";
+    }
 
-        std::stringstream contentStream;
+    void visitFolder(Folder * folder) override {
+        Iterator * it = folder->createIterator();
 
-        contentStream << "_____________________________________________"
-                      << "\n";
-        contentStream << file->path() << '\n';
-        contentStream << "---------------------------------------------"
-                      << "\n";
-
-        std::string line;
-        while (std::getline(input, line))
-        {
-            // std::cout << line << std::endl;
-            // _contents.append(line + "\n");
-            contentStream << line << "\n";
-        }
-        input.close();
-
-        contentStream << "_____________________________________________"
-                      << "\n";
-
-        _contents.append(contentStream.str());
-    };
-
-    void visitFolder(Folder *folder) override
-    {
-        auto it = folder->dfsIterator();
-        for (it->first(); !it->isDone(); it->next())
-        {
-            printf("%s\n", it->currentItem()->path().c_str());
-            string temp = _contents;
+        for(it->first(); !it->isDone(); it->next()) {
             it->currentItem()->accept(this);
-            if (temp != _contents && it->currentItem()->createIterator()->isDone() == true)
-            {
-                printf("something changing %s\n", it->currentItem()->path().c_str());
-                _contents.append("\n");
-            }
+            if(dynamic_cast<File *>(it->currentItem()))
+                _result += "\n";
         }
-        delete it;
-    };
+    }
 
-    string getResult() const
-    {
-        return _contents;
-    };
+    string getResult() const {
+        return _result;
+    }
+
+private:
+    string _result;
+    int _indent;
 };
