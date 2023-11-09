@@ -1,13 +1,10 @@
 #pragma once
 
-#include <string>
-
-class Expression;
-class Operand;
+class File;
+class Folder;
 
 class Visitor {
 public:
-  virtual void visit(Expression * e) = 0;
-  virtual void visit(Operand * o) = 0;
-  virtual std::string result() const = 0;
+    virtual void visitFile(File * file) = 0;
+    virtual void visitFolder(Folder * folder) = 0;
 };
