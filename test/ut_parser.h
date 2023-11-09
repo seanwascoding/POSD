@@ -7,10 +7,10 @@ TEST(parser, normal)
 {
     try
     {
-        Folder folder("/home/sean/test/posd2023f_109300219_hw/structure");
-        folder.add(new Folder("/home/sean/test/posd2023f_109300219_hw/structure/home"));
-        folder.add(new Folder("/home/sean/test/posd2023f_109300219_hw/structure/visitor"));
-        folder.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/file.txt"));
+        Folder folder("structure");
+        folder.add(new Folder("structure/home"));
+        folder.add(new Folder("structure/visitor"));
+        folder.add(new File("structure/file.txt"));
 
         Iterator *it = folder.createIterator(OrderBy::Normal);
 
@@ -32,12 +32,12 @@ TEST(parser, OrderByNameIterator)
     Iterator *it = nullptr;
     try
     {
-        Folder folder("/home/sean/test/posd2023f_109300219_hw/structure");
-        Folder folder1("/home/sean/test/posd2023f_109300219_hw/structure/home");
-        folder1.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/home/my_profile"));
-        folder1.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/home/hello.txt"));
-        folder.add(new Folder("/home/sean/test/posd2023f_109300219_hw/structure/visitor"));
-        folder.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/file.txt"));
+        Folder folder("structure");
+        Folder folder1("structure/home");
+        folder1.add(new File("structure/home/my_profile"));
+        folder1.add(new File("structure/home/hello.txt"));
+        folder.add(new Folder("structure/visitor"));
+        folder.add(new File("structure/file.txt"));
         folder.add(&folder1);
 
         it = folder.createIterator(OrderBy::Name);
@@ -58,12 +58,12 @@ TEST(parser, OrderByNameWithFolderFirstIterator)
     Iterator *it = nullptr;
     try
     {
-        Folder folder("/home/sean/test/posd2023f_109300219_hw/structure");
-        Folder folder1("/home/sean/test/posd2023f_109300219_hw/structure/home");
-        folder1.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/home/my_profile"));
-        folder1.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/home/hello.txt"));
-        folder.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/file.txt"));
-        folder.add(new Folder("/home/sean/test/posd2023f_109300219_hw/structure/visitor"));
+        Folder folder("structure");
+        Folder folder1("structure/home");
+        folder1.add(new File("structure/home/my_profile"));
+        folder1.add(new File("structure/home/hello.txt"));
+        folder.add(new File("structure/file.txt"));
+        folder.add(new Folder("structure/visitor"));
         folder.add(&folder1);
 
         it = folder.createIterator(OrderBy::NameWithFolderFirst);
@@ -84,12 +84,12 @@ TEST(parser, OrderByKindIterator)
     Iterator *it = nullptr;
     try
     {
-        Folder folder("/home/sean/test/posd2023f_109300219_hw/structure");
-        Folder folder1("/home/sean/test/posd2023f_109300219_hw/structure/home");
-        folder1.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/home/my_profile"));
-        folder1.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/home/hello.txt"));
-        folder.add(new File("/home/sean/test/posd2023f_109300219_hw/structure/file.txt"));
-        folder.add(new Folder("/home/sean/test/posd2023f_109300219_hw/structure/visitor"));
+        Folder folder("structure");
+        Folder folder1("structure/home");
+        folder1.add(new File("structure/home/my_profile"));
+        folder1.add(new File("structure/home/hello.txt"));
+        folder.add(new File("structure/file.txt"));
+        folder.add(new Folder("structure/visitor"));
         folder.add(&folder1);
 
         it = folder.createIterator(OrderBy::Kind);
