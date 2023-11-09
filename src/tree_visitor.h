@@ -22,6 +22,8 @@ public:
 
     void visitFolder(Folder *folder) override
     {
+        _level++;
+
         int sizeCount = 0;
         _it = folder->createIterator(_operation);
         for (_it->first(); !_it->isDone(); _it->next())
@@ -33,23 +35,28 @@ public:
             //! add prefix
             if (_level != 0)
             {
-                _results += "|";
                 //! indent
                 int i = 0;
                 while (_level > i)
                 {
-                    _results += "   ";
+                    if ((_level - _levelMinus) <= i)
+                    {
+                        _results += "   ";
+                    }
+                    else
+                    {
+                        _results += "|";
+                        _results += "   ";
+                    }
                     i++;
                 }
             }
 
             //! add filename
-            if (temp.size() != 0 && temp.top()->getSize() == sizeCount)
+            if (folder->getSize() == sizeCount)
             {
                 _results += "└── ";
-                sizeCount = 0;
-                _level--;
-                temp.pop();
+                _levelMinus++;
             }
             else
             {
@@ -61,8 +68,8 @@ public:
             {
                 _results += _it->currentItem()->name();
                 _results += "\n";
-                _level++;
-                temp.push(dynamic_cast<Folder *>(_it->currentItem()));
+                temp.push(_it);
+                _it->currentItem()->accept(this);
             }
             else
             {
@@ -71,11 +78,13 @@ public:
             }
         }
 
-        // if (_level >= 0)
-        // {
-        //     _it = temp.top();
-        //     temp.pop();
-        // }
+        _level--;
+        _levelMinus--;
+        if (_level >= 0)
+        {
+            _it = temp.top();
+            temp.pop();
+        }
     };
 
     string getTree()
@@ -87,6 +96,7 @@ private:
     OrderBy _operation;
     std::string _results;
     Iterator *_it;
-    stack<Folder *> temp;
-    int _level = 0;
+    stack<Iterator *> temp;
+    int _level = -1;
+    int _levelMinus = 0;
 };

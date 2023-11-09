@@ -232,27 +232,27 @@ public:
         void first() override
         {
             checkAvailable();
-            _it->first();
+            _current = _host->_nodes.begin();
         }
 
         Node *currentItem() const override
         {
-            return _it->currentItem();
+            return *_current;
         }
 
         void next() override
         {
             checkAvailable();
-            _it->next();
+            _current++;
         }
 
         bool isDone() const override
         {
-            return _it->isDone();
+            return _current == _host->_nodes.end();
         }
 
     private:
-        Node *const _host;
+        Folder *const _host;
         std::list<Node *>::iterator _current;
         int _operationCount;
         Iterator *_it;
@@ -270,7 +270,7 @@ public:
 
         void checkAvailable() const
         {
-            if (dynamic_cast<Folder *>(_host)->_operationCount != _operationCount)
+            if (_host->_operationCount != _operationCount)
             {
                 throw "Iterator Not Avaliable";
             }
@@ -307,27 +307,27 @@ public:
         void first() override
         {
             checkAvailable();
-            _it->first();
+            _current = _host->_nodes.begin();
         }
 
         Node *currentItem() const override
         {
-            return _it->currentItem();
+            return *_current;
         }
 
         void next() override
         {
             checkAvailable();
-            _it->next();
+            _current++;
         }
 
         bool isDone() const override
         {
-            return _it->isDone();
+            return _current == _host->_nodes.end();
         }
 
     private:
-        Node *const _host;
+        Folder *const _host;
         std::list<Node *>::iterator _current;
         int _operationCount;
         Iterator *_it;
@@ -354,7 +354,7 @@ public:
 
         void checkAvailable() const
         {
-            if (dynamic_cast<Folder *>(_host)->_operationCount != _operationCount)
+            if (_host->_operationCount != _operationCount)
             {
                 throw "Iterator Not Avaliable";
             }
@@ -391,27 +391,27 @@ public:
         void first() override
         {
             checkAvailable();
-            _it->first();
+            _current = _host->_nodes.begin();
         }
 
         Node *currentItem() const override
         {
-            return _it->currentItem();
+            return *_current;
         }
 
         void next() override
         {
             checkAvailable();
-            _it->next();
+            _current++;
         }
 
         bool isDone() const override
         {
-            return _it->isDone();
+            return _current == _host->_nodes.end();
         }
 
     private:
-        Node *const _host;
+        Folder *const _host;
         std::list<Node *>::iterator _current;
         int _operationCount;
         Iterator *_it;
@@ -438,7 +438,7 @@ public:
 
         void checkAvailable() const
         {
-            if (dynamic_cast<Folder *>(_host)->_operationCount != _operationCount)
+            if (_host->_operationCount != _operationCount)
             {
                 throw "Iterator Not Avaliable";
             }
