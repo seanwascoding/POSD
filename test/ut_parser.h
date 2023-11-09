@@ -2,6 +2,7 @@
 #include "../src/file.h"
 #include "../src/iterator.h"
 #include "../src/order_by.h"
+#include "../src/tree_visitor.h"
 
 TEST(parser, normal)
 {
@@ -97,6 +98,35 @@ TEST(parser, OrderByKindIterator)
         {
             cout << it->currentItem()->name() << endl;
         }
+    }
+    catch (const char *e)
+    {
+        std::cerr << e << '\n';
+    }
+    delete it;
+}
+
+TEST(parser, visitor)
+{
+    TreeVisitor *visitor = nullptr;
+    Iterator *it = nullptr;
+    try
+    {
+        Folder folder("structure");
+        Folder folder1("structure/home");
+        folder1.add(new File("structure/home/my_profile"));
+        folder1.add(new File("structure/home/hello.txt"));
+        folder.add(new File("structure/file.txt"));
+        folder.add(new Folder("structure/visitor"));
+        folder.add(&folder1);
+
+        // visitor = new TreeVisitor(OrderBy::Name);
+
+        // folder.accept(visitor);
+
+        // string output = visitor->getTree();
+
+        // cout << output;
     }
     catch (const char *e)
     {

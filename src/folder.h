@@ -80,15 +80,15 @@ public:
     //! Add function => orderby template
     Iterator *createIterator(OrderBy orderby) override
     {
-        _operationCount = static_cast<int>(orderby);
-        cout << "create iterator:" << _operationCount << endl;
-        if (_operationCount == 0)
+        int temp = static_cast<int>(orderby);
+        cout << "create iterator:" << temp << endl;
+        if (temp == 0)
             return new FolderIterator(this, _operationCount);
-        else if (_operationCount == 1)
+        else if (temp == 1)
             return new OrderByNameIterator(this, _operationCount);
-        else if (_operationCount == 2)
+        else if (temp == 2)
             return new OrderByNameWithFolderFirstIterator(this, _operationCount);
-        else if (_operationCount == 3)
+        else if (temp == 3)
             return new OrderByKindIterator(this, _operationCount);
         else
             throw "error orderbyValue";
@@ -151,6 +151,11 @@ public:
     void accept(Visitor *visitor) override
     {
         visitor->visitFolder(this);
+    }
+
+    int getSize()
+    {
+        return _nodes.size();
     }
 
     class FolderIterator : public Iterator
