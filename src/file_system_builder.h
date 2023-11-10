@@ -6,13 +6,16 @@
 
 using std::string;
 
-class FileSystemBuilder {
+class FileSystemBuilder
+{
 public:
-    Folder * getRoot() const;
+    Folder *getRoot() const;
 
     void buildFile(string path);
 
     void buildFolder(string path);
 
     void endFolder();
+
+private:
 };

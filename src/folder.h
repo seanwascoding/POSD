@@ -208,7 +208,7 @@ public:
         OrderByNameIterator(Folder *composite, int operationCount) : _host(composite), _operationCount(operationCount)
         {
             arrangeNodes(dynamic_cast<Folder *>(_host));
-            _it = new DfsIterator(composite);
+            Iterator *_it = new DfsIterator(composite);
             for (_it->first(); !_it->isDone(); _it->next())
             {
                 if (dynamic_cast<Folder *>(_it->currentItem()))
@@ -224,7 +224,6 @@ public:
             }
 
             delete _it;
-            _it = new DfsIterator(composite);
         }
 
         ~OrderByNameIterator() {}
@@ -255,7 +254,6 @@ public:
         Folder *const _host;
         std::list<Node *>::iterator _current;
         int _operationCount;
-        Iterator *_it;
         std::stack<Folder *> _stack;
 
         void arrangeNodes(Folder *compound)
@@ -283,7 +281,7 @@ public:
         OrderByNameWithFolderFirstIterator(Folder *composite, int operationCount) : _host(composite), _operationCount(operationCount)
         {
             arrangeNodes(dynamic_cast<Folder *>(_host));
-            _it = new DfsIterator(composite);
+            Iterator *_it = new DfsIterator(composite);
             for (_it->first(); !_it->isDone(); _it->next())
             {
                 if (dynamic_cast<Folder *>(_it->currentItem()))
@@ -297,9 +295,7 @@ public:
                 arrangeNodes(_stack.top());
                 _stack.pop();
             }
-
             delete _it;
-            _it = new DfsIterator(composite);
         }
 
         ~OrderByNameWithFolderFirstIterator() {}
@@ -330,7 +326,6 @@ public:
         Folder *const _host;
         std::list<Node *>::iterator _current;
         int _operationCount;
-        Iterator *_it;
         std::stack<Folder *> _stack;
 
         void arrangeNodes(Folder *compound)
@@ -367,7 +362,7 @@ public:
         OrderByKindIterator(Folder *composite, int operationCount) : _host(composite), _operationCount(operationCount)
         {
             arrangeNodes(dynamic_cast<Folder *>(_host));
-            _it = new DfsIterator(composite);
+            Iterator *_it = new DfsIterator(composite);
             for (_it->first(); !_it->isDone(); _it->next())
             {
                 if (dynamic_cast<Folder *>(_it->currentItem()))
@@ -381,9 +376,7 @@ public:
                 arrangeNodes(_stack.top());
                 _stack.pop();
             }
-
             delete _it;
-            _it = new DfsIterator(composite);
         }
 
         ~OrderByKindIterator() {}
@@ -414,7 +407,6 @@ public:
         Folder *const _host;
         std::list<Node *>::iterator _current;
         int _operationCount;
-        Iterator *_it;
         std::stack<Folder *> _stack;
 
         void arrangeNodes(Folder *compound)
@@ -424,14 +416,14 @@ public:
 
         static bool compareNodeByName(Node *node1, Node *node2)
         {
-            if (!node1->createIterator()->isDone() && node2->createIterator()->isDone())
-            {
-                return true;
-            }
-            else if (node1->createIterator()->isDone() && !node2->createIterator()->isDone())
-            {
-                return false;
-            }
+            // if (!node1->createIterator()->isDone() && node2->createIterator()->isDone())
+            // {
+            //     return true;
+            // }
+            // else if (node1->createIterator()->isDone() && !node2->createIterator()->isDone())
+            // {
+            //     return false;
+            // }
 
             return node1->name() < node2->name();
         }

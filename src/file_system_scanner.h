@@ -1,20 +1,36 @@
 #pragma once
 
 #include <string>
+#include <dirent.h>
+#include <sstream>
 
 using std::string;
 
-class FileSystemScanner {
+class FileSystemScanner
+{
 public:
-    bool isFile();
+    bool isFile(){
+
+    };
 
     bool isFolder();
 
     bool isDone();
 
-    void setPath(string path);
+    void setPath(string path)
+    {
+        _path = path;
+    };
 
-    string currentNodeName();
+    string currentNodeName(){
 
-    void nextNode();
+    };
+
+    void nextNode(){
+        
+    };
+
+private:
+    Node *_node;
+    string _path;
 };
