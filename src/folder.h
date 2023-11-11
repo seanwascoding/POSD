@@ -418,8 +418,11 @@ public:
         {
             if ((!node1->createIterator()->isDone() && node2->createIterator()->isDone()) || (node1->createIterator()->isDone() && !node2->createIterator()->isDone()))
             {
-                if (node1->name().find('.') == string::npos || node2->name().find('.') == string::npos)
-                    return true;
+                if (node2->createIterator()->isDone())
+                {
+                    if (node2->name().find('.') == string::npos)
+                        return true;
+                }
                 return false;
             }
             else if (node1->createIterator()->isDone() && node2->createIterator()->isDone())
