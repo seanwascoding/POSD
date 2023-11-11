@@ -416,14 +416,21 @@ public:
 
         static bool compareNodeByName(Node *node1, Node *node2)
         {
-            // if (!node1->createIterator()->isDone() && node2->createIterator()->isDone())
-            // {
-            //     return true;
-            // }
-            // else if (node1->createIterator()->isDone() && !node2->createIterator()->isDone())
-            // {
-            //     return false;
-            // }
+            if ((!node1->createIterator()->isDone() && node2->createIterator()->isDone()) || (node1->createIterator()->isDone() && !node2->createIterator()->isDone()))
+            {
+                return false;
+            }
+            else if (node1->createIterator()->isDone() && node2->createIterator()->isDone())
+            {
+                if(node1->name().find('.') != string::npos && node2->name().find('.') == string::npos)
+                {
+                    return true;
+                }
+                else if(node1->name().find('.') == string::npos && node2->name().find('.') != string::npos)
+                {
+                    return false;
+                }
+            }
 
             return node1->name() < node2->name();
         }

@@ -191,15 +191,21 @@ TEST(order, OrderByKindIterator)
         nested.add(new File("structure/visitor/nested/file3.txt"));
         nested.add(new File("structure/visitor/nested/file4.txt"));
 
-        folder.add(&home);
-        folder.add(&visitor);
         folder.add(new File("structure/file.txt"));
+        folder.add(&visitor);
+        folder.add(&home);
 
         it = folder.createIterator(OrderBy::Kind);
         for (it->first(); !it->isDone(); it->next())
         {
             cout << it->currentItem()->name() << endl;
         }
+
+
+        //todo assert test
+
+
+
     }
     catch (const char *e)
     {
