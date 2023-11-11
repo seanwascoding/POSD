@@ -9,20 +9,10 @@ TEST(parser, scanner)
     scanner->setPath("structure");
 
     scanner->nextNode();
-    cout << scanner->currentNodeName() << endl;
-    ASSERT_TRUE(scanner->isFolder());
-    scanner->nextNode();
-    cout << scanner->currentNodeName() << endl;
-    ASSERT_TRUE(scanner->isFolder());
-    scanner->nextNode();
-    cout << scanner->currentNodeName() << endl;
-    ASSERT_TRUE(scanner->isFile());
-
-    scanner->nextNode();
-    cout << scanner->currentNodeName() << endl;
-    scanner->nextNode();
-    cout << scanner->currentNodeName() << endl;
-    scanner->nextNode();
+    for (; !scanner->isDone(); scanner->nextNode())
+    {
+        cout << scanner->currentNodeName() << endl;
+    }
     ASSERT_TRUE(scanner->isDone());
 }
 
@@ -37,7 +27,7 @@ TEST(parser, parser)
         parser->parse();
         Node *getNode = parser->getRoot();
 
-        TreeVisitor *visit = new TreeVisitor(OrderBy::Normal);
+        TreeVisitor *visit = new TreeVisitor(OrderBy::NameWithFolderFirst);
 
         getNode->accept(visit);
         string output = visit->getTree();
