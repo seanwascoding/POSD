@@ -45,7 +45,7 @@ public:
                     }
                     else
                     {
-                        _results += "|";
+                        _results += "\xE2\x94\x82";
                         _results += "   ";
                     }
                     i++;
