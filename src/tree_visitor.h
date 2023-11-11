@@ -41,7 +41,7 @@ public:
                 {
                     if ((_level - _levelMinus) <= i)
                     {
-                        _results += "   ";
+                        _results += "    ";
                     }
                     else
                     {

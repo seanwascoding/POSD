@@ -252,7 +252,7 @@ TEST(order, visitor)
 
         cout << output;
 
-        ASSERT_EQ(".\n├── file.txt\n├── home\n|   ├── Documents\n|   |   └── favorites\n|   |      ├── clean-architecture.pdf\n|   |      ├── cqrs.pdf\n|   |      └── domain-driven-design.pdf\n|   ├── Downloads\n|   |   └── funny.png\n|   ├── hello.txt\n|   └── my_profile\n└── visitor\n   ├── file1.txt\n   ├── file2.txt\n   └── nested\n      ├── file3.txt\n      └── file4.txt\n", output);
+        ASSERT_EQ(".\n├── file.txt\n├── home\n|   ├── Documents\n|   |   └── favorites\n|   |       ├── clean-architecture.pdf\n|   |       ├── cqrs.pdf\n|   |       └── domain-driven-design.pdf\n|   ├── Downloads\n|   |   └── funny.png\n|   ├── hello.txt\n|   └── my_profile\n└── visitor\n    ├── file1.txt\n    ├── file2.txt\n    └── nested\n        ├── file3.txt\n        └── file4.txt\n", output);
     }
     catch (const char *e)
     {

@@ -2,35 +2,52 @@
 
 #include <string>
 #include <dirent.h>
-#include <sstream>
 
 using std::string;
 
 class FileSystemScanner
 {
 public:
-    bool isFile(){
+    ~FileSystemScanner()
+    {
+        closedir(dir);
+    }
 
+    bool isFile()
+    {
+        return entry->d_type == 8;
     };
 
-    bool isFolder();
+    bool isFolder()
+    {
+        if (string(entry->d_name) == "." || string(entry->d_name) == "..")
+            return false;
+        return entry->d_type == 4;
+    };
 
-    bool isDone();
+    bool isDone()
+    {
+        return entry == NULL;
+    };
 
     void setPath(string path)
     {
-        _path = path;
+        dir = opendir(path.c_str());
     };
 
-    string currentNodeName(){
-
+    string currentNodeName()
+    {
+        return entry->d_name;
     };
 
-    void nextNode(){
-        
+    void nextNode()
+    {
+        entry = readdir(dir);
     };
 
 private:
     Node *_node;
-    string _path;
+    string _result;
+    DIR *dir;
+    struct dirent *entry;
 };

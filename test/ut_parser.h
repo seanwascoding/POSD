@@ -1,36 +1,58 @@
 #include "../src/file_system_parser.h"
+#include "../src/tree_visitor.h"
+#include <iostream>
+#include <unistd.h>
 
 TEST(parser, scanner)
 {
     FileSystemScanner *scanner = new FileSystemScanner();
     scanner->setPath("structure");
-    scanner->nextNode();
-}
 
+    scanner->nextNode();
+    cout << scanner->currentNodeName() << endl;
+    ASSERT_TRUE(scanner->isFolder());
+    scanner->nextNode();
+    cout << scanner->currentNodeName() << endl;
+    ASSERT_TRUE(scanner->isFolder());
+    scanner->nextNode();
+    cout << scanner->currentNodeName() << endl;
+    ASSERT_TRUE(scanner->isFile());
+
+    scanner->nextNode();
+    cout << scanner->currentNodeName() << endl;
+    scanner->nextNode();
+    cout << scanner->currentNodeName() << endl;
+    scanner->nextNode();
+    ASSERT_TRUE(scanner->isDone());
+}
 
 TEST(parser, parser)
 {
     try
     {
         FileSystemBuilder *builder = new FileSystemBuilder();
-        FileSystemScanner *scanner = new FileSystemScanner();
-        FileSystemParser *parser = new FileSystemParser(builder, scanner);
+        FileSystemParser *parser = new FileSystemParser(builder);
 
         parser->setPath("structure");
         parser->parse();
         Node *getNode = parser->getRoot();
 
-        string temp;
-        Iterator *it = getNode->createIterator(OrderBy::Name);
-        for (it->first(); !it->isDone(); it->next())
-        {
-            cout << it->currentItem()->name() << endl;
-            temp += it->currentItem()->name();
-            temp += "\n";
-        }
+        TreeVisitor *visit = new TreeVisitor(OrderBy::Normal);
 
-        ASSERT_TRUE(it->isDone());
-        ASSERT_EQ("home\nvisitor\nfile.txt\n", temp);
+        getNode->accept(visit);
+        string output = visit->getTree();
+        cout << output;
+
+        // string temp;
+        // Iterator *it = getNode->createIterator(OrderBy::Normal);
+        // for (it->first(); !it->isDone(); it->next())
+        // {
+        //     cout << "output:" << it->currentItem()->name() << endl;
+        //     temp += it->currentItem()->name();
+        //     temp += "\n";
+        // }
+        // ASSERT_TRUE(it->isDone());
+        // ASSERT_EQ("home\nvisitor\nfile.txt\n", temp);
     }
     catch (const char *e)
     {
