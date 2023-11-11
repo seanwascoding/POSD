@@ -418,15 +418,17 @@ public:
         {
             if ((!node1->createIterator()->isDone() && node2->createIterator()->isDone()) || (node1->createIterator()->isDone() && !node2->createIterator()->isDone()))
             {
+                if (node1->name().find('.') == string::npos || node2->name().find('.') == string::npos)
+                    return true;
                 return false;
             }
             else if (node1->createIterator()->isDone() && node2->createIterator()->isDone())
             {
-                if(node1->name().find('.') != string::npos && node2->name().find('.') == string::npos)
+                if ((node1->name().find('.') == string::npos && node2->name().find('.') != string::npos) || (node1->name().find('.') != string::npos && node2->name().find('.') == string::npos))
                 {
-                    return true;
+                    return false;
                 }
-                else if(node1->name().find('.') == string::npos && node2->name().find('.') != string::npos)
+                else if (node1->name().substr(node1->name().find('.') + 1) != node2->name().substr(node2->name().find('.') + 1))
                 {
                     return false;
                 }
