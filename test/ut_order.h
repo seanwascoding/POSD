@@ -190,22 +190,16 @@ TEST(order, OrderByKindIterator)
         Folder nested("structure/visitor/nested");
         nested.add(new File("structure/visitor/nested/file3.txt"));
         nested.add(new File("structure/visitor/nested/file4.txt"));
+        visitor.add(&nested);
 
-        folder.add(new File("structure/file.txt"));
         folder.add(&visitor);
+        folder.add(new File("structure/file.txt"));
         folder.add(&home);
 
-        it = folder.createIterator(OrderBy::Kind);
-        for (it->first(); !it->isDone(); it->next())
-        {
-            cout << it->currentItem()->name() << endl;
-        }
-
-
-        //todo assert test
-
-
-
+        // todo assert test
+        TreeVisitor *v = new TreeVisitor(OrderBy::Kind);
+        folder.accept(v);
+        cout << v->getTree();
     }
     catch (const char *e)
     {

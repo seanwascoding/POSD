@@ -32,17 +32,6 @@ TEST(parser, parser)
         getNode->accept(visit);
         string output = visit->getTree();
         cout << output;
-
-        // string temp;
-        // Iterator *it = getNode->createIterator(OrderBy::Normal);
-        // for (it->first(); !it->isDone(); it->next())
-        // {
-        //     cout << "output:" << it->currentItem()->name() << endl;
-        //     temp += it->currentItem()->name();
-        //     temp += "\n";
-        // }
-        // ASSERT_TRUE(it->isDone());
-        // ASSERT_EQ("home\nvisitor\nfile.txt\n", temp);
     }
     catch (const char *e)
     {

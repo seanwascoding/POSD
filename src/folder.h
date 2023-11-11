@@ -416,24 +416,47 @@ public:
 
         static bool compareNodeByName(Node *node1, Node *node2)
         {
-            if ((!node1->createIterator()->isDone() && node2->createIterator()->isDone()) || (node1->createIterator()->isDone() && !node2->createIterator()->isDone()))
+            bool isNode1Done = node1->createIterator()->isDone();
+            bool isNode2Done = node2->createIterator()->isDone();
+
+            if ((!isNode1Done && isNode2Done) || (isNode1Done && !isNode2Done))
             {
-                if (node2->createIterator()->isDone())
+                if (isNode2Done)
                 {
+                    // cout << node2->name() << ":no file" << endl;
                     if (node2->name().find('.') == string::npos)
-                        return true;
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-                return false;
+                else if (isNode1Done)
+                {
+                    // cout << node1->name() << ":no file" << endl;
+                    if (node1->name().find('.') == string::npos)
+                        return true;
+                    return false;
+                }
             }
             else if (node1->createIterator()->isDone() && node2->createIterator()->isDone())
             {
-                if ((node1->name().find('.') == string::npos && node2->name().find('.') != string::npos) || (node1->name().find('.') != string::npos && node2->name().find('.') == string::npos))
+                //! file vs file.extend
+                if (node1->name().find('.') == string::npos && node2->name().find('.') != string::npos)
+                {
+                    // cout << node1->name() << ":" << node2->name() << ":jump" << endl;
+                    return true;
+                }
+                else if (node1->name().find('.') != string::npos && node2->name().find('.') == string::npos)
                 {
                     return false;
                 }
-                else if (node1->name().substr(node1->name().find('.') + 1) != node2->name().substr(node2->name().find('.') + 1))
+
+                //! 
+                string temp1 = node1->name().substr(node1->name().find('.') + 1);
+                string temp2 = node2->name().substr(node2->name().find('.') + 1);
+                if (temp1 != temp2)
                 {
-                    return false;
+                    return temp1 < temp2;
                 }
             }
 
