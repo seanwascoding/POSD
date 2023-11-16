@@ -17,7 +17,10 @@ public:
 
     Value *getValue(std::string key)
     {
-        return _compound.find(key)->second;
+        if(_compound.find(key) != _compound.end())
+            return _compound.find(key)->second;
+        else
+            throw "not exist";
     }
 
     std::string toString() override
