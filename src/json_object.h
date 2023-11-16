@@ -12,7 +12,10 @@ class JsonObject : public Value
 public:
     void set(std::string key, Value *value)
     {
-        _compound.insert(std::pair<std::string, Value *>(key, value));
+        if(_compound.find(key) == _compound.end())
+            _compound.insert(std::pair<std::string, Value *>(key, value));
+        else
+            _compound[key] = value;
     }
 
     Value *getValue(std::string key)
