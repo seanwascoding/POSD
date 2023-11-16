@@ -13,62 +13,62 @@ public:
 
     void parse()
     {
-        std::string key = "";
-        while (!_scanner->isDone())
-        {
-            char token = _scanner->next();
-            if (token == ' ')
-            {
-                continue;
-            }
-            else if (token == '{')
-            {
-                //! fill in the code
-                // if (_scanner->next() == '"')
-                // {
-                //     token = _scanner->next();
-                //     _builder->buildObject(std::string(sizeof(token) - 1, token));
-                // }
+        // std::string key = "";
+        // while (!_scanner->isDone())
+        // {
+        //     char token = _scanner->next();
+        //     if (token == ' ')
+        //     {
+        //         continue;
+        //     }
+        //     else if (token == '{')
+        //     {
+        //         //! fill in the code
+        //         // if (_scanner->next() == '"')
+        //         // {
+        //         //     token = _scanner->next();
+        //         //     _builder->buildObject(std::string(sizeof(token) - 1, token));
+        //         // }
 
-                _builder->buildObject(key);
-            }
-            else if (token == '"')
-            {
-                std::string value;
-                token = _scanner->next();
-                while (token != '"')
-                {
-                    value += token;
-                    token = _scanner->next();
-                }
-                token = _scanner->next();
+        //         _builder->buildObject(key);
+        //     }
+        //     else if (token == '"')
+        //     {
+        //         std::string value;
+        //         token = _scanner->next();
+        //         while (token != '"')
+        //         {
+        //             value += token;
+        //             token = _scanner->next();
+        //         }
+        //         token = _scanner->next();
 
-                while (token == ' ')
-                {
-                    token = _scanner->next();
-                }
+        //         while (token == ' ')
+        //         {
+        //             token = _scanner->next();
+        //         }
 
-                if (token == ':')
-                {
-                    key = value;
-                }
-                else if (token == ',')
-                {
-                    // fill in the code
-                    token = _scanner->next();
-                }
-                else if (token == '}')
-                {
-                    //! fill in the code
-                    _builder->endObject();
-                }
-            }
-            else if (token == '}')
-            {
-                //! fill in the code
-                _builder->endObject();
-            }
-        }
+        //         if (token == ':')
+        //         {
+        //             key = value;
+        //         }
+        //         else if (token == ',')
+        //         {
+        //             // fill in the code
+        //             token = _scanner->next();
+        //         }
+        //         else if (token == '}')
+        //         {
+        //             //! fill in the code
+        //             _builder->endObject();
+        //         }
+        //     }
+        //     else if (token == '}')
+        //     {
+        //         //! fill in the code
+        //         _builder->endObject();
+        //     }
+        // }
     }
 
     JsonObject *getJsonObject()
