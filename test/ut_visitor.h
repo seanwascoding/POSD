@@ -135,7 +135,7 @@ TEST_F(VisitorTest, streamOutFile) {
 
     ASSERT_EQ(expected, visitor->getResult());
 }
-
+ 
 TEST_F(VisitorTest, streamOutFolder) {
     StreamOutVisitor * visitor = new StreamOutVisitor();
 
