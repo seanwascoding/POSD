@@ -17,7 +17,6 @@ public:
         while (!_scanner->isDone())
         {
             char token = _scanner->next();
-            std::cout << token << std::endl;
             if (token == ' ')
             {
                 continue;
@@ -49,21 +48,16 @@ public:
                 }
                 else if (token == ',')
                 {
-                    //! fill in the code
-                    std::cout << key << ":" << value << std::endl;
                     _builder->buildValue(key, value);
                 }
                 else if (token == '}' || token == '\n')
                 {
-                    //! fill in the code
                     _builder->buildValue(key, value);
                     _builder->endObject();
                 }
             }
             else if (token == '}')
             {
-                //! fill in the code
-                std::cout << key << std::endl;
                 _builder->endObject();
             }
         }

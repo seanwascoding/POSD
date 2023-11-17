@@ -94,26 +94,21 @@ TEST(JSonSuite, Visitor)
 
     BeautifyVisitor *visit = new BeautifyVisitor();
 
-    // v1->accept(visit);
-    // std::string result = visit->getResult();
-    // std::cout << result;
-
     j_composite->accept(visit);
     std::string result = visit->getResult();
     std::cout << result << std::endl;
 }
 
-TEST(JSonSuite, scanner)
+TEST(JSonSuite, Scanner)
 {
     JsonScanner *scanner = new JsonScanner();
     scanner->setInput("{\n\"keyc\":{\n\"key1\":\"value1\",\n\"key2\":\"value2\"\n}\n}");
-
     int i = 0;
-    for (; !scanner->isDone(); i++)
+    for (; !scanner->isDone(); scanner->next())
     {
-        std::cout << i << ":" << scanner->next() << std::endl;
+        i++;
     }
-    // std::cout << i << std::endl;
+    ASSERT_EQ(48, i);
     ASSERT_TRUE(scanner->isDone());
 }
 
@@ -128,10 +123,8 @@ TEST(JSonSuite, Parser)
 
     Value *temp = parser->getJsonObject();
     std::cout << temp->toString() << std::endl;
-    // JsonIterator *it = temp->createIterator();
-    // for (it->first(); !it->isDone(); it->next())
-    // {
-    //     std::cout << "test:" << it->currentKey() << std::endl;
-    // }
-    // delete it;
+
+    BeautifyVisitor *visit = new BeautifyVisitor();
+    temp->accept(visit);
+    std::cout << visit->getResult() << std::endl;
 }

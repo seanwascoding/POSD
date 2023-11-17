@@ -40,7 +40,6 @@ public:
             _compound.pop();
             if (_compound.empty())
             {
-                std::cout << "in the end" << std::endl;
                 _root->set(_temp.first, _temp.second);
             }
             else

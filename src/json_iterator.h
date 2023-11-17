@@ -16,7 +16,7 @@ public:
 
     virtual void next() = 0;
     virtual bool isDone() const = 0;
-    virtual int getSize() {}
+    virtual int getSize() { return -1; }
 };
 
 class NullIterator : public JsonIterator
