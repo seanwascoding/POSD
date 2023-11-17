@@ -4,6 +4,7 @@
 #include "../src/json_scanner.h"
 #include "../src/json_parser.h"
 #include "../src/json_builder.h"
+#include <iostream>
 
 TEST(StringValueSuite, ToString)
 {
@@ -102,34 +103,35 @@ TEST(JSonSuite, Visitor)
     std::cout << result << std::endl;
 }
 
+TEST(JSonSuite, scanner)
+{
+    JsonScanner *scanner = new JsonScanner();
+    scanner->setInput("{\n\"keyc\":{\n\"key1\":\"value1\",\n\"key2\":\"value2\"\n}\n}");
+
+    int i = 0;
+    for (; !scanner->isDone(); i++)
+    {
+        std::cout << i << ":" << scanner->next() << std::endl;
+    }
+    // std::cout << i << std::endl;
+    ASSERT_TRUE(scanner->isDone());
+}
+
 TEST(JSonSuite, Parser)
 {
-    JsonObject *jo = new JsonObject;
-    Value *v1 = new StringValue("value1");
-    jo->set("key1", v1);
-    Value *v2 = new StringValue("value2");
-    jo->set("key2", v2);
-
-    JsonObject *jo2 = new JsonObject;
-    Value *v3 = new StringValue("value3");
-    jo2->set("key3", v3);
-    Value *v4 = new StringValue("value4");
-    jo2->set("key4", v4);
-
-    jo->set("compound", jo2);
-
-    JsonObject *j_composite = new JsonObject;
-    j_composite->set("keyc", jo);
-
     JsonScanner *scanner = new JsonScanner();
     JsonBuilder *builder = new JsonBuilder();
     JsonParser *parser = new JsonParser(scanner, builder);
 
-    parser->setInput("{\n      \"key1\": \"value1\",\n      \"key2\":\"value2\"\n}");
-
+    parser->setInput("{\n\"keyc\":{\n\"key1\":\"value1\",\n\"key2\":\"value2\"\n}\n}");
     parser->parse();
 
     Value *temp = parser->getJsonObject();
-
     std::cout << temp->toString() << std::endl;
+    // JsonIterator *it = temp->createIterator();
+    // for (it->first(); !it->isDone(); it->next())
+    // {
+    //     std::cout << "test:" << it->currentKey() << std::endl;
+    // }
+    // delete it;
 }

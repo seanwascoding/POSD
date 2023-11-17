@@ -3,21 +3,25 @@
 #include <string>
 #include <sstream>
 
-class JsonScanner {
+class JsonScanner
+{
 public:
-    void setInput(std::string input) {
+    void setInput(std::string input)
+    {
         _input = input;
         ss.str(_input);
     }
 
-    char next() {
+    char next()
+    {
         char token;
         ss.get(token);
 
         return token;
     }
-    
-    bool isDone() const {
+
+    bool isDone() const
+    {
         return ss.eof();
     }
 
