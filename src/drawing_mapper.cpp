@@ -60,10 +60,13 @@ std::string DrawingMapper::addStmt(DomainObject *domainObject) const {}
 
 std::string DrawingMapper::deleteByIdStmt(std::string id) const {}
 
-int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colNames) 
+int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colNames)
 {
-    Painter * painter = PainterMapper::instance()->find(argv[1]);
-    Drawing* drawing = new Drawing(argv[0], painter);
+    Painter *painter = PainterMapper::instance()->find(argv[1]);
+    Parser *parser = new Parser(new Scanner(), new Builder());
+    parser->setInput(argv[2]);
+    parser->parse();
+    Drawing *drawing = new Drawing(argv[0], painter, parser->getShapes());
     DrawingMapper::instance()->load(drawing);
     return 0;
 }

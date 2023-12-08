@@ -147,7 +147,7 @@ TEST_F(DBSuite, findDrawing)
 
     ASSERT_EQ(drawing->id(), "d_0001");
     
-    // ASSERT_EQ(drawing->getShape(0)->perimeter(), 3);
-    // ASSERT_EQ(drawing->painter()->id(), "p_0001");
-    // ASSERT_EQ(drawing->painter()->name(), "Patrick");
+    ASSERT_EQ(drawing->getShape(0)->perimeter(), 3);
+    ASSERT_EQ(drawing->painter()->id(), "p_0001");
+    ASSERT_EQ(drawing->painter()->name(), "Patrick");
 }
