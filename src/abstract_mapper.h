@@ -69,21 +69,25 @@ protected:
 
     void abstractAdd(DomainObject *domainObject)
     {
+        std::cout << "abstractAdd" << std::endl;
         sqlite3_exec(_db, addStmt(domainObject).c_str(), NULL, NULL, &_errorMessage);
     };
 
     void abstractUpdate(DomainObject *domainObject)
     {
+        std::cout << "abstractUpdate" << std::endl;
         sqlite3_exec(_db, updateStmt(domainObject).c_str(), NULL, NULL, &_errorMessage);
     };
 
     void abstractDelete(std::string id)
     {
+        std::cout << "abstractDelete" << std::endl;
         sqlite3_exec(_db, deleteByIdStmt(id).c_str(), NULL, NULL, &_errorMessage);
     };
 
     void load(DomainObject *domainObject)
     {
+        std::cout << "load" << std::endl;
         _domainObjects[domainObject->id()] = domainObject;
     };
 
