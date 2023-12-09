@@ -33,7 +33,7 @@ public:
 	Shape *getShape(int i) const
 	{
 		std::cout << "getShape" << std::endl;
-		if (i < 0 || _shapes.size() == 0)
+		if (i < 0 || i < _shapes.size() - 1)
 		{
 			std::cout << "getShape-null" << std::endl;
 			return nullptr;
