@@ -58,6 +58,7 @@ protected:
         DomainObject *domainObject = getDomainObject(id);
         if (domainObject != nullptr)
         {
+            std::cout << "not null" << std::endl;
             return domainObject;
         }
         std::cout << "2" << std::endl;
@@ -71,6 +72,8 @@ protected:
         std::cout << "3" << ":"<< id << std::endl;
         if(object == nullptr)
             std::cout << "fail" << std::endl;
+        else
+            std::cout << "4" << ":"<< object->id() << std::endl;
         return object;
     };
 

@@ -51,7 +51,7 @@ std::list<Shape *> DrawingMapper::convertShapes(int argc, char **argv)
 
 //! extra
 
-void DrawingMapper::add(DomainObject *Drawing) 
+void DrawingMapper::add(DomainObject *Drawing)
 {
     std::cout << "DrawingMapper::add" << std::endl;
     abstractAdd(Drawing);
@@ -63,13 +63,13 @@ void DrawingMapper::update(std::string id)
     abstractUpdate(DrawingMapper::instance()->find(id));
 }
 
-void DrawingMapper::del(std::string id) 
+void DrawingMapper::del(std::string id)
 {
     std::cout << "DrawingMapper::del" << std::endl;
     abstractDelete(id);
 }
 
-std::string DrawingMapper::updateStmt(DomainObject *domainObject) const 
+std::string DrawingMapper::updateStmt(DomainObject *domainObject) const
 {
     std::cout << "DrawingMapper::updateStmt" << std::endl;
     Drawing *drawing = static_cast<Drawing *>(domainObject);
@@ -77,7 +77,7 @@ std::string DrawingMapper::updateStmt(DomainObject *domainObject) const
     return stmt;
 }
 
-std::string DrawingMapper::addStmt(DomainObject *domainObject) const 
+std::string DrawingMapper::addStmt(DomainObject *domainObject) const
 {
     std::cout << "DrawingMapper::addStmt" << std::endl;
     Drawing *drawing = static_cast<Drawing *>(domainObject);
@@ -87,7 +87,7 @@ std::string DrawingMapper::addStmt(DomainObject *domainObject) const
     return stmt;
 }
 
-std::string DrawingMapper::deleteByIdStmt(std::string id) const 
+std::string DrawingMapper::deleteByIdStmt(std::string id) const
 {
     std::cout << "DrawingMapper::deleteByIdStmt" << std::endl;
     std::string stmt = "DELETE FROM drawing WHERE ID='" + id + "'";
@@ -96,12 +96,22 @@ std::string DrawingMapper::deleteByIdStmt(std::string id) const
 
 int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colNames)
 {
-    std::cout << "DrawingMapper::callback" << std::endl;
+    std::cout << "DrawingMapper::callback:" << argc << std::endl;
     Painter *painter = PainterMapper::instance()->find(argv[1]);
-    Parser *parser = new Parser(new Scanner(), new Builder());
-    parser->setInput(argv[2]);
-    parser->parse();
-    Drawing *drawing = new Drawing(argv[0], painter, parser->getShapes());
+    Drawing *drawing = nullptr;
+    if (argv[2] != nullptr)
+    {
+        std::cout << "DrawingMapper::callback-1" << std::endl;
+        Parser *parser = new Parser(new Scanner(), new Builder());
+        parser->setInput(argv[2]);
+        parser->parse();
+        drawing = new Drawing(argv[0], painter, parser->getShapes());
+    }
+    else
+    {
+        std::cout << "DrawingMapper::callback-2" << std::endl;
+        drawing = new Drawing(argv[0], painter);
+    }
     DrawingMapper::instance()->load(drawing);
     return 0;
 }
