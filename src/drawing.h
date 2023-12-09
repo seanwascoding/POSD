@@ -34,7 +34,10 @@ public:
 	{
 		std::cout << "getShape" << std::endl;
 		if (i < 0 || _shapes.size() == 0)
+		{
+			std::cout << "getShape-null" << std::endl;
 			return nullptr;
+		}
 
 		std::cout << "getShape-1" << std::endl;
 		auto it = _shapes.begin();
