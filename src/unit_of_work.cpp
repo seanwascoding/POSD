@@ -21,9 +21,7 @@ UnitOfWork *UnitOfWork::instance()
 
 void UnitOfWork::registerNew(DomainObject *domainObject)
 {
-    std::cout << domainObject->id() << std::endl;
     _new[domainObject->id()] = domainObject;
-    
 }
 
 void UnitOfWork::registerClean(DomainObject *domainObject)
@@ -66,6 +64,7 @@ void UnitOfWork::commit()
     _dirty.clear();
     for (auto newObj : _new)
     {
+        std::cout << "test" << std::endl;
         PainterMapper::instance()->add(newObj.second);
         registerClean(newObj.second);
     }

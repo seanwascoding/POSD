@@ -44,6 +44,8 @@ std::string PainterMapper::findByIdStmt(std::string id) const
 
 std::string PainterMapper::addStmt(DomainObject *domainObject) const
 {
+    // Painter* painter = static_cast<Painter*>(domainObject);
+    // std::string stmt = "UPDATE painter ADD Name='" + painter->name() + "' WHERE ID='" + painter->id() + "'";
     return "";
 }
 

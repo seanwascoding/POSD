@@ -192,5 +192,6 @@ TEST_F(DBSuite, UnitOfWorkRegisterNew)
     UnitOfWork::instance()->commit();
     ASSERT_FALSE(UnitOfWork::instance()->inNew(painter->id()));
     ASSERT_FALSE(UnitOfWork::instance()->inNew(drawing->id()));
-    ASSERT_TRUE(UnitOfWork::instance()->inClean("p_0003"));
+    ASSERT_TRUE(UnitOfWork::instance()->inClean(painter->id()));
+    ASSERT_TRUE(UnitOfWork::instance()->inClean(drawing->id()));
 }
