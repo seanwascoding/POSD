@@ -109,7 +109,7 @@ int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colName
     }
     else
     {
-        std::cout << "DrawingMapper::callback-2:" << argv[0] << std::endl;
+        std::cout << "DrawingMapper::callback-2:" << argv[0] << ":" << argc << std::endl;
         drawing = new Drawing(argv[0], painter);
     }
     DrawingMapper::instance()->load(drawing);
