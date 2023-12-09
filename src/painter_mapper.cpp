@@ -14,7 +14,7 @@ PainterMapper::PainterMapper()
 
 Painter *PainterMapper::find(std::string id)
 {
-    std::cout << "find" << std::endl;
+    std::cout << "PainterMapper::find" << std::endl;
     return static_cast<Painter *>(abstractFind(id, PainterMapper::callback));
 }
 

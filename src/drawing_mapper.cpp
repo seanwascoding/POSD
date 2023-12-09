@@ -13,6 +13,7 @@ DrawingMapper *DrawingMapper::_instance = nullptr;
 
 Drawing *DrawingMapper::find(std::string id)
 {
+    std::cout << "DrawingMapper::find" << std::endl;
     return static_cast<Drawing *>(abstractFind(id, DrawingMapper::callback));
 }
 
