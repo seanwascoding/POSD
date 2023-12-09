@@ -160,8 +160,7 @@ TEST_F(DBSuite, NotFound)
 TEST_F(DBSuite, UnitOfWorkRegisterCleanNotFound)
 {
     UnitOfWork *uow = UnitOfWork::instance();
-    DrawingMapper *mapper = DrawingMapper::instance();
-    mapper->find("d_9999");
+    dm->find("d_9999");
     ASSERT_FALSE(uow->inClean("d_9999"));
 }
 
