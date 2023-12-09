@@ -196,7 +196,5 @@ TEST_F(DBSuite, UnitOfWorkRegisterNew)
     ASSERT_TRUE(UnitOfWork::instance()->inClean(drawing->id()));
 
     pm->find(painter->id());
-
     dm->find(drawing->id());
-
 }

@@ -35,6 +35,7 @@ void PainterMapper::del(std::string id)
 
 std::string PainterMapper::updateStmt(DomainObject *domainObject) const
 {
+    std::cout << "PainterMapper::updateStmt" << std::endl;
     Painter *painter = static_cast<Painter *>(domainObject);
     std::string stmt = "UPDATE painter SET Name='" + painter->name() + "' WHERE ID='" + painter->id() + "'";
     return stmt;
@@ -42,17 +43,20 @@ std::string PainterMapper::updateStmt(DomainObject *domainObject) const
 
 std::string PainterMapper::findByIdStmt(std::string id) const
 {
+    std::cout << "PainterMapper::findByIdStmt" << std::endl;
     std::string stmt = "SELECT * FROM painter WHERE ID='" + id + "'";
     return stmt;
 }
 
 std::string PainterMapper::addStmt(DomainObject *domainObject) const
 {
+    std::cout << "PainterMapper::addStmt" << std::endl;
     return "";
 }
 
 std::string PainterMapper::deleteByIdStmt(std::string id) const
 {
+    std::cout << "PainterMapper::deleteByIdStmt" << std::endl;
     std::string stmt = "DELETE FROM painter WHERE ID='" + id + "'";
     return stmt;
 }
