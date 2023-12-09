@@ -30,7 +30,7 @@ public:
 
   Shape *getShape(int i) const
   {
-    if (i < 0 || i > _shapes.size() - 1)
+    if (i < 0 || _shapes.size() == 0)
       return nullptr;
 
     auto it = _shapes.begin();
