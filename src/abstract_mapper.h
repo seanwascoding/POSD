@@ -67,7 +67,9 @@ protected:
         {
             UnitOfWork::instance()->registerClean(object);
         }
-        std::cout << "3" << std::endl;
+        std::cout << "3" << ":"<< id << std::endl;
+        if(object == nullptr)
+            std::cout << "fail" << std::endl;
         return object;
     };
 

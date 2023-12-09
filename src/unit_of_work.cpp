@@ -75,7 +75,6 @@ bool UnitOfWork::inDeleted(std::string id) const
 void UnitOfWork::commit()
 {
     std::cout << "commit" << std::endl;
-
     for (auto dirty : _dirty)
     {
         DrawingMapper::instance()->update(dirty.second->id());
