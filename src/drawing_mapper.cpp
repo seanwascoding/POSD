@@ -50,11 +50,24 @@ std::list<Shape *> DrawingMapper::convertShapes(int argc, char **argv)
 
 void DrawingMapper::add(DomainObject *Drawing) {}
 
-void DrawingMapper::update(std::string id) {}
+void DrawingMapper::update(std::string id)
+{
+    abstractUpdate(new DomainObject(id));
+}
+
+void DrawingMapper::update(DomainObject *Drawing)
+{
+    abstractUpdate(Drawing);
+}
 
 void DrawingMapper::del(std::string id) {}
 
-std::string DrawingMapper::updateStmt(DomainObject *domainObject) const {}
+std::string DrawingMapper::updateStmt(DomainObject *domainObject) const 
+{
+    Drawing *drawing = static_cast<Drawing *>(domainObject);
+    std::string stmt = "UPDATE drawing SET Painter='" + drawing->painter()->id() + "' WHERE ID='" + drawing->id() + "'";
+    return stmt;
+}
 
 std::string DrawingMapper::addStmt(DomainObject *domainObject) const {}
 

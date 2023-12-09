@@ -21,6 +21,7 @@ public:
 
     // update
     void update(std::string id);
+    void update(DomainObject *Drawing);
 
     // delete
     void del(std::string id);

@@ -146,8 +146,38 @@ TEST_F(DBSuite, findDrawing)
     EXPECT_FALSE(UnitOfWork::instance()->inDirty("p_0001"));
 
     ASSERT_EQ(drawing->id(), "d_0001");
-    
+
     ASSERT_EQ(drawing->getShape(0)->perimeter(), 3);
     ASSERT_EQ(drawing->painter()->id(), "p_0001");
     ASSERT_EQ(drawing->painter()->name(), "Patrick");
+}
+
+TEST_F(DBSuite, NotFound)
+{
+    ASSERT_EQ(nullptr, DrawingMapper::instance()->find("d_9999"));
+}
+
+TEST_F(DBSuite, UnitOfWorkRegisterCleanNotFound)
+{
+    UnitOfWork *uow = UnitOfWork::instance();
+    DrawingMapper *mapper = DrawingMapper::instance();
+    mapper->find("d_9999");
+    ASSERT_FALSE(uow->inClean("d_9999"));
+}
+
+TEST_F(DBSuite, UnitOfWorkRegisterDirty)
+{
+    UnitOfWork *uow = UnitOfWork::instance();
+    DrawingMapper *mapper = DrawingMapper::instance();
+    Drawing *drawing = mapper->find("d_0001");
+    Painter *painter = PainterMapper::instance()->find("p_0002");
+    drawing->setPainter(painter);
+    ASSERT_EQ(painter, drawing->painter());
+    ASSERT_FALSE(uow->inClean("d_0001"));
+    ASSERT_TRUE(uow->inDirty("d_0001"));
+
+    uow->commit();
+    ASSERT_EQ(painter, drawing->painter());
+    ASSERT_TRUE(uow->inClean("d_0001"));
+    ASSERT_FALSE(uow->inDirty("d_0001"));
 }
