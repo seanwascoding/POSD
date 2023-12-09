@@ -86,6 +86,7 @@ std::string DrawingMapper::deleteByIdStmt(std::string id) const
 
 int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colNames)
 {
+    std::cout << "DrawingMapper::callback" << std::endl;
     Painter *painter = PainterMapper::instance()->find(argv[1]);
     Parser *parser = new Parser(new Scanner(), new Builder());
     parser->setInput(argv[2]);
