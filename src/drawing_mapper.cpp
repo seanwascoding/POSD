@@ -73,7 +73,7 @@ std::string DrawingMapper::updateStmt(DomainObject *domainObject) const
 {
     std::cout << "DrawingMapper::updateStmt" << std::endl;
     Drawing *drawing = static_cast<Drawing *>(domainObject);
-    std::string stmt = "UPDATE drawing SET Painter='" + drawing->painter()->id() + "' WHERE ID='" + drawing->id() + "'";
+    std::string stmt = "UPDATE drawing SET painter='" + drawing->painter()->id() + "' WHERE ID='" + drawing->id() + "'";
     return stmt;
 }
 
@@ -81,7 +81,7 @@ std::string DrawingMapper::addStmt(DomainObject *domainObject) const
 {
     std::cout << "DrawingMapper::addStmt" << std::endl;
     Drawing *drawing = static_cast<Drawing *>(domainObject);
-    std::string stmt = "INSERT INTO drawing (ID, Painter) VALUES ('" + drawing->id() + "', '" + drawing->painter()->id() + "')";
+    std::string stmt = "INSERT INTO drawing (ID, painter) VALUES ('" + drawing->id() + "', '" + drawing->painter()->id() + "')";
     return stmt;
 }
 

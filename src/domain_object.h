@@ -10,8 +10,6 @@ public:
 
     std::string id() const
     {
-        if(_id.empty())
-            throw "error";
         return _id;
     }
 

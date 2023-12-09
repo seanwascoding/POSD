@@ -76,7 +76,8 @@ protected:
     void abstractAdd(DomainObject *domainObject)
     {
         std::cout << "abstractAdd" << std::endl;
-        sqlite3_exec(_db, addStmt(domainObject).c_str(), NULL, NULL, &_errorMessage);
+        int temp = sqlite3_exec(_db, addStmt(domainObject).c_str(), NULL, NULL, &_errorMessage);
+        std::cout << "abstractAdd - result:" << (temp == SQLITE_OK) << std::endl;
     };
 
     void abstractUpdate(DomainObject *domainObject)

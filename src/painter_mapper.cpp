@@ -40,7 +40,7 @@ std::string PainterMapper::updateStmt(DomainObject *domainObject) const
 {
     std::cout << "PainterMapper::updateStmt" << std::endl;
     Painter *painter = static_cast<Painter *>(domainObject);
-    std::string stmt = "UPDATE painter SET Name='" + painter->name() + "' WHERE ID='" + painter->id() + "'";
+    std::string stmt = "UPDATE painter SET name='" + painter->name() + "' WHERE ID='" + painter->id() + "'";
     return stmt;
 }
 
@@ -54,7 +54,11 @@ std::string PainterMapper::findByIdStmt(std::string id) const
 std::string PainterMapper::addStmt(DomainObject *domainObject) const
 {
     std::cout << "PainterMapper::addStmt" << std::endl;
-    return "";
+    Painter *painter = static_cast<Painter *>(domainObject);
+    std::cout << painter->id() << std::endl;
+    std::cout << painter->name().c_str() << std::endl;
+    std::string stmt = "INSERT INTO painter (Name, ID) VALUES ('" + painter->name() + "', '" + painter->id() + "')";
+    return stmt;
 }
 
 std::string PainterMapper::deleteByIdStmt(std::string id) const

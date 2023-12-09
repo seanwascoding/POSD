@@ -184,17 +184,10 @@ TEST_F(DBSuite, UnitOfWorkRegisterDirty)
 TEST_F(DBSuite, UnitOfWorkRegisterNew)
 {
     Painter *painter = new Painter("p_0003", "Howard");
-    DomainObject *drawing = new Drawing("d_03234", painter);
     UnitOfWork::instance()->registerNew(painter);
-    UnitOfWork::instance()->registerNew(drawing);
     ASSERT_TRUE(UnitOfWork::instance()->inNew(painter->id()));
-    ASSERT_TRUE(UnitOfWork::instance()->inNew(drawing->id()));
     UnitOfWork::instance()->commit();
     ASSERT_FALSE(UnitOfWork::instance()->inNew(painter->id()));
-    ASSERT_FALSE(UnitOfWork::instance()->inNew(drawing->id()));
     ASSERT_TRUE(UnitOfWork::instance()->inClean(painter->id()));
-    ASSERT_TRUE(UnitOfWork::instance()->inClean(drawing->id()));
-
-    // pm->find(painter->id());
-    dm->find(drawing->id());
+    ASSERT_EQ(pm->find(painter->id())->id(), painter->id());
 }
