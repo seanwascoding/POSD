@@ -7,9 +7,7 @@
 
 UnitOfWork *UnitOfWork::_instance = nullptr;
 
-UnitOfWork::UnitOfWork()
-{
-}
+UnitOfWork::UnitOfWork() {}
 
 //! extra
 UnitOfWork *UnitOfWork::instance()
@@ -21,7 +19,7 @@ UnitOfWork *UnitOfWork::instance()
     return _instance;
 }
 
-void UnitOfWork::registerNew(DomainObject *domainObject) 
+void UnitOfWork::registerNew(DomainObject *domainObject)
 {
     _new[domainObject->id()] = domainObject;
 }
@@ -39,7 +37,7 @@ void UnitOfWork::registerDirty(DomainObject *domainObject)
 
 void UnitOfWork::registerDeleted(DomainObject *domainObject) {}
 
-bool UnitOfWork::inNew(std::string id) const 
+bool UnitOfWork::inNew(std::string id) const
 {
     return _new.count(id);
 }
