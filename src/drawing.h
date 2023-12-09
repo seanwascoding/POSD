@@ -44,7 +44,7 @@ public:
 		for (int j = 0; j < i; j++)
 			it++;
 
-		std::cout << "getShape-2" << std::endl;
+		std::cout << "getShape-2"<< (*it)->toString() << std::endl;
 		return *it;
 	}
 
