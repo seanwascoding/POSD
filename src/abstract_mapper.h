@@ -65,6 +65,7 @@ protected:
         DomainObject *object = getDomainObject(id);
         if (object != nullptr)
         {
+            std::cout << "work to add" << std::endl;
             UnitOfWork::instance()->registerClean(object);
         }
         std::cout << "3" << ":"<< id << std::endl;

@@ -141,7 +141,7 @@ TEST_F(DBSuite, findDrawing)
     EXPECT_TRUE(UnitOfWork::instance()->inClean("d_0001"));
     EXPECT_FALSE(UnitOfWork::instance()->inDirty("d_0001"));
 
-    Painter *painter = pm->find("p_0001");
+    pm->find("p_0001");
     EXPECT_TRUE(UnitOfWork::instance()->inClean("p_0001"));
     EXPECT_FALSE(UnitOfWork::instance()->inDirty("p_0001"));
 
