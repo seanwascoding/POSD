@@ -3,19 +3,21 @@
 #include <string>
 #include <iostream>
 
-class DomainObject {
+class DomainObject
+{
 public:
-    DomainObject(std::string id): _id(id) {}
+    DomainObject(std::string id) : _id(id) {}
 
-    std::string id() const {
-        std::cout << "DomainObject::id" << std::endl;
+    std::string id() const
+    {
+        std::cout << "DomainObject::id" << ":" << _id << std::endl;
         return _id;
     }
 
-    virtual ~DomainObject() {
-        
+    virtual ~DomainObject()
+    {
     }
-    
+
 protected:
     std::string _id;
 };

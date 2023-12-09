@@ -168,6 +168,7 @@ TEST_F(DBSuite, UnitOfWorkRegisterDirty)
 {
     UnitOfWork *uow = UnitOfWork::instance();
     Drawing *drawing = dm->find("d_0001");
+    dynamic_cast<DomainObject*>(drawing)->id();
     Painter *painter = PainterMapper::instance()->find("p_0002");
     drawing->setPainter(painter);
     ASSERT_EQ(painter, drawing->painter());
