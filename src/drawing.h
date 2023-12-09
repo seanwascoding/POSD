@@ -19,7 +19,7 @@ public:
 
 	Painter *painter() const
 	{
-		std::cout << "painter:" << _painter->id() << std::endl;
+		std::cout << "painter" << std::endl;
 		return _painter;
 	}
 
@@ -32,6 +32,7 @@ public:
 
 	Shape *getShape(int i) const
 	{
+		std::cout << "getShape:" << this->_id << std::endl;
 		std::cout << "getShape:" << i << std::endl;
 		if (i < 0 || _shapes.size() == 0)
 		{
