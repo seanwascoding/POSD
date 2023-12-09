@@ -10,7 +10,8 @@ public:
 
     std::string id() const
     {
-        std::cout << "DomainObject::id" << ":" << _id << std::endl;
+        if(_id.empty())
+            throw "error";
         return _id;
     }
 
