@@ -5,6 +5,7 @@
 
 #include "painter.h"
 #include "abstract_mapper.h"
+#include "drawing_mapper.h"
 
 PainterMapper *PainterMapper::_instance = nullptr;
 PainterMapper::PainterMapper()
@@ -23,10 +24,12 @@ void PainterMapper::add(DomainObject *Painter)
 
 void PainterMapper::update(std::string id)
 {
+    abstractUpdate(DrawingMapper::instance()->find(id));
 }
 
 void PainterMapper::del(std::string id)
 {
+    abstractDelete(id);
 }
 
 std::string PainterMapper::updateStmt(DomainObject *domainObject) const
@@ -44,13 +47,13 @@ std::string PainterMapper::findByIdStmt(std::string id) const
 
 std::string PainterMapper::addStmt(DomainObject *domainObject) const
 {
-    // Painter* painter = static_cast<Painter*>(domainObject);
-    // std::string stmt = "UPDATE painter ADD Name='" + painter->name() + "' WHERE ID='" + painter->id() + "'";
     return "";
 }
 
 std::string PainterMapper::deleteByIdStmt(std::string id) const
 {
+    std::string stmt = "DELETE FROM painter WHERE ID='" + id + "'";
+    return stmt;
 }
 
 PainterMapper *PainterMapper::instance()

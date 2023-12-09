@@ -35,7 +35,10 @@ void UnitOfWork::registerDirty(DomainObject *domainObject)
     _clean.erase(domainObject->id());
 }
 
-void UnitOfWork::registerDeleted(DomainObject *domainObject) {}
+void UnitOfWork::registerDeleted(DomainObject *domainObject) 
+{
+    _deleted[domainObject->id()] = domainObject;
+}
 
 bool UnitOfWork::inNew(std::string id) const
 {
@@ -52,13 +55,16 @@ bool UnitOfWork::inDirty(std::string id) const
     return _dirty.count(id);
 }
 
-bool UnitOfWork::inDeleted(std::string id) const {}
+bool UnitOfWork::inDeleted(std::string id) const 
+{
+    return _deleted.count(id);
+}
 
 void UnitOfWork::commit()
 {
     for (auto dirty : _dirty)
     {
-        DrawingMapper::instance()->update(dirty.second);
+        DrawingMapper::instance()->update(dirty.second->id());
         registerClean(dirty.second);
     }
     _dirty.clear();

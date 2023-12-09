@@ -48,17 +48,20 @@ std::list<Shape *> DrawingMapper::convertShapes(int argc, char **argv)
 
 //! extra
 
-void DrawingMapper::add(DomainObject *Drawing) {}
+void DrawingMapper::add(DomainObject *Drawing) 
+{
+    abstractAdd(Drawing);
+}
 
 void DrawingMapper::update(std::string id)
 {
-    abstractUpdate(new DomainObject(id));
+    abstractUpdate(DrawingMapper::instance()->find(id));
 }
 
-void DrawingMapper::update(DomainObject *Drawing)
-{
-    abstractUpdate(Drawing);
-}
+// void DrawingMapper::update(DomainObject *Drawing)
+// {
+//     abstractUpdate(Drawing);
+// }
 
 void DrawingMapper::del(std::string id) {}
 
@@ -69,9 +72,18 @@ std::string DrawingMapper::updateStmt(DomainObject *domainObject) const
     return stmt;
 }
 
-std::string DrawingMapper::addStmt(DomainObject *domainObject) const {}
+std::string DrawingMapper::addStmt(DomainObject *domainObject) const 
+{
+    Drawing *drawing = static_cast<Drawing *>(domainObject);
+    std::string stmt = "INSERT INTO drawing (ID, Painter) VALUES ('" + drawing->id() + "', '" + drawing->painter()->id() + "')";
+    return stmt;
+}
 
-std::string DrawingMapper::deleteByIdStmt(std::string id) const {}
+std::string DrawingMapper::deleteByIdStmt(std::string id) const 
+{
+    std::string stmt = "DELETE FROM drawing WHERE ID='" + id + "'";
+    return stmt;
+}
 
 int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colNames)
 {
