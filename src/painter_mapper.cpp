@@ -56,7 +56,7 @@ std::string PainterMapper::addStmt(DomainObject *domainObject) const
     std::cout << "PainterMapper::addStmt" << std::endl;
     Painter *painter = static_cast<Painter *>(domainObject);
     std::cout << painter->id() << std::endl;
-    std::cout << painter->name().c_str() << std::endl;
+    std::cout << painter->name() << std::endl;
     std::string stmt = "INSERT INTO painter (Name, ID) VALUES ('" + painter->name() + "', '" + painter->id() + "')";
     return stmt;
 }

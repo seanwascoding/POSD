@@ -73,16 +73,21 @@ void UnitOfWork::commit()
     std::cout << "commit" << std::endl;
     for (auto dirty : _dirty)
     {
-        DrawingMapper::instance()->update(dirty.second->id());
+        if (dynamic_cast<Drawing *>(dirty.second))
+            DrawingMapper::instance()->update(dirty.second->id());
+        else
+            PainterMapper::instance()->update(dirty.second->id());
         registerClean(dirty.second);
     }
     _dirty.clear();
     for (auto newObj : _new)
     {
-        PainterMapper::instance()->add(newObj.second);
+        if (dynamic_cast<Drawing *>(newObj.second))
+            DrawingMapper::instance()->add(newObj.second);
+        else
+            PainterMapper::instance()->add(newObj.second);
         registerClean(newObj.second);
     }
     _new.clear();
     std::cout << "commit end" << std::endl;
-
 }
