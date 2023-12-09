@@ -22,16 +22,19 @@ public:
 
     void setDB(std::string db_file)
     {
+        std::cout << "setDB" << std::endl;
         sqlite3_open(db_file.c_str(), &_db);
     }
 
     bool isLoaded(const std::string &id) const
     {
+        std::cout << "isLoaded" << std::endl;
         return _domainObjects.count(id);
     }
 
     void cleanCache()
     {
+        std::cout << "cleanCache" << std::endl;
         _domainObjects.clear();
     }
 
@@ -41,6 +44,7 @@ protected:
 
     DomainObject *getDomainObject(std::string id)
     {
+        std::cout << "getDomainObject" << std::endl;
         if (_domainObjects.count(id))
         {
             return _domainObjects.at(id);
