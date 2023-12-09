@@ -40,6 +40,7 @@ DrawingMapper::DrawingMapper()
 
 std::list<Shape *> DrawingMapper::convertShapes(int argc, char **argv)
 {
+    std::cout << "convertShapes" << std::endl;
     _parser->clear();
     _parser->setInput(argv[2]);
     _parser->parse();
