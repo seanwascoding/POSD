@@ -70,9 +70,9 @@ void UnitOfWork::commit()
     _dirty.clear();
     for (auto newObj : _new)
     {
-        std::cout << "test" << std::endl;
         PainterMapper::instance()->add(newObj.second);
         registerClean(newObj.second);
     }
     _new.clear();
+    std::cout << "test" << std::endl;
 }
