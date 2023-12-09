@@ -36,10 +36,12 @@ public:
 		if (i < 0 || _shapes.size() == 0)
 			return nullptr;
 
+		std::cout << "getShape-1" << std::endl;
 		auto it = _shapes.begin();
 		for (int j = 0; j < i; j++)
 			it++;
 
+		std::cout << "getShape-2" << std::endl;
 		return *it;
 	}
 
