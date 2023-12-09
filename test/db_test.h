@@ -193,5 +193,5 @@ TEST_F(DBSuite, UnitOfWorkRegisterNew)
     ASSERT_FALSE(UnitOfWork::instance()->inNew(painter->id()));
     ASSERT_TRUE(UnitOfWork::instance()->inClean(painter->id()));
     ASSERT_EQ(pm->find(painter->id())->id(), painter->id());
-    // ASSERT_EQ(dm->find(drawing->id())->id(), drawing->id());
+    ASSERT_EQ(dm->find(drawing->id())->id(), drawing->id());
 }
