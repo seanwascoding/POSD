@@ -168,8 +168,7 @@ TEST_F(DBSuite, UnitOfWorkRegisterCleanNotFound)
 TEST_F(DBSuite, UnitOfWorkRegisterDirty)
 {
     UnitOfWork *uow = UnitOfWork::instance();
-    DrawingMapper *mapper = DrawingMapper::instance();
-    Drawing *drawing = mapper->find("d_0001");
+    Drawing *drawing = dm->find("d_0001");
     Painter *painter = PainterMapper::instance()->find("p_0002");
     drawing->setPainter(painter);
     ASSERT_EQ(painter, drawing->painter());
@@ -182,12 +181,16 @@ TEST_F(DBSuite, UnitOfWorkRegisterDirty)
     ASSERT_FALSE(uow->inDirty("d_0001"));
 }
 
-// TEST_F(DBSuite, UnitOfWorkRegisterNew)
-// {
-//     Painter *painter = new Painter("p_0003", "Howard");
-//     UnitOfWork::instance()->registerNew(painter);
-//     ASSERT_TRUE(UnitOfWork::instance()->inNew("p_0003"));
-//     UnitOfWork::instance()->commit();
-//     ASSERT_FALSE(UnitOfWork::instance()->inNew("p_0003"));
-//     ASSERT_TRUE(UnitOfWork::instance()->inClean("p_0003"));
-// }
+TEST_F(DBSuite, UnitOfWorkRegisterNew)
+{
+    Painter *painter = new Painter("p_0003", "Howard");
+    Drawing *drawing = new Drawing("d_03234", painter);
+    UnitOfWork::instance()->registerNew(painter);
+    UnitOfWork::instance()->registerNew(drawing);
+    ASSERT_TRUE(UnitOfWork::instance()->inNew(painter->id()));
+    ASSERT_TRUE(UnitOfWork::instance()->inNew(drawing->id()));
+    UnitOfWork::instance()->commit();
+    ASSERT_FALSE(UnitOfWork::instance()->inNew(painter->id()));
+    ASSERT_FALSE(UnitOfWork::instance()->inNew(drawing->id()));
+    ASSERT_TRUE(UnitOfWork::instance()->inClean("p_0003"));
+}

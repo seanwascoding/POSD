@@ -21,8 +21,8 @@ UnitOfWork *UnitOfWork::instance()
 
 void UnitOfWork::registerNew(DomainObject *domainObject)
 {
-    std::cout << domainObject->id() << std::endl;
-    // _new[domainObject->id()] = domainObject;
+    // std::cout << domainObject->id() << std::endl;
+    _new[domainObject->id()] = domainObject;
 }
 
 void UnitOfWork::registerClean(DomainObject *domainObject)
@@ -60,7 +60,6 @@ void UnitOfWork::commit()
     for (auto dirty : _dirty)
     {
         DrawingMapper::instance()->update(dirty.second);
-        std::cout << _dirty.size() << std::endl;
         registerClean(dirty.second);
     }
     _dirty.clear();
