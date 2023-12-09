@@ -195,3 +195,9 @@ TEST_F(DBSuite, UnitOfWorkRegisterNew)
     ASSERT_EQ(pm->find(painter->id())->id(), painter->id());
     ASSERT_EQ(dm->find(drawing->id())->id(), drawing->id());
 }
+
+TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
+{
+    Drawing *drawing = dm->find("d_0003");
+
+}
