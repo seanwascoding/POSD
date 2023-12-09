@@ -14,6 +14,7 @@ PainterMapper::PainterMapper()
 
 Painter *PainterMapper::find(std::string id)
 {
+    std::cout << "find" << std::endl;
     return static_cast<Painter *>(abstractFind(id, PainterMapper::callback));
 }
 
@@ -34,7 +35,7 @@ void PainterMapper::del(std::string id)
 
 std::string PainterMapper::updateStmt(DomainObject *domainObject) const
 {
-    Painter* painter = static_cast<Painter*>(domainObject);
+    Painter *painter = static_cast<Painter *>(domainObject);
     std::string stmt = "UPDATE painter SET Name='" + painter->name() + "' WHERE ID='" + painter->id() + "'";
     return stmt;
 }
