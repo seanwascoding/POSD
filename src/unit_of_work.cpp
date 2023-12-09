@@ -21,22 +21,26 @@ UnitOfWork *UnitOfWork::instance()
 
 void UnitOfWork::registerNew(DomainObject *domainObject)
 {
+    std::cout << "new" << std::endl;
     _new[domainObject->id()] = domainObject;
 }
 
 void UnitOfWork::registerClean(DomainObject *domainObject)
 {
+    std::cout << "clean" << std::endl;
     _clean[domainObject->id()] = domainObject;
 }
 
 void UnitOfWork::registerDirty(DomainObject *domainObject)
 {
+    std::cout << "dirty" << std::endl;
     _dirty[domainObject->id()] = domainObject;
     _clean.erase(domainObject->id());
 }
 
-void UnitOfWork::registerDeleted(DomainObject *domainObject) 
+void UnitOfWork::registerDeleted(DomainObject *domainObject)
 {
+    std::cout << "deleted" << std::endl;
     _deleted[domainObject->id()] = domainObject;
 }
 
@@ -55,7 +59,7 @@ bool UnitOfWork::inDirty(std::string id) const
     return _dirty.count(id);
 }
 
-bool UnitOfWork::inDeleted(std::string id) const 
+bool UnitOfWork::inDeleted(std::string id) const
 {
     return _deleted.count(id);
 }
