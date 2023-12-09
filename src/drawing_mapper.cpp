@@ -53,16 +53,19 @@ std::list<Shape *> DrawingMapper::convertShapes(int argc, char **argv)
 
 void DrawingMapper::add(DomainObject *Drawing) 
 {
+    std::cout << "DrawingMapper::add" << std::endl;
     abstractAdd(Drawing);
 }
 
 void DrawingMapper::update(std::string id)
 {
+    std::cout << "DrawingMapper::update" << std::endl;
     abstractUpdate(DrawingMapper::instance()->find(id));
 }
 
 void DrawingMapper::del(std::string id) 
 {
+    std::cout << "DrawingMapper::del" << std::endl;
     abstractDelete(id);
 }
 

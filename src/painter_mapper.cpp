@@ -20,16 +20,19 @@ Painter *PainterMapper::find(std::string id)
 
 void PainterMapper::add(DomainObject *Painter)
 {
+    std::cout << "PainterMapper::add" << std::endl;
     abstractAdd(Painter);
 }
 
 void PainterMapper::update(std::string id)
 {
+    std::cout << "PainterMapper::update" << std::endl;
     abstractUpdate(DrawingMapper::instance()->find(id));
 }
 
 void PainterMapper::del(std::string id)
 {
+    std::cout << "PainterMapper::del" << std::endl;
     abstractDelete(id);
 }
 
