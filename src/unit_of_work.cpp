@@ -21,8 +21,9 @@ UnitOfWork *UnitOfWork::instance()
 
 void UnitOfWork::registerNew(DomainObject *domainObject)
 {
-    // std::cout << domainObject->id() << std::endl;
+    std::cout << domainObject->id() << std::endl;
     _new[domainObject->id()] = domainObject;
+    
 }
 
 void UnitOfWork::registerClean(DomainObject *domainObject)

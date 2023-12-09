@@ -184,7 +184,7 @@ TEST_F(DBSuite, UnitOfWorkRegisterDirty)
 TEST_F(DBSuite, UnitOfWorkRegisterNew)
 {
     Painter *painter = new Painter("p_0003", "Howard");
-    Drawing *drawing = new Drawing("d_03234", painter);
+    DomainObject *drawing = new Drawing("d_03234", painter);
     UnitOfWork::instance()->registerNew(painter);
     UnitOfWork::instance()->registerNew(drawing);
     ASSERT_TRUE(UnitOfWork::instance()->inNew(painter->id()));
