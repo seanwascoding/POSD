@@ -181,3 +181,12 @@ TEST_F(DBSuite, UnitOfWorkRegisterDirty)
     ASSERT_TRUE(uow->inClean("d_0001"));
     ASSERT_FALSE(uow->inDirty("d_0001"));
 }
+
+TEST_F(DBSuite, UnitOfWorkRegisterNew) {
+  Painter * painter = new Painter("p_0003", "Howard");
+  UnitOfWork::instance()->registerNew(painter);
+  ASSERT_TRUE(UnitOfWork::instance()->inNew("p_0003"));
+  UnitOfWork::instance()->commit();
+  ASSERT_FALSE(UnitOfWork::instance()->inNew("p_0003"));
+  ASSERT_TRUE(UnitOfWork::instance()->inClean("p_0003"));
+}
