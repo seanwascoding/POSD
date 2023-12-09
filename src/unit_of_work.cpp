@@ -29,6 +29,7 @@ void UnitOfWork::registerClean(DomainObject *domainObject)
 {
     std::cout << "clean" << std::endl;
     _clean[domainObject->id()] = domainObject;
+    std::cout << "clean complete" << std::endl;
 }
 
 void UnitOfWork::registerDirty(DomainObject *domainObject)
