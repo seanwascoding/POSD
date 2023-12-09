@@ -111,7 +111,7 @@ int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colName
     {
         if(argv[0] == "d_0005")
             std::cout << "DrawingMapper::callback-test:" << argv[2] << ":" << argc << std::endl;
-        std::cout << "DrawingMapper::callback-2:" << argv[0] << ":" << argc << std::endl;
+        std::cout << "DrawingMapper::callback-2:" << argv[2] << ":" << argc << std::endl;
         drawing = new Drawing(argv[0], painter);
     }
     DrawingMapper::instance()->load(drawing);
