@@ -19,7 +19,7 @@ public:
 
 	Painter *painter() const
 	{
-		std::cout << "painter" << std::endl;
+		std::cout << "painter:" << _painter->id() << std::endl;
 		return _painter;
 	}
 
@@ -44,8 +44,8 @@ public:
 		for (int j = 0; j < i; j++)
 			it++;
 
-		std::cout << "getShape-2" << (*it)->toString() << std::endl;
-		return *it;
+		std::cout << "getShape-2:" << (*it)->toString() << std::endl;
+		return (*it);
 	}
 
 	std::string getShapesAsString() const

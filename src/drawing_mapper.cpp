@@ -99,7 +99,7 @@ int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colName
     std::cout << "DrawingMapper::callback:" << argc << std::endl;
     Painter *painter = PainterMapper::instance()->find(argv[1]);
     Drawing *drawing = nullptr;
-    if (argv[2] != nullptr)
+    if (argv[2] != "test")
     {
         std::cout << "DrawingMapper::callback-1" << std::endl;
         Parser *parser = new Parser(new Scanner(), new Builder());
