@@ -58,12 +58,10 @@ void DrawingMapper::update(std::string id)
     abstractUpdate(DrawingMapper::instance()->find(id));
 }
 
-// void DrawingMapper::update(DomainObject *Drawing)
-// {
-//     abstractUpdate(Drawing);
-// }
-
-void DrawingMapper::del(std::string id) {}
+void DrawingMapper::del(std::string id) 
+{
+    abstractDelete(id);
+}
 
 std::string DrawingMapper::updateStmt(DomainObject *domainObject) const 
 {
