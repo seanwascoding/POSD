@@ -101,7 +101,7 @@ int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colName
     Drawing *drawing = nullptr;
     if (argv[2] != nullptr)
     {
-        std::cout << "DrawingMapper::callback-1" << std::endl;
+        std::cout << "DrawingMapper::callback-1:" << argv[0] << ":" << argv[2] << std::endl;
         Parser *parser = new Parser(new Scanner(), new Builder());
         parser->setInput(argv[2]);
         parser->parse();
@@ -109,7 +109,7 @@ int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colName
     }
     else
     {
-        std::cout << "DrawingMapper::callback-2" << std::endl;
+        std::cout << "DrawingMapper::callback-2:" << argv[0] << std::endl;
         drawing = new Drawing(argv[0], painter);
     }
     DrawingMapper::instance()->load(drawing);
