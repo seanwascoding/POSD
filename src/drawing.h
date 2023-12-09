@@ -32,8 +32,8 @@ public:
 
 	Shape *getShape(int i) const
 	{
-		std::cout << "getShape" << std::endl;
-		if (i < 0 || i > _shapes.size() - 1)
+		std::cout << "getShape:" << i << std::endl;
+		if (i < 0 || _shapes.size() == 0)
 		{
 			std::cout << "getShape-null" << std::endl;
 			return nullptr;
@@ -44,7 +44,7 @@ public:
 		for (int j = 0; j < i; j++)
 			it++;
 
-		std::cout << "getShape-2"<< (*it)->toString() << std::endl;
+		std::cout << "getShape-2" << (*it)->toString() << std::endl;
 		return *it;
 	}
 
