@@ -8,6 +8,7 @@
 #include "../src/drawing_mapper.h"
 #include "../src/painter_mapper.h"
 #include "../src/drawing.h"
+#include "../src/triangle.h"
 
 class DBSuite : public ::testing::Test
 {
@@ -237,7 +238,9 @@ TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
 {
     auto uow = UnitOfWork::instance();
     Painter *painter = new Painter("p_0123", "seanwascoding");
-    Drawing *drawing = new Drawing("d_3312", painter);
+	std::list<Shape *> shapes;
+    shapes.push_back(new Triangle(1, 2, 3));
+    Drawing *drawing = new Drawing("d_3312", painter, shapes);
     ASSERT_FALSE(uow->inClean(painter->id()));
     ASSERT_FALSE(uow->inClean(drawing->id()));
     uow->registerNew(painter);
@@ -253,7 +256,7 @@ TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
     ASSERT_EQ(dm->find(drawing->id())->id(), drawing->id());
     ASSERT_TRUE(uow->inClean(drawing->id()));
     ASSERT_EQ(dm->find(drawing->id())->painter()->id(), painter->id());
-    // dm->find(drawing->id())->getShape(0)->perimeter();
+    dm->find(drawing->id())->getShape(0)->perimeter();
     
     // ASSERT_EQ(pm->find("p_0123")->id(), painter->id());
 

@@ -40,7 +40,6 @@ public:
 		if (i < 0 || _shapes.size() == 0)
 		{
 			std::cout << "getShape-null" << std::endl;
-			// throw "error";
 			return nullptr;
 		}
 
