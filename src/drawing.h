@@ -12,12 +12,11 @@ public:
 	Drawing(std::string id, Painter *painter) : DomainObject(id), _painter(painter)
 	{
 		std::cout << "Drawing--1:" << _id << std::endl;
-		
 	}
 
 	Drawing(std::string id, Painter *painter, std::list<Shape *> shapes) : DomainObject(id), _painter(painter), _shapes(shapes)
 	{
-		std::cout << "Drawing--2:" << _id << std::endl;
+		std::cout << "Drawing--2:" << _id << ":" << _shapes.size() << std::endl;
 	}
 
 	Painter *painter() const
