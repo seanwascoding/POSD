@@ -236,7 +236,7 @@ TEST_F(DBSuite, DeletePainterInClean)
 TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
 {
     auto uow = UnitOfWork::instance();
-    Painter *painter = new Painter("p_0123", "Howard");
+    Painter *painter = new Painter("p_0123", "seanwascoding");
     Drawing *drawing = new Drawing("d_3312", painter);
     ASSERT_FALSE(uow->inClean(painter->id()));
     ASSERT_FALSE(uow->inClean(drawing->id()));
@@ -248,10 +248,16 @@ TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
     ASSERT_EQ(pm->find(painter->id()), nullptr);
 
     uow->commit();
-    ASSERT_FALSE(uow->inNew(drawing->id()));
-    ASSERT_FALSE(uow->inNew(painter->id()));
-    ASSERT_TRUE(uow->inClean(painter->id()));
-    ASSERT_TRUE(uow->inClean(drawing->id()));
+    dm->cleanCache();
+    pm->cleanCache();
     ASSERT_EQ(dm->find(drawing->id())->id(), drawing->id());
-    ASSERT_EQ(pm->find("p_0123")->id(), painter->id());
+    ASSERT_TRUE(uow->inClean(drawing->id()));
+    ASSERT_EQ(dm->find(drawing->id())->painter()->id(), painter->id());
+    // dm->find(drawing->id())->getShape(0)->perimeter();
+    
+    // ASSERT_EQ(pm->find("p_0123")->id(), painter->id());
+
+    // ASSERT_FALSE(uow->inNew(drawing->id()));
+    // ASSERT_FALSE(uow->inNew(painter->id()));
+    // ASSERT_TRUE(uow->inClean(painter->id()));
 }

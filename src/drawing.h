@@ -11,10 +11,13 @@ class Drawing : public DomainObject
 public:
 	Drawing(std::string id, Painter *painter) : DomainObject(id), _painter(painter)
 	{
+		std::cout << "Drawing--1" << std::endl;
+		
 	}
 
 	Drawing(std::string id, Painter *painter, std::list<Shape *> shapes) : DomainObject(id), _painter(painter), _shapes(shapes)
 	{
+		std::cout << "Drawing--2" << std::endl;
 	}
 
 	Painter *painter() const
@@ -38,8 +41,8 @@ public:
 		if (i < 0 || _shapes.size() == 0)
 		{
 			std::cout << "getShape-null" << std::endl;
-			throw "error";
-			// return nullptr;
+			// throw "error";
+			return nullptr;
 		}
 
 		std::cout << "getShape-1" << std::endl;
