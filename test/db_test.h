@@ -168,7 +168,6 @@ TEST_F(DBSuite, UnitOfWorkRegisterDirty)
 {
     UnitOfWork *uow = UnitOfWork::instance();
     Drawing *drawing = dm->find("d_0001");
-    dynamic_cast<DomainObject*>(drawing)->id();
     Painter *painter = PainterMapper::instance()->find("p_0002");
     drawing->setPainter(painter);
     ASSERT_EQ(painter, drawing->painter());
@@ -207,7 +206,6 @@ TEST_F(DBSuite, findPainterAndUpdate)
     UnitOfWork::instance()->commit();
     ASSERT_FALSE(UnitOfWork::instance()->inDirty(painter->id()));
     ASSERT_TRUE(UnitOfWork::instance()->inClean(painter->id()));
-
 }
 
 TEST_F(DBSuite, DeletePainterInNewWithoutCommit)
@@ -233,4 +231,27 @@ TEST_F(DBSuite, DeletePainterInClean)
     uow->registerDeleted(painter);
     ASSERT_FALSE(uow->inClean(painter->id()));
     ASSERT_EQ(pm->find(painter->id()), nullptr);
+}
+
+TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
+{
+    auto uow = UnitOfWork::instance();
+    Painter *painter = new Painter("p_0123", "Howard");
+    Drawing *drawing = new Drawing("d_3312", painter);
+    ASSERT_FALSE(uow->inClean(painter->id()));
+    ASSERT_FALSE(uow->inClean(drawing->id()));
+    uow->registerNew(painter);
+    uow->registerNew(drawing);
+    ASSERT_TRUE(uow->inNew(drawing->id()));
+    ASSERT_TRUE(uow->inNew(painter->id()));
+    ASSERT_EQ(dm->find(drawing->id()), nullptr);
+    ASSERT_EQ(pm->find(painter->id()), nullptr);
+
+    uow->commit();
+    ASSERT_FALSE(uow->inNew(drawing->id()));
+    ASSERT_FALSE(uow->inNew(painter->id()));
+    ASSERT_TRUE(uow->inClean(painter->id()));
+    ASSERT_TRUE(uow->inClean(drawing->id()));
+    // ASSERT_EQ(dm->find(drawing->id()), drawing);
+    ASSERT_EQ(pm->find(painter->id()), painter);
 }
