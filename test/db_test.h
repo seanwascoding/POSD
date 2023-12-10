@@ -238,7 +238,7 @@ TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
 {
     auto uow = UnitOfWork::instance();
     Painter *painter = new Painter("p_0123", "seanwascoding");
-	std::list<Shape *> shapes;
+    std::list<Shape *> shapes;
     shapes.push_back(new Triangle(1, 2, 3));
     Drawing *drawing = new Drawing("d_3312", painter, shapes);
     ASSERT_FALSE(uow->inClean(painter->id()));
@@ -256,11 +256,9 @@ TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
     ASSERT_EQ(dm->find(drawing->id())->id(), drawing->id());
     ASSERT_TRUE(uow->inClean(drawing->id()));
     ASSERT_EQ(dm->find(drawing->id())->painter()->id(), painter->id());
-    dm->find(drawing->id())->getShape(0)->perimeter();
-    
-    // ASSERT_EQ(pm->find("p_0123")->id(), painter->id());
-
-    // ASSERT_FALSE(uow->inNew(drawing->id()));
-    // ASSERT_FALSE(uow->inNew(painter->id()));
-    // ASSERT_TRUE(uow->inClean(painter->id()));
+    ASSERT_EQ(dm->find(drawing->id())->getShape(0)->perimeter(), 6);
+    ASSERT_EQ(pm->find("p_0123")->id(), painter->id());
+    ASSERT_FALSE(uow->inNew(drawing->id()));
+    ASSERT_FALSE(uow->inNew(painter->id()));
+    ASSERT_TRUE(uow->inClean(painter->id()));
 }
