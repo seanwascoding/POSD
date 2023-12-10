@@ -215,8 +215,22 @@ TEST_F(DBSuite, DeletePainterInNewWithoutCommit)
     auto uow = UnitOfWork::instance();
     Painter *painter = new Painter("p_0003", "Howard");
     uow->registerNew(painter);
+    ASSERT_TRUE(uow->inClean(painter->id()));
     ASSERT_TRUE(uow->inNew(painter->id()));
     uow->registerDeleted(painter);
     ASSERT_TRUE(uow->inDeleted(painter->id()));
+    ASSERT_FALSE(uow->inClean(painter->id()));
     ASSERT_FALSE(uow->inNew(painter->id()));
+    Painter *it = pm->find(painter->id());
+    ASSERT_EQ(it, nullptr);
+}
+
+TEST_F(DBSuite, DeletePainterInClean)
+{
+    auto uow = UnitOfWork::instance();
+    Painter *painter = pm->find("p_0001");
+    ASSERT_TRUE(uow->inClean(painter->id()));
+    uow->registerDeleted(painter);
+    ASSERT_FALSE(uow->inClean(painter->id()));
+    ASSERT_EQ(pm->find(painter->id()), nullptr);
 }

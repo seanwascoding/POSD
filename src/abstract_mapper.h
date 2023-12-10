@@ -93,6 +93,7 @@ protected:
     void abstractDelete(std::string id)
     {
         std::cout << "abstractDelete" << std::endl;
+        _domainObjects.erase(id);
         sqlite3_exec(_db, deleteByIdStmt(id).c_str(), NULL, NULL, &_errorMessage);
     };
 

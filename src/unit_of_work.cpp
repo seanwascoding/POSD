@@ -44,6 +44,16 @@ void UnitOfWork::registerDeleted(DomainObject *domainObject)
     _deleted[domainObject->id()] = domainObject;
     _new.erase(domainObject->id());
     _clean.erase(domainObject->id());
+    if (dynamic_cast<Drawing *>(domainObject))
+    {
+        std::cout << "deleted-drawing" << std::endl;
+        DrawingMapper::instance()->del(domainObject->id());
+    }
+    else
+    {
+        std::cout << "deleted-painter" << std::endl;
+        PainterMapper::instance()->del(domainObject->id());
+    }
 }
 
 bool UnitOfWork::inNew(std::string id) const
