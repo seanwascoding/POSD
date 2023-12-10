@@ -209,3 +209,14 @@ TEST_F(DBSuite, findPainterAndUpdate)
     ASSERT_TRUE(UnitOfWork::instance()->inClean(painter->id()));
 
 }
+
+TEST_F(DBSuite, DeletePainterInNewWithoutCommit)
+{
+    auto uow = UnitOfWork::instance();
+    Painter *painter = new Painter("p_0003", "Howard");
+    uow->registerNew(painter);
+    ASSERT_TRUE(uow->inNew(painter->id()));
+    uow->registerDeleted(painter);
+    ASSERT_TRUE(uow->inDeleted(painter->id()));
+    ASSERT_FALSE(uow->inNew(painter->id()));
+}

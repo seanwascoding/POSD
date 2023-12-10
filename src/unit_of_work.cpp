@@ -42,6 +42,8 @@ void UnitOfWork::registerDeleted(DomainObject *domainObject)
 {
     std::cout << "deleted" << std::endl;
     _deleted[domainObject->id()] = domainObject;
+    _new.erase(domainObject->id());
+    _clean.erase(domainObject->id());
 }
 
 bool UnitOfWork::inNew(std::string id) const
