@@ -27,7 +27,7 @@ void PainterMapper::add(DomainObject *Painter)
 void PainterMapper::update(std::string id)
 {
     std::cout << "PainterMapper::update" << std::endl;
-    abstractUpdate(DrawingMapper::instance()->find(id));
+    abstractUpdate(PainterMapper::instance()->find(id));
 }
 
 void PainterMapper::del(std::string id)
@@ -41,7 +41,7 @@ std::string PainterMapper::updateStmt(DomainObject *domainObject) const
     std::cout << "PainterMapper::updateStmt" << std::endl;
     Painter *painter = static_cast<Painter *>(domainObject);
     std::cout << "PainterMapper::updateStmt-2" << std::endl;
-    throw "test";
+    // throw "test";
     std::string stmt = "UPDATE painter SET name='" + painter->name() + "' WHERE ID='" + painter->id() + "'";
     std::cout << "PainterMapper::updateStmt-3" << std::endl;
     return stmt;

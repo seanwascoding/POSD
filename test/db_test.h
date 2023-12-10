@@ -196,8 +196,16 @@ TEST_F(DBSuite, UnitOfWorkRegisterNew)
     ASSERT_EQ(dm->find(drawing->id())->id(), drawing->id());
 }
 
-TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
+TEST_F(DBSuite, findPainterAndUpdate)
 {
-    Drawing *drawing = dm->find("d_0003");
+    Painter *painter = pm->find("p_0001");
+    ASSERT_EQ(painter->id(), "p_0001");
+    painter->setName("Patrick-edit");
+    ASSERT_FALSE(UnitOfWork::instance()->inClean(painter->id()));
+    ASSERT_TRUE(UnitOfWork::instance()->inDirty(painter->id()));
+
+    UnitOfWork::instance()->commit();
+    ASSERT_FALSE(UnitOfWork::instance()->inDirty(painter->id()));
+    ASSERT_TRUE(UnitOfWork::instance()->inClean(painter->id()));
 
 }
