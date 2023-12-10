@@ -33,11 +33,13 @@ public:
 	Shape *getShape(int i) const
 	{
 		std::cout << "getShape:" << this->_id << std::endl;
+		std::cout << "getShape:" << this->_painter->id() << std::endl;
 		std::cout << "getShape:" << i << std::endl;
 		if (i < 0 || _shapes.size() == 0)
 		{
 			std::cout << "getShape-null" << std::endl;
-			return nullptr;
+			throw "error";
+			// return nullptr;
 		}
 
 		std::cout << "getShape-1" << std::endl;
