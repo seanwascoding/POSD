@@ -39,8 +39,9 @@ void PainterMapper::del(std::string id)
 std::string PainterMapper::updateStmt(DomainObject *domainObject) const
 {
     std::cout << "PainterMapper::updateStmt" << std::endl;
-    Painter *painter = dynamic_cast<Painter *>(domainObject);
+    Painter *painter = static_cast<Painter *>(domainObject);
     std::cout << "PainterMapper::updateStmt-2" << std::endl;
+    throw "test";
     std::string stmt = "UPDATE painter SET name='" + painter->name() + "' WHERE ID='" + painter->id() + "'";
     std::cout << "PainterMapper::updateStmt-3" << std::endl;
     return stmt;
