@@ -252,6 +252,6 @@ TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
     ASSERT_FALSE(uow->inNew(painter->id()));
     ASSERT_TRUE(uow->inClean(painter->id()));
     ASSERT_TRUE(uow->inClean(drawing->id()));
-    // ASSERT_EQ(dm->find(drawing->id()), drawing);
-    ASSERT_EQ(pm->find(painter->id()), painter);
+    ASSERT_EQ(dm->find(drawing->id())->id(), drawing->id());
+    ASSERT_EQ(pm->find("p_0123")->id(), painter->id());
 }
