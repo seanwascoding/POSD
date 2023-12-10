@@ -41,6 +41,7 @@ std::string PainterMapper::updateStmt(DomainObject *domainObject) const
     std::cout << "PainterMapper::updateStmt" << std::endl;
     Painter *painter = static_cast<Painter *>(domainObject);
     std::string stmt = "UPDATE painter SET name='" + painter->name() + "' WHERE ID='" + painter->id() + "'";
+    std::cout << "PainterMapper::updateStmt-2" << std::endl;
     return stmt;
 }
 
