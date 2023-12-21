@@ -69,6 +69,11 @@ public:
         return _result;
     }
 
+    //!
+    void visitLink(Link *link) override
+    {
+    }
+
 private:
     // OrderBy _orderBy;
     IteratorFactory *_itF;

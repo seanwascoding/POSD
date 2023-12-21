@@ -89,10 +89,11 @@ public:
     //! add new function
     void rename(std::string name)
     {
-        _path = name;
+        size_t slash = _path.rfind("/");
+        _path = _path.substr(0, slash + 1) + name;
         updatePath(name);
     }
 
 protected:
-    virtual void updatePath(string name){};
+    virtual void updatePath(string name) = 0;
 };

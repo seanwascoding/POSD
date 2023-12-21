@@ -105,7 +105,6 @@ public:
         return itF->create(this, _operationCount);
     }
 
-
     Node *find(string path) override
     {
         if (this->path() == path)
@@ -178,9 +177,21 @@ public:
     }
 
 protected:
+    //! add child_path
+    // todo edit child file name in temple method
     void updatePath(string name) override
     {
-        
+        cout << "folder updatePath" << endl;
+        for (auto it = _nodes.begin(); it != _nodes.end(); ++it)
+        {
+            if ((*it)->path().substr(0, path().length()) != path())
+            {
+                
+                // cout << (*it)->path().substr(0, path().length()) << endl;
+                cout << (*it)->path() << endl;
+                
+            }
+        }
     }
 
 private:

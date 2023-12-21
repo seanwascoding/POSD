@@ -33,6 +33,12 @@ public:
         return _paths;
     }
 
+    //!
+    void visitLink(Link *link) override
+    {
+        return;
+    }
+
 private:
     string _name;
     std::list<string> _paths;

@@ -36,6 +36,12 @@ public:
         return _result;
     }
 
+    //!
+    void visitLink(Link *link) override
+    {
+        return;
+    }
+
 private:
     string _result;
 };
