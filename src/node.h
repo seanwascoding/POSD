@@ -93,7 +93,7 @@ public:
     {
         size_t slash = _path.rfind("/");
         string temp = _path.substr(0, slash + 1) + name;
-        std::rename(_path.c_str(), temp.c_str());
+        // std::rename(_path.c_str(), temp.c_str());
         _path = temp;
         updatePath(name);
     }
