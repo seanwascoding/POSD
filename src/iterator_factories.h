@@ -8,17 +8,18 @@ class FolderIteratorFactory : public IteratorFactory
 public:
     Iterator *create(Folder *node, int operationCount) override
     {
-        _it = new Folder::FolderIterator(node, operationCount);
-        return _it;
+        return new Folder::FolderIterator(node, operationCount);
     }
 
-    Iterator *instance()
+    static IteratorFactory *instance()
     {
+        if (!_it)
+            _it = new FolderIteratorFactory();
         return _it;
     }
 
 private:
-    Iterator *_it;
+    static IteratorFactory *_it;
 };
 
 class OrderByNameIteratorFactory : public IteratorFactory
@@ -26,17 +27,18 @@ class OrderByNameIteratorFactory : public IteratorFactory
 public:
     Iterator *create(Folder *node, int operationCount) override
     {
-        _it = new Folder::OrderByNameIterator(node, operationCount);
-        return _it;
+        return new Folder::OrderByNameIterator(node, operationCount);
     }
 
-    Iterator *instance()
+    static IteratorFactory *instance()
     {
+        if (!_it)
+            _it = new OrderByNameIteratorFactory();
         return _it;
     }
 
-private:
-    Iterator *_it;
+protected:
+    static IteratorFactory *_it;
 };
 
 class OrderByNameWithFolderFirstIteratorFactory : public IteratorFactory
@@ -44,17 +46,18 @@ class OrderByNameWithFolderFirstIteratorFactory : public IteratorFactory
 public:
     Iterator *create(Folder *node, int operationCount) override
     {
-        _it = new Folder::OrderByNameWithFolderFirstIterator(node, operationCount);
-        return _it;
+        return new Folder::OrderByNameWithFolderFirstIterator(node, operationCount);
     }
 
-    Iterator *instance()
+    static IteratorFactory *instance()
     {
+        if (!_it)
+            _it = new OrderByNameWithFolderFirstIteratorFactory();
         return _it;
     }
 
 private:
-    Iterator *_it;
+    static IteratorFactory *_it;
 };
 
 class OrderByKindIteratorFactory : public IteratorFactory
@@ -62,15 +65,21 @@ class OrderByKindIteratorFactory : public IteratorFactory
 public:
     Iterator *create(Folder *node, int operationCount) override
     {
-        _it = new Folder::OrderByKindIterator(node, operationCount);
-        return _it;
+        return new Folder::OrderByKindIterator(node, operationCount);
     }
 
-    Iterator *instance()
+    static IteratorFactory *instance()
     {
+        if (!_it)
+            _it = new OrderByKindIteratorFactory();
         return _it;
     }
 
 private:
-    Iterator *_it;
+    static IteratorFactory *_it;
 };
+
+IteratorFactory* FolderIteratorFactory::_it = nullptr;
+IteratorFactory* OrderByNameIteratorFactory::_it = nullptr;
+IteratorFactory* OrderByNameWithFolderFirstIteratorFactory::_it = nullptr;
+IteratorFactory* OrderByKindIteratorFactory::_it = nullptr;
