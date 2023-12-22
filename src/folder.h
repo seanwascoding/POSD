@@ -276,12 +276,12 @@ private:
                 if (dynamic_cast<File *>(dynamic_cast<Link *>(node)->getTarget()))
                 {
                     // return new File(dynamic_cast<Link *>(node)->getTarget()->path());
-                    return new Link(node->path(), dynamic_cast<Link*>(node)->getTarget());
+                    return new Link(node->path(), dynamic_cast<Link *>(node)->getTarget());
                 }
                 else
                 {
                     // clonedFolder = new Folder(dynamic_cast<Link *>(node)->getTarget()->path());
-                    clonedFolder = new Link(node->path(), dynamic_cast<Link*>(node)->getTarget());
+                    clonedFolder = new Link(node->path(), dynamic_cast<Link *>(node)->getTarget());
                 }
             }
             else
@@ -508,6 +508,12 @@ public:
             if (pos == std::string::npos)
             {
                 return "file";
+            }
+
+            const Link *link = dynamic_cast<const Link *>(node);
+            if (link)
+            {
+                return "link";
             }
 
             return node->name().substr(pos + 1);
