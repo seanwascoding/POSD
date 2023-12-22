@@ -36,6 +36,7 @@ public:
         {
             cout << "test4:" << folder->getOperationCount() << endl;
             it = _itF->create(folder, folder->getOperationCount());
+            cout << "test5:" << endl;
         }
 
         it->first();

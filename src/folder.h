@@ -28,6 +28,7 @@ public:
             if (S_ISDIR(fileInfo.st_mode))
                 return;
         }
+        cout << "No Folder exists" << endl;
         throw "No Folder exists";
     }
 
@@ -44,6 +45,7 @@ public:
     {
         if (node->path() != this->path() + "/" + node->name())
         {
+            cout << "Incorrect path of node" << endl;
             throw string("Incorrect path of node: " + node->path());
         }
         _nodes.push_back(node);
