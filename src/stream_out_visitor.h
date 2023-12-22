@@ -39,7 +39,7 @@ public:
     //!
     void visitLink(Link *link) override
     {
-        return;
+        link->getTarget()->accept(this);
     }
 
 private:
