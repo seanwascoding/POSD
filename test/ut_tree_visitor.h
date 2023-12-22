@@ -135,7 +135,8 @@ TEST_F(TreeVisitorTest, OrderByNameWithFolderFirst)
         "├── Downloads\n"
         "│   └── funny.png\n"
         "├── hello.txt\n"
-        "└── my_profile\n";
+        "├── my_profile\n"
+        "└── test\n";
 
     TreeVisitor *tree = new TreeVisitor(OrderByNameWithFolderFirstIteratorFactory::instance());
     Link *temp = new Link("structure2/home/test", profile);
@@ -143,7 +144,7 @@ TEST_F(TreeVisitorTest, OrderByNameWithFolderFirst)
     home->accept(tree);
     string result = tree->getTree();
 
-    // ASSERT_EQ(expected, result);
+    ASSERT_EQ(expected, result);
 
     cout << result << endl;
 
@@ -168,6 +169,7 @@ TEST_F(TreeVisitorTest, OrderByKind)
         "│   └── note.txt\n"
         "├── Downloads\n"
         "│   └── funny.png\n"
+        "├── test\n"
         "└── hello.txt\n";
 
     TreeVisitor *tree = new TreeVisitor(OrderByKindIteratorFactory::instance());
@@ -176,10 +178,9 @@ TEST_F(TreeVisitorTest, OrderByKind)
     home->accept(tree);
     string result = tree->getTree();
 
-    // ASSERT_EQ(expected, result);
+    ASSERT_EQ(expected, result);
 
     cout << result << endl;
-
 
     delete tree;
 }
