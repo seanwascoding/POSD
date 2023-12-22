@@ -3,6 +3,7 @@
 #include "visitor.h"
 #include "order_by.h"
 #include "iterator_factory.h"
+#include "link.h"
 
 class TreeVisitor : public Visitor
 {
@@ -83,6 +84,7 @@ public:
     //!
     void visitLink(Link *link) override
     {
+        _result += link->name();
     }
 
 private:
