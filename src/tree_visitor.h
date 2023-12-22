@@ -7,9 +7,9 @@
 class TreeVisitor : public Visitor
 {
 public:
-    TreeVisitor(IteratorFactory *itF) : _itF(itF), _currentLevel(0), _notEndLevel(0) {}
+    TreeVisitor(IteratorFactory *itF) : _itF(itF), _currentLevel(0), _notEndLevel(0) { cout << "test1" << endl; }
 
-    TreeVisitor(OrderBy orderBy) : _orderBy(orderBy), _currentLevel(0), _notEndLevel(0) {}
+    TreeVisitor(OrderBy orderBy) : _orderBy(orderBy), _currentLevel(0), _notEndLevel(0) { cout << "test2" << endl; }
 
     void visitFile(File *file)
     {
