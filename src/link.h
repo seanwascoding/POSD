@@ -5,7 +5,7 @@
 class Link : public Node
 {
 public:
-    Link(string name, Node *node) : Node(name), _lnode(node) {}
+    Link(string path, Node *node) : Node(path), _lnode(node) {}
 
     int numberOfFiles() const override {}
     Node *find(string path) override {}
@@ -13,11 +13,14 @@ public:
     void add(Node *node) override {}
     void remove(string path) override {}
     Node *getChildByName(const char *name) const override {}
+    void accept(Visitor *visitor) override {}
 
-    //! 
+    // //!
     Node *getTarget() {}
 
+protected:
+    void updatePath(string name) override{};
+
 private:
-    string _lname;
     Node *_lnode;
 };
