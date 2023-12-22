@@ -28,9 +28,15 @@ public:
 
         Iterator *it;
         if (_orderBy == OrderBy::Normal || _orderBy == OrderBy::Name || _orderBy == OrderBy::NameWithFolderFirst || _orderBy == OrderBy::Kind)
+        {
+            cout << "test3" << endl;
             it = folder->createIterator(_orderBy);
+        }
         else
+        {
+            cout << "test4" << endl;
             it = _itF->create(folder, folder->getOperationCount());
+        }
 
         it->first();
         while (!it->isDone())
