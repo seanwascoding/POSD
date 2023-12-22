@@ -103,7 +103,7 @@ TEST_F(TreeVisitorTest, OrderByName)
         "├── hello.txt\n"
         "└── my_profile\n";
 
-    TreeVisitor *tree = new TreeVisitor(OrderBy::Name);
+    TreeVisitor *tree = new TreeVisitor(OrderByNameIteratorFactory::instance());
     home->accept(tree);
     string result = tree->getTree();
 

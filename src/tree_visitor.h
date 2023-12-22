@@ -7,9 +7,9 @@
 class TreeVisitor : public Visitor
 {
 public:
-    TreeVisitor(IteratorFactory *itF) : _itF(itF), _currentLevel(0), _notEndLevel(0) { cout << "test1" << endl; }
+    TreeVisitor(IteratorFactory *itF) : _itF(itF), _currentLevel(0), _notEndLevel(0), _state(false) { cout << "test1" << endl; }
 
-    TreeVisitor(OrderBy orderBy) : _orderBy(orderBy), _currentLevel(0), _notEndLevel(0) { cout << "test2" << endl; }
+    TreeVisitor(OrderBy orderBy) : _orderBy(orderBy), _currentLevel(0), _notEndLevel(0), _state(true) { cout << "test2" << endl; }
 
     void visitFile(File *file)
     {
@@ -27,7 +27,7 @@ public:
         }
 
         Iterator *it;
-        if (_orderBy == OrderBy::Normal || _orderBy == OrderBy::Name || _orderBy == OrderBy::NameWithFolderFirst || _orderBy == OrderBy::Kind)
+        if (_state)
         {
             cout << "test3" << endl;
             it = folder->createIterator(_orderBy);
@@ -87,6 +87,7 @@ public:
 private:
     OrderBy _orderBy;
     IteratorFactory *_itF;
+    bool _state;
     std::string _result;
     int _currentLevel;
     int _notEndLevel;
