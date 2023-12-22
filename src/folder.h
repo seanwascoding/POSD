@@ -489,7 +489,7 @@ public:
                 if (kindA == kindB) {
                     return a->name() < b->name();
                 }
-                return kindA > kindB; });
+                return kindA < kindB; });
         }
 
     private:
