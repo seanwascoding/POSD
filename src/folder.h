@@ -21,6 +21,7 @@ private:
 public:
     Folder(string path) : Node(path)
     {
+        cout << "No Folder TEST" << endl;
         struct stat fileInfo;
         const char *c = path.c_str();
         if (lstat(c, &fileInfo) == 0)

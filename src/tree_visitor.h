@@ -34,9 +34,9 @@ public:
         }
         else
         {
-            cout << "test4:" << folder->getOperationCount() << endl;
+            cout << "test4" << endl;
             it = _itF->create(folder, folder->getOperationCount());
-            cout << "test5:" << endl;
+            cout << "test5" << endl;
         }
 
         it->first();
