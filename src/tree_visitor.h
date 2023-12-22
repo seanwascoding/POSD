@@ -8,7 +8,7 @@
 class TreeVisitor : public Visitor
 {
 public:
-    TreeVisitor(IteratorFactory *itF) : _itF(itF), _currentLevel(0), _notEndLevel(0), _state(false) { cout << "test1" << endl; }
+    TreeVisitor(IteratorFactory *itF) : _itF(itF), _currentLevel(0), _notEndLevel(0) { cout << "test1" << endl; }
 
     // TreeVisitor(OrderBy orderBy) : _orderBy(orderBy), _currentLevel(0), _notEndLevel(0), _state(true) { cout << "test2" << endl; }
 
@@ -27,7 +27,9 @@ public:
             _result += folder->name() + "\n";
         }
 
+        cout << "begin1" << endl;
         Iterator *it = _itF->create(folder, folder->getOperationCount());
+        cout << "begin2" << endl;
 
         it->first();
         while (!it->isDone())
@@ -73,14 +75,13 @@ public:
     //!
     void visitLink(Link *link) override
     {
-        link->getTarget()->accept(this);
-        // _result += link->name();
+        // link->getTarget()->accept(this);
+        _result += link->name() + "\n";
     }
 
 private:
     OrderBy _orderBy;
     IteratorFactory *_itF;
-    bool _state;
     std::string _result;
     int _currentLevel;
     int _notEndLevel;

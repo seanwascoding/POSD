@@ -79,7 +79,8 @@ private:
     static IteratorFactory *_it;
 };
 
-IteratorFactory* FolderIteratorFactory::_it = nullptr;
-IteratorFactory* OrderByNameIteratorFactory::_it = nullptr;
-IteratorFactory* OrderByNameWithFolderFirstIteratorFactory::_it = nullptr;
-IteratorFactory* OrderByKindIteratorFactory::_it = nullptr;
+IteratorFactory *FolderIteratorFactory::_it = nullptr;
+IteratorFactory *OrderByNameIteratorFactory::_it = nullptr;
+IteratorFactory *OrderByNameWithFolderFirstIteratorFactory::_it = nullptr;
+IteratorFactory *OrderByKindIteratorFactory::_it = nullptr;
+

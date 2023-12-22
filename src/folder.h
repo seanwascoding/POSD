@@ -7,6 +7,7 @@
 #include "iterator.h"
 #include "dfs_iterator.h"
 #include "order_by.h"
+#include "link.h"
 
 #include <iostream>
 
@@ -21,6 +22,7 @@ private:
 public:
     Folder(string path) : Node(path)
     {
+        cout << "folder create:" << path << endl;
         struct stat fileInfo;
         const char *c = path.c_str();
         if (lstat(c, &fileInfo) == 0)
@@ -28,6 +30,7 @@ public:
             if (S_ISDIR(fileInfo.st_mode))
                 return;
         }
+
         cout << path << ":No Folder exists" << endl;
         throw "No Folder exists";
     }
@@ -267,7 +270,16 @@ private:
                 return new File(node->path());
             }
 
-            Node *clonedFolder = new Folder(node->path());
+            Node *clonedFolder;
+            if (dynamic_cast<Link *>(node))
+            {
+                if (dynamic_cast<File *>(dynamic_cast<Link *>(node)->getTarget()))
+                    return new File(dynamic_cast<Link *>(node)->getTarget()->path());
+                else
+                    clonedFolder = new Folder(dynamic_cast<Link *>(node)->getTarget()->path());
+            }
+            else
+                clonedFolder = new Folder(node->path());
 
             std::list<Node *> children;
             Iterator *it = node->createIterator();
@@ -295,7 +307,9 @@ public:
     public:
         OrderByNameIterator(Folder *node, int operationCount) : OrderByAbstractIterator(node, operationCount)
         {
+            cout << "it1" << endl;
             _root = cloneSortedNode(node);
+            cout << "it2" << endl;
         }
 
         ~OrderByNameIterator()
