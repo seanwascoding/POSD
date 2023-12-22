@@ -489,7 +489,7 @@ public:
                 if (kindA == kindB) {
                     return a->name() < b->name();
                 }
-                return kindA < kindB; });
+                return kindA > kindB; });
         }
 
     private:
@@ -498,6 +498,12 @@ public:
 
         static string getKind(const Node *node)
         {
+            const Link *link = dynamic_cast<const Link *>(node);
+            if (link)
+            {
+                return "link";
+            }
+
             const Folder *folder = dynamic_cast<const Folder *>(node);
             if (folder)
             {
@@ -508,12 +514,6 @@ public:
             if (pos == std::string::npos)
             {
                 return "file";
-            }
-
-            const Link *link = dynamic_cast<const Link *>(node);
-            if (link)
-            {
-                return "link";
             }
 
             return node->name().substr(pos + 1);
