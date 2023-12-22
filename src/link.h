@@ -15,7 +15,7 @@ public:
     Node *getChildByName(const char *name) const override {}
     void accept(Visitor *visitor) override {}
 
-    // //!
+    //!
     Node *getTarget() {}
 
 protected:

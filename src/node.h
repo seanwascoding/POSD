@@ -94,6 +94,15 @@ public:
         updatePath(name);
     }
 
+    void correctPath(std::string path, size_t slashpot)
+    {
+        if (_path.substr(0, path.length()) != path)
+        {
+            size_t pot = _path.find('/', slashpot + 1);
+            _path = path + _path.substr(pot);
+        }
+    }
+
 protected:
     virtual void updatePath(string name) = 0;
 };

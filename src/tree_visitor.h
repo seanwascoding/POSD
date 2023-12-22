@@ -29,14 +29,14 @@ public:
         Iterator *it;
         if (_state)
         {
-            cout << "test3" << endl;
+            // cout << "test3" << endl;
             it = folder->createIterator(_orderBy);
         }
         else
         {
-            cout << "test4" << endl;
+            // cout << "test4" << endl;
             it = _itF->create(folder, folder->getOperationCount());
-            cout << "test5" << endl;
+            // cout << "test5" << endl;
         }
 
         it->first();

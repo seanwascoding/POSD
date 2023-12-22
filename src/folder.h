@@ -21,7 +21,7 @@ private:
 public:
     Folder(string path) : Node(path)
     {
-        cout << "No Folder TEST" << endl;
+        // cout << "No Folder TEST" << endl;
         struct stat fileInfo;
         const char *c = path.c_str();
         if (lstat(c, &fileInfo) == 0)
@@ -185,15 +185,17 @@ protected:
     void updatePath(string name) override
     {
         cout << "folder updatePath" << endl;
-        for (auto it = _nodes.begin(); it != _nodes.end(); ++it)
+        auto it = new BfsIterator(this);
+        for (it->first(); !it->isDone(); it->next())
         {
-            if ((*it)->path().substr(0, path().length()) != path())
+            if (it->currentItem()->path().substr(0, path().length()) != path())
             {
-
-                // cout << (*it)->path().substr(0, path().length()) << endl;
-                cout << (*it)->path() << endl;
+                cout << it->currentItem()->path() << endl;
+                it->currentItem()->correctPath(this->path(), this->path().rfind('/'));
+                cout << "edited:" << it->currentItem()->path() << endl;
             }
         }
+        delete it;
     }
 
 private:
