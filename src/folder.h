@@ -186,10 +186,9 @@ protected:
         {
             if ((*it)->path().substr(0, path().length()) != path())
             {
-                
+
                 // cout << (*it)->path().substr(0, path().length()) << endl;
                 cout << (*it)->path() << endl;
-                
             }
         }
     }
@@ -209,6 +208,7 @@ private:
         {
             if (_host->_operationCount != _operationCount)
             {
+                cout << _host->_operationCount << ":" << _operationCount << endl;
                 throw "Iterator Not Avaliable";
             }
         }
