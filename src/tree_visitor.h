@@ -9,6 +9,8 @@ class TreeVisitor : public Visitor
 public:
     TreeVisitor(IteratorFactory *itF) : _itF(itF), _currentLevel(0), _notEndLevel(0) {}
 
+    TreeVisitor(OrderBy orderBy): _orderBy(orderBy), _currentLevel(0), _notEndLevel(0) {}
+
     void visitFile(File *file)
     {
         _result += file->name() + "\n";
@@ -75,7 +77,7 @@ public:
     }
 
 private:
-    // OrderBy _orderBy;
+    OrderBy _orderBy;
     IteratorFactory *_itF;
     std::string _result;
     int _currentLevel;
