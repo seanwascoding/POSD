@@ -274,9 +274,15 @@ private:
             if (dynamic_cast<Link *>(node))
             {
                 if (dynamic_cast<File *>(dynamic_cast<Link *>(node)->getTarget()))
-                    return new File(dynamic_cast<Link *>(node)->getTarget()->path());
+                {
+                    // return new File(dynamic_cast<Link *>(node)->getTarget()->path());
+                    return new Link(node->path(), dynamic_cast<Link*>(node)->getTarget());
+                }
                 else
-                    clonedFolder = new Folder(dynamic_cast<Link *>(node)->getTarget()->path());
+                {
+                    // clonedFolder = new Folder(dynamic_cast<Link *>(node)->getTarget()->path());
+                    clonedFolder = new Link(node->path(), dynamic_cast<Link*>(node)->getTarget());
+                }
             }
             else
                 clonedFolder = new Folder(node->path());
