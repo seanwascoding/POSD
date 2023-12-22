@@ -73,7 +73,8 @@ public:
     //!
     void visitLink(Link *link) override
     {
-        _result += link->name();
+        link->getTarget()->accept(this);
+        // _result += link->name();
     }
 
 private:
