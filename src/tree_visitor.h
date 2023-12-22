@@ -9,7 +9,7 @@ class TreeVisitor : public Visitor
 public:
     TreeVisitor(IteratorFactory *itF) : _itF(itF), _currentLevel(0), _notEndLevel(0) {}
 
-    TreeVisitor(OrderBy orderBy): _orderBy(orderBy), _currentLevel(0), _notEndLevel(0) {}
+    TreeVisitor(OrderBy orderBy) : _orderBy(orderBy), _currentLevel(0), _notEndLevel(0) {}
 
     void visitFile(File *file)
     {
@@ -26,9 +26,11 @@ public:
             _result += folder->name() + "\n";
         }
 
-        // Iterator * it = folder->createIterator(_orderBy);
-
-        Iterator *it = _itF->create(folder, folder->getOperationCount());
+        Iterator *it;
+        if (_orderBy == OrderBy::Normal || _orderBy == OrderBy::Name || _orderBy == OrderBy::NameWithFolderFirst || _orderBy == OrderBy::Kind)
+            it = folder->createIterator(_orderBy);
+        else
+            it = _itF->create(folder, folder->getOperationCount());
 
         it->first();
         while (!it->isDone())

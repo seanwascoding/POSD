@@ -103,7 +103,7 @@ TEST_F(TreeVisitorTest, OrderByName)
         "├── hello.txt\n"
         "└── my_profile\n";
 
-    TreeVisitor *tree = new TreeVisitor(new OrderByNameIteratorFactory());
+    TreeVisitor *tree = new TreeVisitor(OrderBy::Name);
     home->accept(tree);
     string result = tree->getTree();
 
@@ -131,7 +131,7 @@ TEST_F(TreeVisitorTest, OrderByNameWithFolderFirst)
         "├── hello.txt\n"
         "└── my_profile\n";
 
-    TreeVisitor *tree = new TreeVisitor(new OrderByNameWithFolderFirstIteratorFactory());
+    TreeVisitor *tree = new TreeVisitor(OrderBy::NameWithFolderFirst);
     home->accept(tree);
     string result = tree->getTree();
 
@@ -159,7 +159,7 @@ TEST_F(TreeVisitorTest, OrderByKind)
         "│   └── funny.png\n"
         "└── hello.txt\n";
 
-    TreeVisitor *tree = new TreeVisitor(new OrderByKindIteratorFactory());
+    TreeVisitor *tree = new TreeVisitor(OrderBy::Kind);
     home->accept(tree);
     string result = tree->getTree();
 

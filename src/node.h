@@ -59,10 +59,10 @@ public:
 
     virtual int numberOfFiles() const = 0;
 
-    // virtual Iterator *createIterator(OrderBy orderBy = OrderBy::Normal)
-    // {
-    //     return new NullIterator();
-    // }
+    virtual Iterator *createIterator(OrderBy orderBy)
+    {
+        return new NullIterator();
+    }
 
     //! overloading versions
     virtual Iterator *createIterator()

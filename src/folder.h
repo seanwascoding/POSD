@@ -78,21 +78,21 @@ public:
         return num;
     }
 
-    // Iterator *createIterator(OrderBy orderBy = OrderBy::Normal) override
-    // {
-    //     switch (orderBy)
-    //     {
-    //     case OrderBy::Name:
-    //         return new OrderByNameIterator(this, _operationCount);
-    //     case OrderBy::NameWithFolderFirst:
-    //         return new OrderByNameWithFolderFirstIterator(this, _operationCount);
-    //     case OrderBy::Kind:
-    //         return new OrderByKindIterator(this, _operationCount);
-    //     case OrderBy::Normal:
-    //     default:
-    //         return new FolderIterator(this, _operationCount);
-    //     }
-    // }
+    Iterator *createIterator(OrderBy orderBy) override
+    {
+        switch (orderBy)
+        {
+        case OrderBy::Name:
+            return new OrderByNameIterator(this, _operationCount);
+        case OrderBy::NameWithFolderFirst:
+            return new OrderByNameWithFolderFirstIterator(this, _operationCount);
+        case OrderBy::Kind:
+            return new OrderByKindIterator(this, _operationCount);
+        case OrderBy::Normal:
+        default:
+            return new FolderIterator(this, _operationCount);
+        }
+    }
 
     //! overloading versions
     Iterator *createIterator() override
