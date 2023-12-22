@@ -29,7 +29,7 @@ public:
             if (S_ISDIR(fileInfo.st_mode))
                 return;
         }
-        cout << path << "No Folder exists" << endl;
+        cout << path << ":No Folder exists" << endl;
         throw "No Folder exists";
     }
 
