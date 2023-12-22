@@ -6,6 +6,8 @@
 #include "null_iterator.h"
 #include "order_by.h"
 #include "iterator_factory.h"
+#include <cstdio>
+#include <iostream>
 
 using namespace std;
 
@@ -90,7 +92,9 @@ public:
     void rename(std::string name)
     {
         size_t slash = _path.rfind("/");
-        _path = _path.substr(0, slash + 1) + name;
+        string temp = _path.substr(0, slash + 1) + name;
+        std::rename(_path.c_str(), temp.c_str());
+        _path = temp;
         updatePath(name);
     }
 
@@ -99,7 +103,9 @@ public:
         if (_path.substr(0, path.length()) != path)
         {
             size_t pot = _path.find('/', slashpot + 1);
-            _path = path + _path.substr(pot);
+            string temp = path + _path.substr(pot);
+            // std::rename(_path.c_str(), temp.c_str());
+            _path = temp;
         }
     }
 
