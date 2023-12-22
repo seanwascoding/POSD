@@ -7,6 +7,8 @@
 #include <iostream>
 #include <sstream>
 
+#include "link.h"
+
 class StreamOutVisitor : public Visitor {
 public:
     void visitFile(File * file) override {

@@ -4,6 +4,8 @@
 #include "folder.h"
 #include "visitor.h"
 
+#include "link.h"
+
 class FindByNameVisitor : public Visitor
 {
 public:
