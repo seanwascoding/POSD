@@ -19,13 +19,13 @@ public:
         delete _parser;
     }
 
-    void add(DomainObject *Drawing);
+    virtual void add(DomainObject *Drawing);
 
-    Drawing *find(std::string id);
+    virtual Drawing *find(std::string id);
 
-    void update(std::string id);
+    virtual void update(std::string id);
 
-    void del(std::string id);
+    virtual void del(std::string id);
 
     static DrawingMapper *instance();
 

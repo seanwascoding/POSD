@@ -10,17 +10,17 @@
 class PainterMapper : public SQLiteAbstractMapper
 {
 public:
-    void add(DomainObject *Painter);
+    virtual void add(DomainObject *Painter);
 
-    Painter *find(std::string id);
+    virtual Painter *find(std::string id);
 
-    void update(std::string id);
+    virtual void update(std::string id);
 
-    void del(std::string id);
+    virtual void del(std::string id);
 
     static PainterMapper *instance();
 
-    void cleanCache();
+    virtual void cleanCache();
 
 protected:
     PainterMapper();

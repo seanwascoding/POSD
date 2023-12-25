@@ -7,8 +7,10 @@
 #include "./iterator_test.h"
 #include "./drawing_test.h"
 #include "./db_test.h"
+#include "./db_test2.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
