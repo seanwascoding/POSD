@@ -5,8 +5,9 @@
 
 #include "painter.h"
 #include "sqlite_abstract_mapper.h"
+#include "sqlite_painter_mapper.h"
 
-// PainterMapper *PainterMapper::_instance = nullptr;
+PainterMapper *PainterMapper::_instance = nullptr;
 
 // Painter *PainterMapper::find(std::string id)
 // {
@@ -64,14 +65,15 @@
 //     return "DELETE FROM painter WHERE id = '" + id + "'";
 // }
 
-// PainterMapper *PainterMapper::instance()
-// {
-//     if (_instance == nullptr)
-//     {
-//         _instance = new PainterMapper();
-//     }
-//     return _instance;
-// }
+PainterMapper *PainterMapper::instance()
+{
+    // if (_instance == nullptr)
+    // {
+    //     _instance = new PainterMapper();
+    // }
+    // return _instance;
+    return SQLitePainterMapper::instance();
+}
 
 // PainterMapper::PainterMapper() : SQLiteAbstractMapper("resource/painter.db")
 // {

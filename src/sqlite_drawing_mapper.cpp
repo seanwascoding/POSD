@@ -9,21 +9,21 @@
 #include "builder.h"
 #include "domain_object.h"
 
-DrawingMapper *DrawingMapper::_instance = nullptr;
+SQLiteDrawingMapper *SQLiteDrawingMapper::_instance = nullptr;
 
-Drawing *DrawingMapper::find(std::string id)
+Drawing *SQLiteDrawingMapper::find(std::string id)
 {
-    return static_cast<Drawing *>(abstractFind(id, DrawingMapper::callback));
+    return static_cast<Drawing *>(abstractFind(id, SQLiteDrawingMapper::callback));
 }
 
 // add
-void DrawingMapper::add(DomainObject *drawing)
+void SQLiteDrawingMapper::add(DomainObject *drawing)
 {
     abstractAdd(drawing);
 }
 
 // update
-void DrawingMapper::update(std::string id)
+void SQLiteDrawingMapper::update(std::string id)
 {
     DomainObject *drawing = getDomainObject(id);
     if (drawing)
@@ -33,12 +33,12 @@ void DrawingMapper::update(std::string id)
 }
 
 // delete
-void DrawingMapper::del(std::string id)
+void SQLiteDrawingMapper::del(std::string id)
 {
     abstractDelete(id);
 }
 
-std::string DrawingMapper::updateStmt(DomainObject *domainObject) const
+std::string SQLiteDrawingMapper::updateStmt(DomainObject *domainObject) const
 {
     Drawing *drawing = static_cast<Drawing *>(domainObject);
     std::string stmt("UPDATE drawing SET ");
@@ -50,13 +50,13 @@ std::string DrawingMapper::updateStmt(DomainObject *domainObject) const
     return stmt;
 }
 
-std::string DrawingMapper::findByIdStmt(std::string id) const
+std::string SQLiteDrawingMapper::findByIdStmt(std::string id) const
 {
     std::string stmt = "SELECT * FROM drawing WHERE ID = '" + id + "'";
     return stmt;
 }
 
-std::string DrawingMapper::addStmt(DomainObject *domainObject) const
+std::string SQLiteDrawingMapper::addStmt(DomainObject *domainObject) const
 {
     Drawing *drawing = static_cast<Drawing *>(domainObject);
     std::string stmt = "INSERT INTO drawing values (";
@@ -66,35 +66,35 @@ std::string DrawingMapper::addStmt(DomainObject *domainObject) const
     return stmt;
 }
 
-std::string DrawingMapper::deleteByIdStmt(std::string id) const
+std::string SQLiteDrawingMapper::deleteByIdStmt(std::string id) const
 {
     return "DELETE FROM drawing WHERE id = '" + id + "'";
 }
 
-DrawingMapper *DrawingMapper::instance()
+SQLiteDrawingMapper *SQLiteDrawingMapper::instance()
 {
     if (_instance == nullptr)
     {
-        _instance = new DrawingMapper();
+        _instance = new SQLiteDrawingMapper();
     }
     return _instance;
 }
 
-DrawingMapper::DrawingMapper() : SQLiteAbstractMapper("resource/drawing.db")
+SQLiteDrawingMapper::SQLiteDrawingMapper() : DrawingMapper(), SQLiteAbstractMapper("resource/drawing.db")
 {
     _parser = new Parser(new Scanner(), new Builder());
 }
 
-int DrawingMapper::callback(void *notUsed, int argc, char **argv, char **colNames)
+int SQLiteDrawingMapper::callback(void *notUsed, int argc, char **argv, char **colNames)
 {
     Painter *painter = PainterMapper::instance()->find(argv[1]);
-    std::list<Shape *> shapes = DrawingMapper::instance()->convertShapes(argv[2]);
+    std::list<Shape *> shapes = SQLiteDrawingMapper::instance()->convertShapes(argv[2]);
     Drawing *drawing = new Drawing(argv[0], painter, shapes);
-    DrawingMapper::instance()->load(drawing);
+    SQLiteDrawingMapper::instance()->load(drawing);
     return 0;
 }
 
-std::list<Shape *> DrawingMapper::convertShapes(char *shape_string)
+std::list<Shape *> SQLiteDrawingMapper::convertShapes(char *shape_string)
 {
     _parser->clear();
     _parser->setInput(shape_string);
@@ -102,7 +102,7 @@ std::list<Shape *> DrawingMapper::convertShapes(char *shape_string)
     return _parser->getShapes();
 }
 
-void DrawingMapper::cleanCache()
+void SQLiteDrawingMapper::cleanCache()
 {
     SQLiteAbstractMapper::cleanCache();
     _parser->clear();

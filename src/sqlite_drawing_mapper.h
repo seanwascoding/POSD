@@ -18,7 +18,7 @@ public:
 
     void del(std::string id) override;
 
-    static DrawingMapper *instance();
+    static SQLiteDrawingMapper *instance();
 
     void cleanCache() override;
 
@@ -35,6 +35,6 @@ protected:
     std::string deleteByIdStmt(std::string id) const;
 
 private:
-    static DrawingMapper *_instance;
+    static SQLiteDrawingMapper *_instance;
     Parser *_parser;
 };

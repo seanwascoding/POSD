@@ -5,7 +5,7 @@
 class SQLitePainterMapper : public SQLiteAbstractMapper, public PainterMapper
 {
 public:
-    ~SQLitePainterMapper();
+    ~SQLitePainterMapper(){};
 
     void add(DomainObject *Drawing) override;
 
@@ -17,17 +17,17 @@ public:
 
     static SQLitePainterMapper *instance();
 
-    void cleanCache();
+    void cleanCache() override;
 
 private:
     SQLitePainterMapper();
 
     static int callback(void *notUsed, int argc, char **argv, char **colNames);
 
-    std::string addStmt(DomainObject *domainObject) const;
-    std::string findByIdStmt(std::string id) const;
-    std::string updateStmt(DomainObject *domainObject) const;
-    std::string deleteByIdStmt(std::string id) const;
+    std::string addStmt(DomainObject *domainObject) const override;
+    std::string findByIdStmt(std::string id) const override;
+    std::string updateStmt(DomainObject *domainObject) const override;
+    std::string deleteByIdStmt(std::string id) const override;
 
 private:
     static SQLitePainterMapper *_instance;

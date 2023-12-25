@@ -11,9 +11,11 @@
 #include "../src/painter.h"
 #include <memory>
 
-class DBSuite : public ::testing::Test {
+class DBSuite : public ::testing::Test
+{
 protected:
-    void SetUp() override {
+    void SetUp() override
+    {
         create_drawing_table();
         create_painter_table();
         populate_drawings();
@@ -24,14 +26,16 @@ protected:
         pm->cleanCache();
     }
 
-    void TearDown() override {
+    void TearDown() override
+    {
         drop_drawing_table();
         drop_painter_table();
         sqlite3_close(db);
         sqlite3_close(db_p);
     }
 
-    void create_drawing_table() {
+    void create_drawing_table()
+    {
         ASSERT_EQ(0, sqlite3_open("resource/drawing.db", &db));
         const char *stmt = "CREATE TABLE drawing ("
                            "ID         char(6) PRIMARY KEY     not null,"
@@ -42,13 +46,15 @@ protected:
         display_err_msg_and_fail_if_any(rc);
     }
 
-    void drop_drawing_table() {
+    void drop_drawing_table()
+    {
         const char *dropStmt = "DROP TABLE drawing";
         int rc = sqlite3_exec(db, dropStmt, NULL, NULL, &err_msg);
         display_err_msg_and_fail_if_any(rc);
     }
 
-    void create_painter_table() {
+    void create_painter_table()
+    {
         ASSERT_EQ(0, sqlite3_open("resource/painter.db", &db_p));
         const char *stmt = "CREATE TABLE painter ("
                            "ID         char(6) PRIMARY KEY     not null,"
@@ -57,13 +63,15 @@ protected:
         display_err_msg_and_fail_if_any(rc);
     }
 
-    void drop_painter_table() {
+    void drop_painter_table()
+    {
         const char *dropStmt = "DROP TABLE painter";
         int rc = sqlite3_exec(db_p, dropStmt, NULL, NULL, &err_msg);
         display_err_msg_and_fail_if_any(rc);
     }
 
-    void populate_drawings() {
+    void populate_drawings()
+    {
         const char *s1 = "INSERT INTO drawing"
                          "(ID, painter, shapes)"
                          "values"
@@ -89,7 +97,8 @@ protected:
         ASSERT_EQ(SQLITE_OK, rc);
     }
 
-    void populate_painters() {
+    void populate_painters()
+    {
         const char *s1 = "INSERT INTO painter"
                          "(ID, name)"
                          "values"
@@ -107,27 +116,31 @@ protected:
         ASSERT_EQ(SQLITE_OK, rc);
     }
 
-    void display_err_msg_and_fail_if_any(int rc) {
-        if (rc) {
+    void display_err_msg_and_fail_if_any(int rc)
+    {
+        if (rc)
+        {
             std::cout << "db error: " << err_msg << std::endl;
             sqlite3_free(err_msg);
         }
         ASSERT_EQ(SQLITE_OK, rc);
     }
 
-    sqlite3 * db;
-    sqlite3 * db_p;
-    char * err_msg = nullptr;
-    DrawingMapper * dm;
-    PainterMapper * pm;
+    sqlite3 *db;
+    sqlite3 *db_p;
+    char *err_msg = nullptr;
+    DrawingMapper *dm;
+    PainterMapper *pm;
 };
 
 // ensure db setup teardown works alone
-TEST_F(DBSuite, Sanity) {
+TEST_F(DBSuite, Sanity)
+{
 }
 
 // new
-TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind) {
+TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind)
+{
     UnitOfWork *uow = UnitOfWork::instance();
     Painter *painter = new Painter("p_0004", "Richard");
     uow->registerNew(painter);
@@ -143,7 +156,7 @@ TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind) {
 
     dm->cleanCache();
     pm->cleanCache();
-    Drawing * d = dm->find("d_0005");
+    Drawing *d = dm->find("d_0005");
     EXPECT_TRUE(uow->inClean(d->id()));
     ASSERT_EQ("p_0004", d->painter()->id());
     ASSERT_EQ("Richard", d->painter()->name());
@@ -154,7 +167,8 @@ TEST_F(DBSuite, NewDrawingAndPainterThroughUoWAndFind) {
     delete drawing;
 }
 
-TEST_F(DBSuite, CommitNewDrawingsWithOldPainter) {
+TEST_F(DBSuite, CommitNewDrawingsWithOldPainter)
+{
     UnitOfWork *uow = UnitOfWork::instance();
 
     Painter *painter = PainterMapper::instance()->find("p_0001");
@@ -174,8 +188,9 @@ TEST_F(DBSuite, CommitNewDrawingsWithOldPainter) {
 }
 
 // find
-TEST_F(DBSuite, findDrawing) {
-    Drawing * drawing = dm->find("d_0001");
+TEST_F(DBSuite, findDrawing)
+{
+    Drawing *drawing = dm->find("d_0001");
 
     EXPECT_TRUE(UnitOfWork::instance()->inClean("d_0001"));
     EXPECT_FALSE(UnitOfWork::instance()->inDirty("d_0001"));
@@ -188,7 +203,8 @@ TEST_F(DBSuite, findDrawing) {
 }
 
 // can't test db, find will find in Mapper
-TEST_F(DBSuite, findDrawingAndUpdate) {
+TEST_F(DBSuite, findDrawingAndUpdate)
+{
     Drawing *drawing = dm->find("d_0001");
     Painter *painter = pm->find("p_0002");
 
@@ -206,7 +222,8 @@ TEST_F(DBSuite, findDrawingAndUpdate) {
     ASSERT_EQ("Mary", d->painter()->name());
 }
 
-TEST_F(DBSuite, findPainterAndUpdate) {
+TEST_F(DBSuite, findPainterAndUpdate)
+{
     Painter *painter = pm->find("p_0002");
 
     painter->setName("Mary2");
@@ -223,7 +240,8 @@ TEST_F(DBSuite, findPainterAndUpdate) {
     ASSERT_EQ("Mary2", p->name());
 }
 
-TEST_F(DBSuite, DeletePainterInNewWithoutCommit) {
+TEST_F(DBSuite, DeletePainterInNewWithoutCommit)
+{
 
     UnitOfWork *uow = UnitOfWork::instance();
 
@@ -239,7 +257,8 @@ TEST_F(DBSuite, DeletePainterInNewWithoutCommit) {
     ASSERT_FALSE(UnitOfWork::instance()->inClean(p->id()));
 }
 
-TEST_F(DBSuite, DeletePainterInClean) {
+TEST_F(DBSuite, DeletePainterInClean)
+{
     Painter *painter = pm->find("p_0002");
 
     EXPECT_FALSE(UnitOfWork::instance()->inDirty(painter->id()));
